@@ -1,5 +1,9 @@
+import './Button.scss';
+
 const Button = ({ buttonText, onClick }) => (
-	<button onClick={onClick}>{buttonText}</button>
+	<button onClick={onClick} className='common-button'>
+		{buttonText}
+	</button>
 );
 
 export default Button;

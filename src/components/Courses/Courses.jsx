@@ -2,12 +2,13 @@ import Button from '../../common/Button/Button';
 import CourseCard from './components/CourseCard/CourseCard';
 import SearchBar from './components/SearchBar/SearchBar';
 import { mockedAuthorsList, mockedCoursesList } from './mockedData';
+import './Courses.scss';
 
-const Courses = () => (
-	<section>
-		<div>
+const Courses = ({ changeView }) => (
+	<section className='courses'>
+		<div className='courses__heading'>
 			<SearchBar />
-			<Button buttonText='Add new course' />
+			<Button buttonText='Add new course' onClick={changeView} />
 		</div>
 		<div>
 			{mockedCoursesList.map((course) => (
