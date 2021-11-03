@@ -15,7 +15,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test:nowatch": "react-scripts test --watchAll=false",
+    "test:nowatch": "react-scripts test --watchAll=false --passWithNoTests",
     "prepare": "husky install",
     "prepublish": "npm run eslint:fix && npm run test:nowatch",
     "eject": "react-scripts eject",
