@@ -54,6 +54,16 @@
         flex-direction: column;
       }
     }
+
+		&__left {
+			& > div {
+				align-items: center;
+
+				label {
+					width: 90%;
+				}
+			}
+		}
   }
 }
 

@@ -2,11 +2,13 @@ import './App.scss';
 import Header from './components/Header/Header';
 import Courses from './components/Courses/Courses';
 import CreateCourse from './components/CreateCourse/CreateCourse';
-import { mockedAuthorsList } from './components/Courses/mockedData';
 import { useState } from 'react';
+import { mockedAuthorsList, mockedCoursesList } from './helpers/mockedData';
 
 function App() {
 	const [addView, setView] = useState(false);
+	const [authors, setAuthors] = useState(mockedAuthorsList);
+	const [courses, setCourses] = useState(mockedCoursesList);
 
 	const handleChangeView = () => setView(!addView);
 
@@ -15,9 +17,17 @@ function App() {
 			<Header />
 			<main className='main-view'>
 				{addView ? (
-					<CreateCourse authors={mockedAuthorsList} />
+					<CreateCourse
+						changeView={handleChangeView}
+						authors={{ data: authors, set: setAuthors }}
+						courses={{ data: courses, set: setCourses }}
+					/>
 				) : (
-					<Courses changeView={handleChangeView} />
+					<Courses
+						changeView={handleChangeView}
+						authors={{ data: authors, set: setAuthors }}
+						courses={{ data: courses, set: setCourses }}
+					/>
 				)}
 			</main>
 		</>

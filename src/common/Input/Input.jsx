@@ -1,14 +1,24 @@
 import './Input.scss';
 
-const Input = ({ labelText, placeholderText, onChange, inputType, min }) => (
+const Input = ({
+	labelText,
+	placeholderText,
+	onChange,
+	inputType,
+	min,
+	value,
+	required,
+}) => (
 	<label className='common-input__label'>
 		<span className='common-input__label--text'>{labelText}</span>
 		<input
 			className='common-input'
-			type={inputType}
+			type={inputType ?? 'text'}
 			placeholder={placeholderText}
 			onChange={onChange}
 			min={min}
+			value={value}
+			required={required}
 		/>
 	</label>
 );
