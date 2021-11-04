@@ -1,9 +1,11 @@
-import './App.scss';
+import { useState } from 'react';
+import { mockedAuthorsList, mockedCoursesList } from './helpers/mockedData';
+
 import Header from './components/Header/Header';
 import Courses from './components/Courses/Courses';
 import CreateCourse from './components/CreateCourse/CreateCourse';
-import { useState } from 'react';
-import { mockedAuthorsList, mockedCoursesList } from './helpers/mockedData';
+
+import './App.scss';
 
 function App() {
 	const [addView, setView] = useState(false);
