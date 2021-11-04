@@ -23,7 +23,8 @@
         "singleQuote": true,
         "useTabs": true,
         "endOfLine": "auto",
-        "max-len": ["error", { "code": 80 }]
+        "max-len": ["error", { "code": 80 }],
+				"tabWidth": 2
       }
     ]
   }
