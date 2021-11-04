@@ -1,6 +1,9 @@
-import Button from '../../../../common/Button/Button';
-import './CourseCard.scss';
 import pipeDuration from '../../../../helpers/pipeDuration';
+import { BUTTON } from '../../../../constants';
+
+import Button from '../../../../common/Button/Button';
+
+import './CourseCard.scss';
 
 const CourseCard = ({ title, description, authors, duration, createdAt }) => (
 	<article className='course-card'>
@@ -25,7 +28,7 @@ const CourseCard = ({ title, description, authors, duration, createdAt }) => (
 					</tr>
 				</tbody>
 			</table>
-			<Button buttonText='Show course' />
+			<Button buttonText={BUTTON.SHOW_COURSE} />
 		</div>
 	</article>
 );

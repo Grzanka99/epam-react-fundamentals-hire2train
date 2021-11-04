@@ -1,13 +1,16 @@
+import { BUTTON } from '../../constants';
+
 import Button from '../../common/Button/Button';
 import CourseCard from './components/CourseCard/CourseCard';
 import SearchBar from './components/SearchBar/SearchBar';
+
 import './Courses.scss';
 
 const Courses = ({ changeView, courses, authors }) => (
 	<section className='courses'>
 		<div className='courses__heading'>
 			<SearchBar />
-			<Button buttonText='Add new course' onClick={changeView} />
+			<Button buttonText={BUTTON.ADD_NEW} onClick={changeView} />
 		</div>
 		<div>
 			{courses.data.map((course) => (

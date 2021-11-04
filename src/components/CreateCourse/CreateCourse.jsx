@@ -1,10 +1,15 @@
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
 import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
+
 import pipeDuration from '../../helpers/pipeDuration';
 import dateGenerator from '../../helpers/dateGenerator';
+
+import { BUTTON, PLACEHOLDER, TITLE } from '../../constants';
+
 import './CreateCourse.scss';
-import { v4 as uuidv4 } from 'uuid';
 
 const CreateCourse = ({ changeView, authors, courses }) => {
 	const [duration, setDuration] = useState(0);
@@ -74,8 +79,13 @@ const CreateCourse = ({ changeView, authors, courses }) => {
 	return (
 		<form className='create-course' onSubmit={handleSubmit}>
 			<div className='create-course__title'>
-				<Input labelText='Title' value={title} onChange={handleChangeTitle} />
-				<Button buttonText='Create course' type='submit' />
+				<Input
+					labelText='Title'
+					value={title}
+					onChange={handleChangeTitle}
+					placeholderText={PLACEHOLDER.TITLE}
+				/>
+				<Button buttonText={BUTTON.CREATE_COURSE} type='submit' />
 			</div>
 			<label className='create-course__desc'>
 				Description
@@ -84,7 +94,7 @@ const CreateCourse = ({ changeView, authors, courses }) => {
 					id='description-input'
 					cols='30'
 					rows='10'
-					placeholder='Enter description'
+					placeholder={PLACEHOLDER.DESCRIPTION}
 					value={description}
 					onChange={handleChangeDescription}
 				></textarea>
@@ -92,31 +102,32 @@ const CreateCourse = ({ changeView, authors, courses }) => {
 			<div className='create-course__authors'>
 				<div className='create-course__authors__left'>
 					<div className='create-course__authors__left__new-author'>
-						<h3>Add author</h3>
+						<h3>{TITLE.ADD_AUTHOR}</h3>
 						<Input
 							labelText='Author name'
 							value={newAuthorName}
 							onChange={handleAuthorNameChange}
+							placeholderText={PLACEHOLDER.AUTHOR}
 						/>
 						<Button
-							buttonText='Create author'
+							buttonText={BUTTON.CREATE_AUTHOR}
 							onClick={() => handleCreateAuthor(newAuthorName)}
 						/>
 					</div>
 					<div className='create-course__authors__left__duration'>
-						<h3>Duration</h3>
+						<h3>{TITLE.DURATION}</h3>
 						<Input
 							labelText='Duration'
 							inputType='number'
-							placeholderText='Enter duration in minutes'
+							placeholderText={PLACEHOLDER.DURATION}
 							value={duration}
 							onChange={handleChangeDuration}
 						/>
-						Duration: {pipeDuration(duration)}
+						<span>Duration: {pipeDuration(duration)}</span>
 					</div>
 				</div>
 				<div className='create-course__authors__right'>
-					<h3>Authors</h3>
+					<h3>{TITLE.AUTHORS}</h3>
 					<div>
 						{authorList.length &&
 							authorList
@@ -131,7 +142,7 @@ const CreateCourse = ({ changeView, authors, courses }) => {
 									</div>
 								))}
 					</div>
-					<h3>Course authors</h3>
+					<h3>{TITLE.COURSE_AUTHORS}</h3>
 					<div>
 						{currAuthors.length ? (
 							currAuthors.map((author) => {
@@ -140,7 +151,7 @@ const CreateCourse = ({ changeView, authors, courses }) => {
 									<div key={curr.id} className='single-author'>
 										<span>{curr.name}</span>
 										<Button
-											buttonText='Delete author'
+											buttonText={BUTTON.DELETE_AUTHOR}
 											onClick={() => handleDeleteAuthor(curr.id)}
 										/>
 									</div>

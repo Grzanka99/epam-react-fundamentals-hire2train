@@ -1,11 +1,14 @@
+import { BUTTON, PLACEHOLDER } from '../../../../constants';
+
 import Button from '../../../../common/Button/Button';
 import Input from '../../../../common/Input/Input';
+
 import './SearchBar.scss';
 
 const SearchBar = () => (
 	<div className='search-bar'>
-		<Input placeholderText='Enter course name...' />
-		<Button buttonText='Search' />
+		<Input placeholderText={PLACEHOLDER.SEARCH} />
+		<Button buttonText={BUTTON.SEARCH} />
 	</div>
 );
 
