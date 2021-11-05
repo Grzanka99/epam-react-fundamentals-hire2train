@@ -34,7 +34,7 @@ const CreateCourse = ({ changeView, authors, courses }) => {
 		setNewAuthorName('');
 	};
 
-	const fine = () => {
+	const validateData = () => {
 		const errors = [];
 		if (!title) errors.push('Title cannot be empty');
 		if (!description) errors.push('Description cannot be empty');
@@ -49,7 +49,7 @@ const CreateCourse = ({ changeView, authors, courses }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		if (fine()) {
+		if (validateData()) {
 			const newCourse = {
 				id: uuidv4(),
 				title,
