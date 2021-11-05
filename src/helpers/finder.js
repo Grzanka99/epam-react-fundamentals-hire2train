@@ -18,6 +18,9 @@ const fzf = (sp, str) => {
 };
 
 const finder = (curr, sp) =>
-	!sp ? true : fzf(sp, curr.title) || fzf(sp, curr.id);
+	!sp
+		? true
+		: fzf(sp.toLowerCase(), curr.title.toLowerCase()) ||
+		  fzf(sp.toLowerCase(), curr.id.toLowerCase());
 
 export default finder;
