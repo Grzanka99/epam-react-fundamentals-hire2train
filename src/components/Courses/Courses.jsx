@@ -14,7 +14,11 @@ const Courses = ({ changeView, courses, authors }) => {
 		<section className='courses'>
 			<div className='courses__heading'>
 				<SearchBar searchIn={courses.data} onFind={setToDisplay} />
-				<Button buttonText={BUTTON.ADD_NEW} onClick={changeView} />
+				<Button
+					buttonText={BUTTON.ADD_NEW}
+					onClick={changeView}
+					pathTo='/new-course'
+				/>
 			</div>
 			<div>
 				{toDisplay.map((course) => (

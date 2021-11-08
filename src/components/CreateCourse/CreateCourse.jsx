@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 import Button from '../../common/Button/Button';
@@ -18,6 +19,9 @@ const CreateCourse = ({ changeView, authors, courses }) => {
 	const [newAuthorName, setNewAuthorName] = useState('');
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
+
+	// useNavigate replaced useHistory in react-router-dom v6
+	const navigate = useNavigate();
 
 	const handleCreateAuthor = useCallback(
 		(newName) => () => {
@@ -64,7 +68,7 @@ const CreateCourse = ({ changeView, authors, courses }) => {
 
 			courses.set([...courses.data, newCourse]);
 			authors.set(authorList);
-			changeView();
+			navigate('/', { replace: true });
 		} else return;
 	};
 
