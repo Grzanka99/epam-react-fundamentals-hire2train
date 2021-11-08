@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import Button from '../../common/Button/Button';
@@ -19,20 +19,23 @@ const CreateCourse = ({ changeView, authors, courses }) => {
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
 
-	const handleCreateAuthor = (newName) => {
-		if (!newName) {
-			alert('Author name cannot be empty');
-			return;
-		}
-		const newID = uuidv4();
-		const newAuthor = {
-			name: newName,
-			id: newID,
-		};
+	const handleCreateAuthor = useCallback(
+		(newName) => () => {
+			if (!newName) {
+				alert('Author name cannot be empty');
+				return;
+			}
+			const newID = uuidv4();
+			const newAuthor = {
+				name: newName,
+				id: newID,
+			};
 
-		setAuthorsList([...authorList, newAuthor]);
-		setNewAuthorName('');
-	};
+			setAuthorsList([...authorList, newAuthor]);
+			setNewAuthorName('');
+		},
+		[authorList]
+	);
 
 	const validateData = () => {
 		const errors = [];
@@ -69,8 +72,8 @@ const CreateCourse = ({ changeView, authors, courses }) => {
 	const handleChangeDuration = (e) =>
 		setDuration(Number(e.target.value) < 1 ? 1 : e.target.value);
 
-	const handleAddAuthor = (id) => setCurrAuthors([...currAuthors, id]);
-	const handleDeleteAuthor = (id) =>
+	const handleAddAuthor = (id) => () => setCurrAuthors([...currAuthors, id]);
+	const handleDeleteAuthor = (id) => () =>
 		setCurrAuthors(currAuthors.filter((el) => el !== id));
 
 	const handleChangeTitle = (e) => setTitle(e.target.value);
@@ -97,7 +100,7 @@ const CreateCourse = ({ changeView, authors, courses }) => {
 					placeholder={PLACEHOLDER.DESCRIPTION}
 					value={description}
 					onChange={handleChangeDescription}
-				></textarea>
+				/>
 			</label>
 			<div className='create-course__authors'>
 				<div className='create-course__authors__left'>
@@ -111,7 +114,7 @@ const CreateCourse = ({ changeView, authors, courses }) => {
 						/>
 						<Button
 							buttonText={BUTTON.CREATE_AUTHOR}
-							onClick={() => handleCreateAuthor(newAuthorName)}
+							onClick={handleCreateAuthor(newAuthorName)}
 						/>
 					</div>
 					<div className='create-course__authors__left__duration'>
@@ -137,7 +140,7 @@ const CreateCourse = ({ changeView, authors, courses }) => {
 										<span>{author.name}</span>
 										<Button
 											buttonText='Add author'
-											onClick={() => handleAddAuthor(author.id)}
+											onClick={handleAddAuthor(author.id)}
 										/>
 									</div>
 								))}
@@ -152,7 +155,7 @@ const CreateCourse = ({ changeView, authors, courses }) => {
 										<span>{curr.name}</span>
 										<Button
 											buttonText={BUTTON.DELETE_AUTHOR}
-											onClick={() => handleDeleteAuthor(curr.id)}
+											onClick={handleDeleteAuthor(curr.id)}
 										/>
 									</div>
 								);

@@ -1,4 +1,4 @@
-import './Button.scss';
+import 'common/Button/Button.scss';
 
 const Button = ({ buttonText, onClick, type }) => (
 	<button onClick={onClick} className='common-button' type={type ?? 'button'}>
