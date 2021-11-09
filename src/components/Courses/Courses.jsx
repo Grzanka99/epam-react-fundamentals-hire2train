@@ -1,24 +1,21 @@
-import { BUTTON } from '../../constants';
+// it didn't compile without .js extension
+import { BUTTON } from 'constants.js';
 
-import Button from '../../common/Button/Button';
+import Button from 'common/Button/Button';
 import CourseCard from './components/CourseCard/CourseCard';
 import SearchBar from './components/SearchBar/SearchBar';
 
 import './Courses.scss';
 import { useState } from 'react';
 
-const Courses = ({ changeView, courses, authors }) => {
+const Courses = ({ courses, authors }) => {
 	const [toDisplay, setToDisplay] = useState(courses.data);
 
 	return (
 		<section className='courses'>
 			<div className='courses__heading'>
 				<SearchBar searchIn={courses.data} onFind={setToDisplay} />
-				<Button
-					buttonText={BUTTON.ADD_NEW}
-					onClick={changeView}
-					pathTo='/new-course'
-				/>
+				<Button buttonText={BUTTON.ADD_NEW} pathTo='/new-course' />
 			</div>
 			<div>
 				{toDisplay.map((course) => (
