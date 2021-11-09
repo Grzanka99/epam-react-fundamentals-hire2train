@@ -1,16 +1,38 @@
 import Input from 'common/Input/Input';
 import Button from 'common/Button/Button';
-import { useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { API } from 'constants.js';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const handleSubmit = useCallback((e) => {
+	const navigate = useNavigate();
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log('submit');
-	}, []);
+		let result;
+
+		try {
+			result = await axios.post(`${API}/login`, {
+				email,
+				password,
+			});
+		} catch (error) {
+			result = error.response;
+			if (error.response.data.successful === false) {
+				alert('Wrong username or password');
+			}
+
+			return;
+		}
+
+		console.log(result.data);
+
+		navigate('/');
+	};
 
 	const handleEmailChange = (e) => setEmail(e.target.value);
 	const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -27,6 +49,7 @@ const Login = () => {
 				labelText='Password'
 				onChange={handlePasswordChange}
 				value={password}
+				inputType='password'
 			/>
 			<Button buttonText='Login' type='submit' />
 			<p>

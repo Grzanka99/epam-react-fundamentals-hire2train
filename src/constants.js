@@ -24,3 +24,5 @@ export const PLACEHOLDER = {
 	DURATION: 'Enter duration in minutes',
 	SEARCH: 'Enter course name...',
 };
+
+export const API = 'http://localhost:3000';

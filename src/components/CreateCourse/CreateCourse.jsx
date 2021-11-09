@@ -5,10 +5,10 @@ import { v4 as uuidv4 } from 'uuid';
 import Button from 'common/Button/Button';
 import Input from 'common/Input/Input';
 
-import pipeDuration from '../../helpers/pipeDuration';
-import dateGenerator from '../../helpers/dateGenerator';
+import pipeDuration from 'helpers/pipeDuration';
+import dateGenerator from 'helpers/dateGenerator';
 
-import { BUTTON, PLACEHOLDER, TITLE } from '../../constants';
+import { BUTTON, PLACEHOLDER, TITLE } from 'constants.js';
 
 import './CreateCourse.scss';
 
