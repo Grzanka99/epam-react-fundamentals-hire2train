@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API } from 'constants.js';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -29,7 +29,8 @@ const Login = () => {
 			return;
 		}
 
-		console.log(result.data);
+		onLogin.setUser(result.data.user.name);
+		onLogin.setToken(result.data.result);
 
 		navigate('/');
 	};
