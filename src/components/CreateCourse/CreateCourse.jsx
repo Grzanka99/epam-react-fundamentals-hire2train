@@ -92,7 +92,10 @@ const CreateCourse = ({ authors, courses }) => {
 					onChange={handleChangeTitle}
 					placeholderText={PLACEHOLDER.TITLE}
 				/>
-				<Button buttonText={BUTTON.CREATE_COURSE} type='submit' />
+				<span className='flex center'>
+					<Button buttonText={BUTTON.CANCEL} pathTo='/' />
+					<Button buttonText={BUTTON.CREATE_COURSE} type='submit' />
+				</span>
 			</div>
 			<label className='create-course__desc'>
 				Description

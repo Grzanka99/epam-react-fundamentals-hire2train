@@ -5,6 +5,8 @@ import { mockedAuthorsList, mockedCoursesList } from 'helpers/mockedData';
 import Header from 'components/Header/Header';
 import Courses from 'components/Courses/Courses';
 import CreateCourse from 'components/CreateCourse/CreateCourse';
+import Registration from 'components/Registration/Registration';
+import Login from 'components/Login/Login';
 
 import 'App.scss';
 
@@ -37,6 +39,8 @@ function App() {
 								/>
 							}
 						/>
+						<Route path='/registration' element={<Registration />} />
+						<Route path='/login' element={<Login />} />
 					</Routes>
 				</main>
 			</Router>

@@ -1,3 +1,24 @@
 .main-view {
+	margin-top: 15px;
   border: 2px solid cyan;
+	height: 100%;
+
+	overflow: auto;
+}
+
+.flex {
+	display: flex;
+}
+
+.column {
+	flex-direction: column;
+}
+
+.h100 {
+	height: 100%;
+}
+
+.center {
+	justify-content: center;
+	align-items: center;
 }

@@ -7,6 +7,7 @@ export const BUTTON = {
 	CREATE_AUTHOR: 'Create author',
 	DELETE_AUTHOR: 'Delete author',
 	ADD_AUTHOR: 'Add author',
+	CANCEL: 'Cancel',
 };
 
 export const TITLE = {
