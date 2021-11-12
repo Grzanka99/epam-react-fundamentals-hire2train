@@ -9,6 +9,7 @@ import Registration from 'components/Registration/Registration';
 import Login from 'components/Login/Login';
 
 import 'App.scss';
+import CourseInfo from 'components/CourseInfo/CourseInfo';
 
 function App() {
 	const [authors, setAuthors] = useState(mockedAuthorsList);
@@ -20,8 +21,19 @@ function App() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		const localUser = localStorage.getItem('user');
+		const localToken = localStorage.getItem('token');
+
+		if (!localUser) localStorage.setItem('user', user);
+		if (!localToken) localStorage.setItem('token', token);
+
+		if (!user) setUser(localUser);
+		if (!token) setToken(localToken);
+
 		if (!user || !token) {
 			navigate('/login');
+		} else if (!!user && !!token) {
+			navigate('/courses');
 		}
 	}, [user, token, navigate]);
 
@@ -32,7 +44,7 @@ function App() {
 				<Routes>
 					<Route
 						exact
-						path='/'
+						path='/courses'
 						element={
 							<Courses
 								authors={{ data: authors, set: setAuthors }}
@@ -41,7 +53,7 @@ function App() {
 						}
 					/>
 					<Route
-						path='/new-course'
+						path='/courses/add'
 						element={
 							<CreateCourse
 								authors={{ data: authors, set: setAuthors }}
@@ -53,6 +65,10 @@ function App() {
 					<Route
 						path='/login'
 						element={<Login onLogin={{ setUser, setToken }} />}
+					/>
+					<Route
+						path='/courses/:courseId'
+						element={<CourseInfo courses={courses} authors={authors} />}
 					/>
 				</Routes>
 			</main>

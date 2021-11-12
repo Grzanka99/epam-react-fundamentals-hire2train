@@ -5,7 +5,14 @@ import Button from '../../../../common/Button/Button';
 
 import './CourseCard.scss';
 
-const CourseCard = ({ title, description, authors, duration, createdAt }) => (
+const CourseCard = ({
+	title,
+	description,
+	authors,
+	duration,
+	createdAt,
+	id,
+}) => (
 	<article className='course-card'>
 		<div className='course-card__desc'>
 			<h2>{title}</h2>
@@ -28,7 +35,7 @@ const CourseCard = ({ title, description, authors, duration, createdAt }) => (
 					</tr>
 				</tbody>
 			</table>
-			<Button buttonText={BUTTON.SHOW_COURSE} />
+			<Button buttonText={BUTTON.SHOW_COURSE} pathTo={`/courses/${id}`} />
 		</div>
 	</article>
 );

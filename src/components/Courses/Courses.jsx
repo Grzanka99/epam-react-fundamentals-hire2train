@@ -15,7 +15,7 @@ const Courses = ({ courses, authors }) => {
 		<section className='courses'>
 			<div className='courses__heading'>
 				<SearchBar searchIn={courses.data} onFind={setToDisplay} />
-				<Button buttonText={BUTTON.ADD_NEW} pathTo='/new-course' />
+				<Button buttonText={BUTTON.ADD_NEW} pathTo='/courses/add' />
 			</div>
 			<div>
 				{toDisplay.map((course) => (
@@ -28,6 +28,7 @@ const Courses = ({ courses, authors }) => {
 						duration={course.duration}
 						key={course.id}
 						createdAt={course.creationDate}
+						id={course.id}
 					/>
 				))}
 			</div>
