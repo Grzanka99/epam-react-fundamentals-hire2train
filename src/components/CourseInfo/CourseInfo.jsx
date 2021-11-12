@@ -45,8 +45,8 @@ const CourseInfo = ({ courses, authors }) => {
 
 								<tr className='course-info__authors'>
 									<td>Authors:</td>
-									{currentAuthors.map((el) => (
-										<td>{el.name}</td>
+									{currentAuthors.map((author) => (
+										<td key={author.id}>{author.name}</td>
 									))}
 								</tr>
 							</tbody>
