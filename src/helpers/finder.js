@@ -1,14 +1,14 @@
-const fzf = (sp, str) => {
-	const hlen = str.length;
-	const nlen = sp.length;
+const fuzzySearch = (searchPhrase, str) => {
+	const strLen = str.length;
+	const searchPhraseLen = searchPhrase.length;
 
-	if (nlen > hlen) return false;
-	if (nlen === hlen) return sp === str;
+	if (searchPhraseLen > strLen) return false;
+	if (searchPhraseLen === strLen) return searchPhrase === str;
 
-	forLoop: for (let i = 0, j = 0; i < nlen; i++) {
-		const nch = sp.charCodeAt(i);
-		while (j < hlen) {
-			if (str.charCodeAt(j++) === nch) {
+	forLoop: for (let i = 0, j = 0; i < searchPhraseLen; i++) {
+		const searchPhraseChar = searchPhrase.charCodeAt(i);
+		while (j < strLen) {
+			if (str.charCodeAt(j++) === searchPhraseChar) {
 				continue forLoop;
 			}
 		}
@@ -20,7 +20,7 @@ const fzf = (sp, str) => {
 const finder = (curr, sp) =>
 	!sp
 		? true
-		: fzf(sp.toLowerCase(), curr.title.toLowerCase()) ||
-		  fzf(sp.toLowerCase(), curr.id.toLowerCase());
+		: fuzzySearch(sp.toLowerCase(), curr.title.toLowerCase()) ||
+		  fuzzySearch(sp.toLowerCase(), curr.id.toLowerCase());
 
 export default finder;
