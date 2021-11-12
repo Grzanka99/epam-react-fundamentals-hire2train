@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import './Input.scss';
 
 const Input = ({
@@ -22,5 +24,15 @@ const Input = ({
 		/>
 	</label>
 );
+
+Input.propTypes = {
+	labelText: PropTypes.string,
+	placeholderText: PropTypes.string,
+	onChange: PropTypes.func,
+	inputType: PropTypes.string,
+	min: PropTypes.number,
+	value: PropTypes.string,
+	required: PropTypes.bool,
+};
 
 export default Input;

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import 'common/Button/Button.scss';
 
@@ -12,5 +13,12 @@ const Button = ({ buttonText, onClick, type, pathTo }) =>
 			{buttonText}
 		</button>
 	);
+
+Button.propTypes = {
+	buttonText: PropTypes.string.isRequired,
+	onClick: PropTypes.func,
+	type: PropTypes.string,
+	pathTo: PropTypes.string,
+};
 
 export default Button;

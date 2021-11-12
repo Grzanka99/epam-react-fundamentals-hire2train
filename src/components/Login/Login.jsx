@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Input from 'common/Input/Input';
 import Button from 'common/Button/Button';
 import { useState } from 'react';
@@ -59,6 +60,10 @@ const Login = ({ onLogin }) => {
 			</p>
 		</form>
 	);
+};
+
+Login.propTypes = {
+	onLogin: PropTypes.object.isRequired,
 };
 
 export default Login;

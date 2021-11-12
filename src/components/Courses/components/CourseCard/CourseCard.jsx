@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import pipeDuration from '../../../../helpers/pipeDuration';
 import { BUTTON } from '../../../../constants';
 
@@ -39,5 +40,11 @@ const CourseCard = ({
 		</div>
 	</article>
 );
+
+CourseCard.propTypes = {
+	title: PropTypes.string.isRequired,
+	description: PropTypes.string.isRequired,
+	authors: PropTypes.arrayOf(PropTypes.shape),
+};
 
 export default CourseCard;

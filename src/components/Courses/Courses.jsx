@@ -1,6 +1,8 @@
 // it didn't compile without .js extension
 import { BUTTON } from 'constants.js';
 
+import PropTypes from 'prop-types';
+
 import Button from 'common/Button/Button';
 import CourseCard from './components/CourseCard/CourseCard';
 import SearchBar from './components/SearchBar/SearchBar';
@@ -34,6 +36,11 @@ const Courses = ({ courses, authors }) => {
 			</div>
 		</section>
 	);
+};
+
+Courses.propTypes = {
+	courses: PropTypes.object.isRequired,
+	authors: PropTypes.object.isRequired,
 };
 
 export default Courses;

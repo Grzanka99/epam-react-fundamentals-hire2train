@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
 
 import pipeDuration from 'helpers/pipeDuration';
@@ -46,6 +47,11 @@ const CourseInfo = ({ courses, authors }) => {
 			</div>
 		</div>
 	);
+};
+
+CourseInfo.propTypes = {
+	courses: PropTypes.arrayOf(PropTypes.object).isRequired,
+	authors: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default CourseInfo;

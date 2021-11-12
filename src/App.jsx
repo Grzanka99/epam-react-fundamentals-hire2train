@@ -42,6 +42,7 @@ function App() {
 		} else if (!!localUser && !!localToken) {
 			navigate('/courses');
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user, token]);
 
 	return (

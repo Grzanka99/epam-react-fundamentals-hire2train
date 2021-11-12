@@ -2,6 +2,8 @@ import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
+import PropTypes from 'prop-types';
+
 import Button from 'common/Button/Button';
 import Input from 'common/Input/Input';
 
@@ -175,6 +177,12 @@ const CreateCourse = ({ authors, courses }) => {
 			</div>
 		</form>
 	);
+};
+
+CreateCourse.propTypes = {
+	courses: PropTypes.object.isRequired,
+	authors: PropTypes.object.isRequired,
+	navigate: PropTypes.func.isRequired,
 };
 
 export default CreateCourse;

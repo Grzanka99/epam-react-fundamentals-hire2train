@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import Logo from './components/Logo/Logo';
@@ -26,6 +27,11 @@ const Header = ({ user, onLogout }) => {
 			)}
 		</header>
 	);
+};
+
+Header.propTypes = {
+	user: PropTypes.string,
+	onLogout: PropTypes.object,
 };
 
 export default Header;

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { useState } from 'react';
 
 import Button from '../../../../common/Button/Button';
@@ -28,6 +30,11 @@ const SearchBar = ({ searchIn, onFind }) => {
 			<Button buttonText={BUTTON.SEARCH} onClick={handleSearch} />
 		</div>
 	);
+};
+
+SearchBar.propTypes = {
+	searchIn: PropTypes.arrayOf(PropTypes.object).isRequired,
+	onFind: PropTypes.func.isRequired,
 };
 
 export default SearchBar;
