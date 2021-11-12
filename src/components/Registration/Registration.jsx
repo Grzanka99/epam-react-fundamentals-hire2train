@@ -2,7 +2,7 @@ import axios from 'axios';
 import Button from 'common/Button/Button';
 import Input from 'common/Input/Input';
 import { API } from 'constants.js';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import './Registration.scss';
@@ -14,27 +14,31 @@ const Registration = () => {
 
 	const navigate = useNavigate();
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		let result;
+	const handleSubmit = useCallback(
+		async (e) => {
+			e.preventDefault();
+			let result;
 
-		try {
-			result = await axios.post(`${API}/register`, {
-				name,
-				email,
-				password,
-			});
-		} catch (error) {
-			result = error.response;
+			try {
+				result = await axios.post(`${API}/register`, {
+					name,
+					email,
+					password,
+				});
+			} catch (error) {
+				result = error.response;
+				console.log(result.data);
+				alert('Wrong data or email is already taken');
+				return;
+			}
+
+			alert('User created succesful');
 			console.log(result.data);
-			alert('Wrong data or email is already taken');
-			return;
-		}
-
-		alert('User created succesful');
-		console.log(result.data);
-		navigate('/login');
-	};
+			navigate('/login');
+		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[name, email, password]
+	);
 
 	const handleNameChange = (e) => setName(e.target.value);
 	const handleEmailChange = (e) => setEmail(e.target.value);

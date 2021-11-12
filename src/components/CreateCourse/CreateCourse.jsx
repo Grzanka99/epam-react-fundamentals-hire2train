@@ -182,7 +182,6 @@ const CreateCourse = ({ authors, courses }) => {
 CreateCourse.propTypes = {
 	courses: PropTypes.object.isRequired,
 	authors: PropTypes.object.isRequired,
-	navigate: PropTypes.func.isRequired,
 };
 
 export default CreateCourse;

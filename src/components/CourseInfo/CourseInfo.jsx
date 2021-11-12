@@ -9,6 +9,12 @@ const CourseInfo = ({ courses, authors }) => {
 	const { courseId } = useParams();
 
 	const currentCourse = courses.find((course) => course.id === courseId);
+
+	if (!currentCourse) {
+		// idk why, but this immediately returns to the home page
+		return <div></div>;
+	}
+
 	const currentAuthors = authors.filter((author) =>
 		currentCourse.authors.includes(author.id)
 	);

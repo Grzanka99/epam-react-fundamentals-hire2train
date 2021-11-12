@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Input from 'common/Input/Input';
 import Button from 'common/Button/Button';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API } from 'constants.js';
@@ -12,29 +12,33 @@ const Login = ({ onLogin }) => {
 
 	const navigate = useNavigate();
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		let result;
+	const handleSubmit = useCallback(
+		async (e) => {
+			e.preventDefault();
+			let result;
 
-		try {
-			result = await axios.post(`${API}/login`, {
-				email,
-				password,
-			});
-		} catch (error) {
-			result = error.response;
-			if (error.response.data.successful === false) {
-				alert('Wrong username or password');
+			try {
+				result = await axios.post(`${API}/login`, {
+					email,
+					password,
+				});
+			} catch (error) {
+				result = error.response;
+				if (error.response.data.successful === false) {
+					alert('Wrong username or password');
+				}
+
+				return;
 			}
 
-			return;
-		}
+			onLogin.setUser(result.data.user.name);
+			onLogin.setToken(result.data.result);
 
-		onLogin.setUser(result.data.user.name);
-		onLogin.setToken(result.data.result);
-
-		navigate('/');
-	};
+			navigate('/');
+		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[email, password]
+	);
 
 	const handleEmailChange = (e) => setEmail(e.target.value);
 	const handlePasswordChange = (e) => setPassword(e.target.value);
