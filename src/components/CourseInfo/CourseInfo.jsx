@@ -2,25 +2,27 @@ import { Link, useParams } from 'react-router-dom';
 
 import pipeDuration from 'helpers/pipeDuration';
 
+import './CourseInfo.scss';
+
 const CourseInfo = ({ courses, authors }) => {
 	const { courseId } = useParams();
 
 	const currentCourse = courses.find((course) => course.id === courseId);
 
 	return (
-		<div className='flex column'>
-			<Link to='/'> {'<'} Back to courses</Link>
-			<div className='flex column center'>
-				<h1>{currentCourse.title}</h1>
-				<div className='flex'>
+		<div className='flex column course-info--wrapper'>
+			<Link to='/courses'> {'<'} Back to courses</Link>
+			<div className='flex column center course-info'>
+				<h1 className='courses-info__title'>{currentCourse.title}</h1>
+				<div className='flex course-info__info-container'>
 					<p>{currentCourse.description}</p>
 
 					<div className='course-card__info'>
 						<table>
 							<tbody>
 								<tr>
-									<td>Authors:</td>
-									<td>{authors.map((el) => `${el.name}, `)}</td>
+									<td>ID:</td>
+									<td className='info-id'>{currentCourse.id}</td>
 								</tr>
 								<tr>
 									<td>Duration:</td>
@@ -29,6 +31,13 @@ const CourseInfo = ({ courses, authors }) => {
 								<tr>
 									<td>Created:</td>
 									<td>{currentCourse.creationDate.replace(/\//g, '.')}</td>
+								</tr>
+
+								<tr className='course-info__authors'>
+									<td>Authors:</td>
+									{authors.map((el) => (
+										<td>{el.name}</td>
+									))}
 								</tr>
 							</tbody>
 						</table>

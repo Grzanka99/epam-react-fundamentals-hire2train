@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { mockedAuthorsList, mockedCoursesList } from 'helpers/mockedData';
 
 import Header from 'components/Header/Header';
@@ -21,27 +21,35 @@ function App() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const localUser = localStorage.getItem('user');
-		const localToken = localStorage.getItem('token');
+		let localUser = localStorage.getItem('user');
+		let localToken = localStorage.getItem('token');
 
-		if (!localUser) localStorage.setItem('user', user);
-		if (!localToken) localStorage.setItem('token', token);
+		if (user && !localUser && token && !localToken) {
+			localStorage.setItem('user', user);
+			localStorage.setItem('token', token);
+		}
 
-		if (!user) setUser(localUser);
-		if (!token) setToken(localToken);
+		if (localUser && localToken) {
+			setUser(localUser);
+			setToken(localToken);
+		}
 
-		if (!user || !token) {
+		localUser = localStorage.getItem('user');
+		localToken = localStorage.getItem('token');
+
+		if (!localUser || !localToken) {
 			navigate('/login');
-		} else if (!!user && !!token) {
+		} else if (!!localUser && !!localToken) {
 			navigate('/courses');
 		}
-	}, [user, token, navigate]);
+	}, [user, token]);
 
 	return (
 		<>
 			<Header user={user} onLogout={{ setUser, setToken }} />
 			<main className='main-view'>
 				<Routes>
+					<Route exac path='/' element={<Navigate to='/courses' />} />
 					<Route
 						exact
 						path='/courses'

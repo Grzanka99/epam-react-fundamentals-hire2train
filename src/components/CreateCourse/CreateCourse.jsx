@@ -93,7 +93,7 @@ const CreateCourse = ({ authors, courses }) => {
 					placeholderText={PLACEHOLDER.TITLE}
 				/>
 				<span className='flex center'>
-					<Button buttonText={BUTTON.CANCEL} pathTo='/' />
+					<Button buttonText={BUTTON.CANCEL} pathTo='/courses' />
 					<Button buttonText={BUTTON.CREATE_COURSE} type='submit' />
 				</span>
 			</div>

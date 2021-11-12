@@ -7,10 +7,11 @@ const Header = ({ user, onLogout }) => {
 	const navigate = useNavigate();
 
 	const handleLogout = () => {
-		if (!!user) {
-			onLogout.setUser('');
-			onLogout.setToken('');
-		}
+		onLogout.setUser('');
+		onLogout.setToken('');
+
+		localStorage.removeItem('user');
+		localStorage.removeItem('token');
 		navigate('/');
 	};
 

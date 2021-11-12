@@ -1,0 +1,60 @@
+.course-info {
+	display: flex;
+	flex-direction: column;
+
+	&--wrapper {
+		padding: 15px 25px;
+
+		& > a {
+			color: black;
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	&__info-container {
+		display: flex;
+		gap: 10%;
+
+		padding: 10px 0px;
+
+		& > p {
+			flex: 1 1 70%;
+		}
+
+		& > .course-card__info {
+			flex: 1 1 30%;
+
+			tr:first-child {
+				margin-top: 0;
+			}
+			tr {
+				display: block;
+			}
+		}
+
+		& > * {
+			margin: 10px 0;
+			padding: 0;
+		}
+	}
+
+	&__authors {
+		text-align: left;
+
+		td {
+			display: block;
+			text-align: left !important;
+		}
+	}
+}
+
+.info-id {
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
