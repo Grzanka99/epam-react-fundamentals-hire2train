@@ -9,6 +9,9 @@ const CourseInfo = ({ courses, authors }) => {
 	const { courseId } = useParams();
 
 	const currentCourse = courses.find((course) => course.id === courseId);
+	const currentAuthors = authors.filter((author) =>
+		currentCourse.authors.includes(author.id)
+	);
 
 	return (
 		<div className='flex column course-info--wrapper'>
@@ -36,7 +39,7 @@ const CourseInfo = ({ courses, authors }) => {
 
 								<tr className='course-info__authors'>
 									<td>Authors:</td>
-									{authors.map((el) => (
+									{currentAuthors.map((el) => (
 										<td>{el.name}</td>
 									))}
 								</tr>
