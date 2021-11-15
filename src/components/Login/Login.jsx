@@ -1,16 +1,19 @@
-import PropTypes from 'prop-types';
 import Input from 'common/Input/Input';
 import Button from 'common/Button/Button';
 import { useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API } from 'constants.js';
+import { userLogin } from 'store/user/actionCreators';
 
-const Login = ({ onLogin }) => {
+const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
 	const navigate = useNavigate();
+
+	const dispatch = useDispatch();
 
 	const handleSubmit = useCallback(
 		async (e) => {
@@ -31,8 +34,13 @@ const Login = ({ onLogin }) => {
 				return;
 			}
 
-			onLogin.setUser(result.data.user.name);
-			onLogin.setToken(result.data.result);
+			dispatch(
+				userLogin({
+					token: result.data.result,
+					name: result.data.user.name,
+					email: result.data.user.email,
+				})
+			);
 
 			navigate('/');
 		},
@@ -64,10 +72,6 @@ const Login = ({ onLogin }) => {
 			</p>
 		</form>
 	);
-};
-
-Login.propTypes = {
-	onLogin: PropTypes.object.isRequired,
 };
 
 export default Login;

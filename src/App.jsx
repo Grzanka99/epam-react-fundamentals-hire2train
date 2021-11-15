@@ -10,28 +10,34 @@ import Login from 'components/Login/Login';
 
 import 'App.scss';
 import CourseInfo from 'components/CourseInfo/CourseInfo';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogin } from 'store/user/actionCreators';
 
 function App() {
 	const [authors, setAuthors] = useState(mockedAuthorsList);
 	const [courses, setCourses] = useState(mockedCoursesList);
 
-	const [user, setUser] = useState('');
-	const [token, setToken] = useState('');
-
 	const navigate = useNavigate();
+
+	const user = useSelector((state) => state.user);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		let localUser = localStorage.getItem('user');
 		let localToken = localStorage.getItem('token');
 
-		if (user && !localUser && token && !localToken) {
-			localStorage.setItem('user', user);
-			localStorage.setItem('token', token);
+		if (user.name && !localUser && user.token && !localToken) {
+			localStorage.setItem('user', user.name);
+			localStorage.setItem('token', user.token);
 		}
 
 		if (localUser && localToken) {
-			setUser(localUser);
-			setToken(localToken);
+			dispatch(
+				userLogin({
+					name: localUser,
+					token: localToken,
+				})
+			);
 		}
 
 		localUser = localStorage.getItem('user');
@@ -43,11 +49,11 @@ function App() {
 			navigate('/courses');
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user, token]);
+	}, [user.name, user.token, user.email, dispatch]);
 
 	return (
 		<>
-			<Header user={user} onLogout={{ setUser, setToken }} />
+			<Header user={user} />
 			<main className='main-view'>
 				<Routes>
 					<Route exac path='/' element={<Navigate to='/courses' />} />
@@ -71,10 +77,7 @@ function App() {
 						}
 					/>
 					<Route path='/registration' element={<Registration />} />
-					<Route
-						path='/login'
-						element={<Login onLogin={{ setUser, setToken }} />}
-					/>
+					<Route path='/login' element={<Login />} />
 					<Route
 						path='/courses/:courseId'
 						element={<CourseInfo courses={courses} authors={authors} />}
