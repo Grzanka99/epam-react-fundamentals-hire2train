@@ -2,8 +2,6 @@ import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
-import PropTypes from 'prop-types';
-
 import Button from 'common/Button/Button';
 import Input from 'common/Input/Input';
 
@@ -15,8 +13,9 @@ import { BUTTON, PLACEHOLDER, TITLE } from 'constants.js';
 import './CreateCourse.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { authorsAdd } from 'store/authors/actionCreators';
+import { coursesAdd } from 'store/courses/actionCreators';
 
-const CreateCourse = ({ courses }) => {
+const CreateCourse = () => {
 	const [duration, setDuration] = useState(0);
 	const [newAuthorName, setNewAuthorName] = useState('');
 	const [title, setTitle] = useState('');
@@ -74,7 +73,7 @@ const CreateCourse = ({ courses }) => {
 				authors: currAuthors,
 			};
 
-			courses.set([...courses.data, newCourse]);
+			dispatch(coursesAdd([newCourse]));
 
 			dispatch(
 				authorsAdd(
@@ -191,10 +190,6 @@ const CreateCourse = ({ courses }) => {
 			</div>
 		</form>
 	);
-};
-
-CreateCourse.propTypes = {
-	courses: PropTypes.object.isRequired,
 };
 
 export default CreateCourse;

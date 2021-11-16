@@ -1,13 +1,7 @@
 import * as actions from './actionTypes';
 
-export function authorsAdd(author) {
-	let payload = [];
-
-	if (Array.isArray(author)) {
-		payload = author;
-	} else {
-		payload.push(author);
-	}
+export function authorsAdd(authors) {
+	const payload = Array.isArray(authors) ? authors : [authors];
 
 	return {
 		type: actions.AUTHORS_ADD,

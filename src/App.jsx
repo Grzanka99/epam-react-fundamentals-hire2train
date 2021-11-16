@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
-import { mockedCoursesList } from 'helpers/mockedData';
 
 import Header from 'components/Header/Header';
 import Courses from 'components/Courses/Courses';
@@ -15,12 +14,11 @@ import { userLogin } from 'store/user/actionCreators';
 import 'store/services';
 
 function App() {
-	const [courses, setCourses] = useState(mockedCoursesList);
-
 	const navigate = useNavigate();
 
 	const user = useSelector((state) => state.user);
 	const authors = useSelector((state) => state.authors);
+	const courses = useSelector((state) => state.courses);
 
 	const dispatch = useDispatch();
 
@@ -60,17 +58,8 @@ function App() {
 			<main className='main-view'>
 				<Routes>
 					<Route exac path='/' element={<Navigate to='/courses' />} />
-					<Route
-						exact
-						path='/courses'
-						element={<Courses courses={{ data: courses, set: setCourses }} />}
-					/>
-					<Route
-						path='/courses/add'
-						element={
-							<CreateCourse courses={{ data: courses, set: setCourses }} />
-						}
-					/>
+					<Route exact path='/courses' element={<Courses />} />
+					<Route path='/courses/add' element={<CreateCourse />} />
 					<Route path='/registration' element={<Registration />} />
 					<Route path='/login' element={<Login />} />
 					<Route
