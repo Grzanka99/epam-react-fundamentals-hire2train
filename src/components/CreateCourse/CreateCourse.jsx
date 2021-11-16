@@ -13,14 +13,20 @@ import dateGenerator from 'helpers/dateGenerator';
 import { BUTTON, PLACEHOLDER, TITLE } from 'constants.js';
 
 import './CreateCourse.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { authorsAdd } from 'store/authors/actionCreators';
 
-const CreateCourse = ({ authors, courses }) => {
+const CreateCourse = ({ courses }) => {
 	const [duration, setDuration] = useState(0);
-	const [currAuthors, setCurrAuthors] = useState([]);
-	const [authorList, setAuthorsList] = useState(authors.data);
 	const [newAuthorName, setNewAuthorName] = useState('');
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
+
+	const authors = useSelector((state) => state.authors);
+	const [authorList, setAuthorsList] = useState(authors);
+	const [currAuthors, setCurrAuthors] = useState([]);
+
+	const dispatch = useDispatch();
 
 	// useNavigate replaced useHistory in react-router-dom v6
 	const navigate = useNavigate();
@@ -69,7 +75,15 @@ const CreateCourse = ({ authors, courses }) => {
 			};
 
 			courses.set([...courses.data, newCourse]);
-			authors.set(authorList);
+
+			dispatch(
+				authorsAdd(
+					authorList.filter(
+						(author) => !authors.find((el) => el.id === author.id)
+					)
+				)
+			);
+
 			navigate('/', { replace: true });
 		} else return;
 	};
@@ -181,7 +195,6 @@ const CreateCourse = ({ authors, courses }) => {
 
 CreateCourse.propTypes = {
 	courses: PropTypes.object.isRequired,
-	authors: PropTypes.object.isRequired,
 };
 
 export default CreateCourse;

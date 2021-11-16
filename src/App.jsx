@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
-import { mockedAuthorsList, mockedCoursesList } from 'helpers/mockedData';
+import { mockedCoursesList } from 'helpers/mockedData';
 
 import Header from 'components/Header/Header';
 import Courses from 'components/Courses/Courses';
@@ -12,14 +12,16 @@ import 'App.scss';
 import CourseInfo from 'components/CourseInfo/CourseInfo';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from 'store/user/actionCreators';
+import 'store/services';
 
 function App() {
-	const [authors, setAuthors] = useState(mockedAuthorsList);
 	const [courses, setCourses] = useState(mockedCoursesList);
 
 	const navigate = useNavigate();
 
 	const user = useSelector((state) => state.user);
+	const authors = useSelector((state) => state.authors);
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -48,6 +50,7 @@ function App() {
 		} else if (!!localUser && !!localToken) {
 			navigate('/courses');
 		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user.name, user.token, user.email, dispatch]);
 
@@ -60,20 +63,12 @@ function App() {
 					<Route
 						exact
 						path='/courses'
-						element={
-							<Courses
-								authors={{ data: authors, set: setAuthors }}
-								courses={{ data: courses, set: setCourses }}
-							/>
-						}
+						element={<Courses courses={{ data: courses, set: setCourses }} />}
 					/>
 					<Route
 						path='/courses/add'
 						element={
-							<CreateCourse
-								authors={{ data: authors, set: setAuthors }}
-								courses={{ data: courses, set: setCourses }}
-							/>
+							<CreateCourse courses={{ data: courses, set: setCourses }} />
 						}
 					/>
 					<Route path='/registration' element={<Registration />} />

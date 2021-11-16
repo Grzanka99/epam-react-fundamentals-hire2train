@@ -31,7 +31,7 @@ Input.propTypes = {
 	onChange: PropTypes.func,
 	inputType: PropTypes.string,
 	min: PropTypes.number,
-	value: PropTypes.string,
+	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	required: PropTypes.bool,
 };
 

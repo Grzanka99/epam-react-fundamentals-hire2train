@@ -9,9 +9,12 @@ import SearchBar from './components/SearchBar/SearchBar';
 
 import './Courses.scss';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
-const Courses = ({ courses, authors }) => {
+const Courses = ({ courses }) => {
 	const [toDisplay, setToDisplay] = useState(courses.data);
+
+	const authors = useSelector((state) => state.authors);
 
 	return (
 		<section className='courses'>
@@ -22,7 +25,7 @@ const Courses = ({ courses, authors }) => {
 			<div>
 				{toDisplay.map((course) => (
 					<CourseCard
-						authors={authors.data.filter((author) =>
+						authors={authors.filter((author) =>
 							course.authors.includes(author.id)
 						)}
 						description={course.description}
@@ -40,7 +43,6 @@ const Courses = ({ courses, authors }) => {
 
 Courses.propTypes = {
 	courses: PropTypes.object.isRequired,
-	authors: PropTypes.object.isRequired,
 };
 
 export default Courses;
