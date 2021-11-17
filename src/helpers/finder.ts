@@ -1,4 +1,6 @@
-const fuzzySearch = (searchPhrase, str) => {
+import { ICourse } from 'types/state.interface';
+
+const fuzzySearch = (searchPhrase: string, str: string) => {
 	const strLen = str.length;
 	const searchPhraseLen = searchPhrase.length;
 
@@ -17,10 +19,10 @@ const fuzzySearch = (searchPhrase, str) => {
 	return true;
 };
 
-const finder = (curr, sp) =>
-	!sp
+const finder = (current: ICourse, searchPhrase: string) =>
+	!searchPhrase
 		? true
-		: fuzzySearch(sp.toLowerCase(), curr.title.toLowerCase()) ||
-		  fuzzySearch(sp.toLowerCase(), curr.id.toLowerCase());
+		: fuzzySearch(searchPhrase.toLowerCase(), current.title.toLowerCase()) ||
+		  fuzzySearch(searchPhrase.toLowerCase(), current.id.toLowerCase());
 
 export default finder;

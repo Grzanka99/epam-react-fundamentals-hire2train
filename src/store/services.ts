@@ -1,25 +1,26 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { API } from 'constants.js';
+import { IAuthor, ICourse } from 'types/state.interface';
 import { authorsAdd } from './authors/actionCreators';
 import { coursesAdd } from './courses/actionCreators';
 import store from './index';
 
 async function loadAuthors() {
-	let result = null;
+	let result: AxiosResponse | null = null;
 
 	try {
 		result = await axios.get(`${API}/authors/all`);
 
-		if (result.status !== 200) {
+		if (result && result.status !== 200) {
 			throw new Error('Error loading authors');
 		}
-	} catch (error) {
+	} catch (error: ErrorEvent | any | unknown) {
 		console.log(error);
 		return error.response.status;
 	}
 
-	if (result.data.successful) {
-		const res = result.data.result;
+	if (result && result.data.successful) {
+		const res: IAuthor[] = result.data.result;
 
 		if (!store.getState().authors.length) {
 			store.dispatch(authorsAdd(res));
@@ -28,20 +29,19 @@ async function loadAuthors() {
 }
 
 async function loadCourses() {
-	let result = null;
+	let result: AxiosResponse | null = null;
 
 	try {
 		result = await axios.get(`${API}/courses/all`);
-		if (result.status !== 200) {
+		if (result && result.status !== 200) {
 			throw new Error('Error loading courses');
 		}
-	} catch (error) {
-		console.log(error);
-		return error.response.status;
+	} catch (error: ErrorEvent | any | unknown) {
+		return error?.response.status || 'Unknown error';
 	}
 
-	if (result.data.successful) {
-		const res = result.data.result;
+	if (result && result.data.successful) {
+		const res: ICourse[] = result.data.result;
 
 		if (!store.getState().courses.length) {
 			store.dispatch(coursesAdd(res));

@@ -1,4 +1,4 @@
-const pipeDuration = (v) => {
+const pipeDuration = (v: number) => {
 	const minutes = v % 60;
 	const hours = Math.floor(v / 60);
 
