@@ -1,4 +1,6 @@
-import * as actions from './actionTypes';
+import { IAction } from 'types/action.interface';
+import { IUser } from 'types/state.interface';
+import { UserActionTypes } from './actionTypes';
 
 const initialUserState = {
 	isAuth: false,
@@ -7,9 +9,12 @@ const initialUserState = {
 	token: '',
 };
 
-export default function userReducer(state = initialUserState, action) {
+export default function userReducer(
+	state = initialUserState,
+	action: IAction<UserActionTypes, IUser>
+): IUser {
 	switch (action.type) {
-		case actions.USER_LOGIN:
+		case UserActionTypes.USER_LOGIN:
 			return {
 				...state,
 				isAuth: true,
@@ -17,7 +22,7 @@ export default function userReducer(state = initialUserState, action) {
 				email: action.payload.email,
 				token: action.payload.token,
 			};
-		case actions.USER_LOGOUT: {
+		case UserActionTypes.USER_LOGOUT: {
 			localStorage.clear();
 			return {
 				...state,

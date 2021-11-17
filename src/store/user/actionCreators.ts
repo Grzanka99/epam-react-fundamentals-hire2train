@@ -1,14 +1,15 @@
-import * as actions from './actionTypes';
+import { IUser } from 'types/state.interface';
+import { UserActionTypes } from './actionTypes';
 
-export function userLogin(user) {
+export function userLogin(user: IUser) {
 	return {
-		type: actions.USER_LOGIN,
+		type: UserActionTypes.USER_LOGIN,
 		payload: user,
 	};
 }
 
 export function userLogout() {
 	return {
-		type: actions.USER_LOGOUT,
+		type: UserActionTypes.USER_LOGOUT,
 	};
 }
