@@ -12,6 +12,6 @@ export function coursesAdd(courses) {
 export function coursesRemove(id) {
 	return {
 		type: actions.COURSES_REMOVE,
-		payload: id,
+		payload: { id },
 	};
 }

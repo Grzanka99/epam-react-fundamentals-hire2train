@@ -8,7 +8,7 @@ export default function coursesReducer(state = initialCoursesState, action) {
 			return [...state, ...action.payload];
 		}
 		case actions.COURSES_REMOVE:
-			return state.filter((author) => author.id !== action.payload.id);
+			return state.filter((course) => course.id !== action.payload.id);
 		default:
 			return state;
 	}

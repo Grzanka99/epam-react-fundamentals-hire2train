@@ -1,5 +1,6 @@
 export const BUTTON = {
-	SHOW_COURSE: 'Show course',
+	SHOW_COURSE: 'Show',
+	DELETE_COURSE: 'Delete',
 	SEARCH: 'Search',
 	ADD_NEW: 'Add new course',
 	LOGOUT: 'Logout',
