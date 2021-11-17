@@ -1,22 +1,25 @@
 import PropTypes from 'prop-types';
 
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
+import { ISearchBarProps } from 'types/props.interface';
+import { ICourse } from 'types/state.interface';
 
-import Button from '../../../../common/Button/Button';
-import Input from '../../../../common/Input/Input';
+import Button from 'common/Button/Button';
+import Input from 'common/Input/Input';
 
-import { BUTTON, PLACEHOLDER } from '../../../../constants';
-import finder from '../../../../helpers/finder';
+import { BUTTON, PLACEHOLDER } from 'constants.js';
+import finder from 'helpers/finder';
 
 import './SearchBar.scss';
 
-const SearchBar = ({ searchIn, onFind }) => {
+const SearchBar = ({ searchIn, onFind }: ISearchBarProps<ICourse>) => {
 	const [searchPhrase, setSearchPhrase] = useState('');
 
-	const handleOnChange = (e) => setSearchPhrase(e.target.value);
+	const handleOnChange = (e: ChangeEvent) =>
+		setSearchPhrase((e.target as HTMLInputElement).value);
 
 	const handleSearch = () => {
-		const found = searchIn.filter((el) => finder(el, searchPhrase));
+		const found = searchIn.filter((el: ICourse) => finder(el, searchPhrase));
 		onFind(found);
 	};
 

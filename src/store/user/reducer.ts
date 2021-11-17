@@ -2,7 +2,7 @@ import { IAction } from 'types/action.interface';
 import { IUser } from 'types/state.interface';
 import { UserActionTypes } from './actionTypes';
 
-const initialUserState = {
+const initialUserState: IUser = {
 	isAuth: false,
 	name: '',
 	email: '',

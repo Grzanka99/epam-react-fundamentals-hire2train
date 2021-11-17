@@ -55,11 +55,11 @@ function App() {
 
 	return (
 		<>
-			<Header user={user} />
+			<Header />
 			<main className='main-view'>
 				<Routes>
-					<Route exac path='/' element={<Navigate to='/courses' />} />
-					<Route exact path='/courses' element={<Courses />} />
+					<Route path='/' element={<Navigate to='/courses' />} />
+					<Route path='/courses' element={<Courses />} />
 					<Route path='/courses/add' element={<CreateCourse />} />
 					<Route path='/registration' element={<Registration />} />
 					<Route path='/login' element={<Login />} />

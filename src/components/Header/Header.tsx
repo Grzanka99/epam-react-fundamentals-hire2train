@@ -7,21 +7,15 @@ import Logo from './components/Logo/Logo';
 import './Header.scss';
 import { userLogout } from 'store/user/actionCreators';
 
+import { IState, IUser } from 'types/state.interface';
+
 const Header = () => {
 	const navigate = useNavigate();
-	const user = useSelector((state) => state.user);
+	const user: IUser = useSelector((state: IState) => state.user);
 	const dispatch = useDispatch();
 
 	const handleLogout = () => {
-		dispatch(
-			userLogout({
-				name: '',
-				email: '',
-				token: '',
-			})
-		);
-		localStorage.removeItem('user');
-		localStorage.removeItem('token');
+		dispatch(userLogout());
 		navigate('/');
 	};
 

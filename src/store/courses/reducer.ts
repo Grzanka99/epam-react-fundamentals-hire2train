@@ -1,22 +1,25 @@
-import * as actions from './actionTypes';
+import { IAction } from 'types/action.interface';
+import { ICourse } from 'types/state.interface';
+import { CoursesActionTypes } from './actionTypes';
 
-const initialCoursesState = [];
+const initialCoursesState: ICourse[] = [];
 
-export default function coursesReducer(state = initialCoursesState, action) {
+export default function coursesReducer(
+	state = initialCoursesState,
+	action: IAction<CoursesActionTypes, any>
+): ICourse[] {
 	switch (action.type) {
-		case actions.COURSES_ADD: {
+		case CoursesActionTypes.COURSES_ADD:
 			return [...state, ...action.payload];
-		}
-		case actions.COURSES_REMOVE:
+		case CoursesActionTypes.COURSES_REMOVE:
 			return state.filter((course) => course.id !== action.payload.id);
-		case actions.COURSES_UPDATE: {
+		case CoursesActionTypes.COURSES_UPDATE:
 			return state.map((course) => {
 				if (course.id === action.payload.id) {
 					return { ...course, ...action.payload };
 				}
 				return course;
 			});
-		}
 		default:
 			return state;
 	}

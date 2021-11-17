@@ -3,7 +3,7 @@ import { DefaultRootState } from 'react-redux';
 export interface IUser {
 	isAuth?: boolean;
 	name: string;
-	email: string;
+	email?: string;
 	token?: string;
 }
 

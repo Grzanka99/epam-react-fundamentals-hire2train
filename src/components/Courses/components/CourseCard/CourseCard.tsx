@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import pipeDuration from 'helpers/pipeDuration';
 import { BUTTON } from 'constants.js';
@@ -7,18 +7,26 @@ import Button from 'common/Button/Button';
 import './CourseCard.scss';
 
 import { coursesRemove } from 'store/courses/actionCreators';
+import { ICourseCardProps } from 'types/props.interface';
+import { IAuthor, IState } from 'types/state.interface';
 
 const CourseCard = ({
 	title,
 	description,
-	authors,
 	duration,
-	createdAt,
+	creationDate,
 	id,
-}) => {
+	authors,
+}: ICourseCardProps) => {
 	const dispatch = useDispatch();
 
-	const handleDelete = () => {
+	const allAuthors = useSelector((state: IState) => state.authors);
+
+	const currentAuthors: IAuthor[] = allAuthors.filter((author) =>
+		authors.includes(author.id)
+	);
+
+	const handleDelete = (): void => {
 		dispatch(coursesRemove(id));
 	};
 
@@ -33,7 +41,7 @@ const CourseCard = ({
 					<tbody>
 						<tr>
 							<td>Authors:</td>
-							<td>{authors.map((el) => `${el.name}, `)}</td>
+							<td>{currentAuthors.map((el) => `${el.name}, `)}</td>
 						</tr>
 						<tr>
 							<td>Duration:</td>
@@ -41,7 +49,7 @@ const CourseCard = ({
 						</tr>
 						<tr>
 							<td>Created:</td>
-							<td>{createdAt.replace(/\//g, '.')}</td>
+							<td>{creationDate.replace(/\//g, '.')}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -57,7 +65,9 @@ const CourseCard = ({
 CourseCard.propTypes = {
 	title: PropTypes.string.isRequired,
 	description: PropTypes.string.isRequired,
-	authors: PropTypes.arrayOf(PropTypes.shape),
+	duration: PropTypes.number.isRequired,
+	creationDate: PropTypes.string.isRequired,
+	id: PropTypes.string.isRequired,
 };
 
 export default CourseCard;

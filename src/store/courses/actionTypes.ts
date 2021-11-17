@@ -1,5 +1,5 @@
-export const COURSES_ADD = 'courses/add';
-
-export const COURSES_REMOVE = 'courses/remove';
-
-export const COURSES_UPDATE = 'courses/update';
+export enum CoursesActionTypes {
+	COURSES_ADD = 'courses/add',
+	COURSES_REMOVE = 'courses/remove',
+	COURSES_UPDATE = 'courses/update',
+}

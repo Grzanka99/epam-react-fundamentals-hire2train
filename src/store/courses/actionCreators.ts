@@ -1,24 +1,32 @@
-import * as actions from './actionTypes';
+import { IAction } from 'types/action.interface';
+import { ICourse } from 'types/state.interface';
+import { CoursesActionTypes } from './actionTypes';
 
-export function coursesAdd(courses) {
+export function coursesAdd(
+	courses: ICourse[] | ICourse
+): IAction<CoursesActionTypes, ICourse[]> {
 	const payload = Array.isArray(courses) ? courses : [courses];
 
 	return {
-		type: actions.COURSES_ADD,
+		type: CoursesActionTypes.COURSES_ADD,
 		payload,
 	};
 }
 
-export function coursesRemove(id) {
+export function coursesRemove(
+	id: string
+): IAction<CoursesActionTypes, { id: string }> {
 	return {
-		type: actions.COURSES_REMOVE,
+		type: CoursesActionTypes.COURSES_REMOVE,
 		payload: { id },
 	};
 }
 
-export function coursesUpdate(course) {
+export function coursesUpdate(
+	course: ICourse
+): IAction<CoursesActionTypes, ICourse> {
 	return {
-		type: actions.COURSES_UPDATE,
+		type: CoursesActionTypes.COURSES_UPDATE,
 		payload: { ...course },
 	};
 }
