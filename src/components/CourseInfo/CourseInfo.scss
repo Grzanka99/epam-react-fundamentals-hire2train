@@ -1,9 +1,11 @@
 .course-info {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 
 	&--wrapper {
 		padding: 15px 25px;
+		width: 100%;
 
 		& > a {
 			color: black;
@@ -17,12 +19,14 @@
 
 	&__info-container {
 		display: flex;
+		width: 100%;
 		gap: 10%;
 
 		padding: 10px 0px;
 
 		& > p {
 			flex: 1 1 70%;
+			text-align: left;
 		}
 
 		& > .course-card__info {

@@ -26,7 +26,6 @@ const CourseInfo = ({ courses, authors }) => {
 				<h1 className='courses-info__title'>{currentCourse.title}</h1>
 				<div className='flex course-info__info-container'>
 					<p>{currentCourse.description}</p>
-
 					<div className='course-card__info'>
 						<table>
 							<tbody>
@@ -42,7 +41,6 @@ const CourseInfo = ({ courses, authors }) => {
 									<td>Created:</td>
 									<td>{currentCourse.creationDate.replace(/\//g, '.')}</td>
 								</tr>
-
 								<tr className='course-info__authors'>
 									<td>Authors:</td>
 									{currentAuthors.map((author) => (
