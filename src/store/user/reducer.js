@@ -17,7 +17,8 @@ export default function userReducer(state = initialUserState, action) {
 				email: action.payload.email,
 				token: action.payload.token,
 			};
-		case actions.USER_LOGOUT:
+		case actions.USER_LOGOUT: {
+			localStorage.clear();
 			return {
 				...state,
 				isAuth: false,
@@ -25,6 +26,7 @@ export default function userReducer(state = initialUserState, action) {
 				email: '',
 				token: '',
 			};
+		}
 		default:
 			return state;
 	}

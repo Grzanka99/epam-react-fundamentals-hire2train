@@ -9,6 +9,14 @@ export default function coursesReducer(state = initialCoursesState, action) {
 		}
 		case actions.COURSES_REMOVE:
 			return state.filter((course) => course.id !== action.payload.id);
+		case actions.COURSES_UPDATE: {
+			return state.map((course) => {
+				if (course.id === action.payload.id) {
+					return { ...course, ...action.payload };
+				}
+				return course;
+			});
+		}
 		default:
 			return state;
 	}

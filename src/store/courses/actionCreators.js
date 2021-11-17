@@ -15,3 +15,10 @@ export function coursesRemove(id) {
 		payload: { id },
 	};
 }
+
+export function coursesUpdate(course) {
+	return {
+		type: actions.COURSES_UPDATE,
+		payload: { ...course },
+	};
+}
