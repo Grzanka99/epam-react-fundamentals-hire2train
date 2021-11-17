@@ -1,6 +1,6 @@
 import Input from 'common/Input/Input';
 import Button from 'common/Button/Button';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -25,7 +25,7 @@ const Login = () => {
 					email,
 					password,
 				});
-			} catch (error) {
+			} catch (error: ErrorEvent | any | unknown) {
 				result = error.response;
 				if (error.response.data.successful === false) {
 					alert('Wrong username or password');
@@ -48,8 +48,10 @@ const Login = () => {
 		[email, password]
 	);
 
-	const handleEmailChange = (e) => setEmail(e.target.value);
-	const handlePasswordChange = (e) => setPassword(e.target.value);
+	const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
+		setEmail(e.target.value);
+	const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) =>
+		setPassword(e.target.value);
 
 	return (
 		<form

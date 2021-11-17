@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { ChangeEvent, FormEventHandler, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -14,6 +14,7 @@ import './CreateCourse.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { authorsAdd } from 'store/authors/actionCreators';
 import { coursesAdd } from 'store/courses/actionCreators';
+import { IState } from 'types/state.interface';
 
 const CreateCourse = () => {
 	const [duration, setDuration] = useState(0);
@@ -21,9 +22,9 @@ const CreateCourse = () => {
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
 
-	const authors = useSelector((state) => state.authors);
+	const authors = useSelector((state: IState) => state.authors);
 	const [authorList, setAuthorsList] = useState(authors);
-	const [currAuthors, setCurrAuthors] = useState([]);
+	const [currAuthors, setCurrAuthors] = useState([] as string[]);
 
 	const dispatch = useDispatch();
 
@@ -60,7 +61,7 @@ const CreateCourse = () => {
 		return !errors.length;
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
 		e.preventDefault();
 
 		if (validateData()) {
@@ -87,16 +88,23 @@ const CreateCourse = () => {
 		} else return;
 	};
 
-	const handleAuthorNameChange = (e) => setNewAuthorName(e.target.value);
-	const handleChangeDuration = (e) =>
-		setDuration(Number(e.target.value) < 1 ? 1 : e.target.value);
+	const handleAuthorNameChange = (e: ChangeEvent<HTMLInputElement>) =>
+		setNewAuthorName(e.target.value);
 
-	const handleAddAuthor = (id) => () => setCurrAuthors([...currAuthors, id]);
-	const handleDeleteAuthor = (id) => () =>
+	const handleChangeDuration = (e: ChangeEvent<HTMLInputElement>) =>
+		setDuration(Number(e.target.value) < 1 ? 1 : Number(e.target.value));
+
+	const handleAddAuthor = (id: string) => () =>
+		setCurrAuthors([...currAuthors, id]);
+
+	const handleDeleteAuthor = (id: string) => () =>
 		setCurrAuthors(currAuthors.filter((el) => el !== id));
 
-	const handleChangeTitle = (e) => setTitle(e.target.value);
-	const handleChangeDescription = (e) => setDescription(e.target.value);
+	const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) =>
+		setTitle(e.target.value);
+
+	const handleChangeDescription = (e: ChangeEvent<HTMLTextAreaElement>) =>
+		setDescription(e.target.value);
 
 	return (
 		<form className='create-course' onSubmit={handleSubmit}>
@@ -117,8 +125,8 @@ const CreateCourse = () => {
 				<textarea
 					name='description'
 					id='description-input'
-					cols='30'
-					rows='10'
+					cols={30}
+					rows={30}
 					placeholder={PLACEHOLDER.DESCRIPTION}
 					value={description}
 					onChange={handleChangeDescription}
@@ -173,11 +181,11 @@ const CreateCourse = () => {
 							currAuthors.map((author) => {
 								const curr = authorList.find((el) => el.id === author);
 								return (
-									<div key={curr.id} className='single-author'>
-										<span>{curr.name}</span>
+									<div key={curr?.id} className='single-author'>
+										<span>{curr?.name}</span>
 										<Button
 											buttonText={BUTTON.DELETE_AUTHOR}
-											onClick={handleDeleteAuthor(curr.id)}
+											onClick={handleDeleteAuthor(curr?.id || '')}
 										/>
 									</div>
 								);

@@ -2,7 +2,7 @@ import axios from 'axios';
 import Button from 'common/Button/Button';
 import Input from 'common/Input/Input';
 import { API } from 'constants.js';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, ChangeEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import './Registration.scss';
@@ -25,10 +25,12 @@ const Registration = () => {
 					email,
 					password,
 				});
-			} catch (error) {
-				result = error.response;
-				console.log(result.data);
-				alert('Wrong data or email is already taken');
+			} catch (error: ErrorEvent | any | unknown) {
+				if (error) {
+					result = error.response;
+					console.log(result.data);
+					alert('Wrong data or email is already taken');
+				}
 				return;
 			}
 
@@ -40,9 +42,12 @@ const Registration = () => {
 		[name, email, password]
 	);
 
-	const handleNameChange = (e) => setName(e.target.value);
-	const handleEmailChange = (e) => setEmail(e.target.value);
-	const handlePasswordChange = (e) => setPassword(e.target.value);
+	const handleNameChange = (e: ChangeEvent<HTMLInputElement>) =>
+		setName(e.target.value);
+	const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
+		setEmail(e.target.value);
+	const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) =>
+		setPassword(e.target.value);
 
 	return (
 		<form
