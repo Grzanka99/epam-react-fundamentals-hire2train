@@ -7,7 +7,7 @@ import CreateCourse from 'components/CreateCourse/CreateCourse';
 import Registration from 'components/Registration/Registration';
 import Login from 'components/Login/Login';
 
-import 'App.scss';
+import './App.scss';
 import CourseInfo from 'components/CourseInfo/CourseInfo';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from 'store/user/actionCreators';
