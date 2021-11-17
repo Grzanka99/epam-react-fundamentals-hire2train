@@ -12,19 +12,20 @@ import CourseInfo from 'components/CourseInfo/CourseInfo';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from 'store/user/actionCreators';
 import 'store/services';
+import { IState } from 'types/state.interface';
 
 function App() {
 	const navigate = useNavigate();
 
-	const user = useSelector((state) => state.user);
-	const authors = useSelector((state) => state.authors);
-	const courses = useSelector((state) => state.courses);
+	const user = useSelector((state: IState) => state.user);
+	const authors = useSelector((state: IState) => state.authors);
+	const courses = useSelector((state: IState) => state.courses);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		let localUser = localStorage.getItem('user');
-		let localToken = localStorage.getItem('token');
+		let localUser: string | null = localStorage.getItem('user');
+		let localToken: string | null = localStorage.getItem('token');
 
 		if (user.name && !localUser && user.token && !localToken) {
 			localStorage.setItem('user', user.name);
