@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { IInputProps } from 'types/props.interface';
 
 import './Input.scss';
 
@@ -10,7 +11,7 @@ const Input = ({
 	min,
 	value,
 	required,
-}) => (
+}: IInputProps) => (
 	<label className='common-input__label'>
 		<span className='common-input__label--text'>{labelText}</span>
 		<input

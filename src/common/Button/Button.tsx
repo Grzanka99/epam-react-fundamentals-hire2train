@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import 'common/Button/Button.scss';
+import './Button.scss';
+import { IButtonProps } from 'types/props.interface';
 
-const Button = ({ buttonText, onClick, type, pathTo }) =>
+const Button = ({ buttonText, onClick, type, pathTo }: IButtonProps) =>
 	pathTo ? (
 		<Link to={pathTo} onClick={onClick} className='common-button'>
 			{buttonText}
