@@ -8,7 +8,10 @@ import './CourseCard.scss';
 
 import { coursesRemove } from 'store/courses/actionCreators';
 import { ICourseCardProps } from 'types/props.interface';
-import { IAuthor, IState } from 'types/state.interface';
+import { IAuthor } from 'types/state.interface';
+import TrashIconSVG from 'svg/trash-icon.svg';
+import PencilIconSVG from 'svg/pencil-icon.svg';
+import { getAuthors } from 'store/selectors';
 
 const CourseCard = ({
 	title,
@@ -20,7 +23,7 @@ const CourseCard = ({
 }: ICourseCardProps) => {
 	const dispatch = useDispatch();
 
-	const allAuthors = useSelector((state: IState) => state.authors);
+	const allAuthors = useSelector(getAuthors);
 
 	const currentAuthors: IAuthor[] = allAuthors.filter((author) =>
 		authors.includes(author.id)
@@ -55,7 +58,12 @@ const CourseCard = ({
 				</table>
 				<div className='flex center'>
 					<Button buttonText={BUTTON.SHOW_COURSE} pathTo={`/courses/${id}`} />
-					<Button buttonText={BUTTON.DELETE_COURSE} onClick={handleDelete} />
+					<Button onClick={handleDelete}>
+						<TrashIconSVG />
+					</Button>
+					<Button>
+						<PencilIconSVG />
+					</Button>
 				</div>
 			</div>
 		</article>

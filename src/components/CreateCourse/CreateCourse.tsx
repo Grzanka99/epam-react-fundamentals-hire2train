@@ -45,8 +45,10 @@ const CreateCourse = () => {
 
 			setAuthorsList([...authorList, newAuthor]);
 			setNewAuthorName('');
+
+			dispatch(authorsAdd(newAuthor));
 		},
-		[authorList]
+		[authorList, dispatch]
 	);
 
 	const validateData = () => {
@@ -75,14 +77,6 @@ const CreateCourse = () => {
 			};
 
 			dispatch(coursesAdd([newCourse]));
-
-			dispatch(
-				authorsAdd(
-					authorList.filter(
-						(author) => !authors.find((el) => el.id === author.id)
-					)
-				)
-			);
 
 			navigate('/', { replace: true });
 		} else return;

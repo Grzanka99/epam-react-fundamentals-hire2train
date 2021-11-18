@@ -12,14 +12,14 @@ import CourseInfo from 'components/CourseInfo/CourseInfo';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from 'store/user/actionCreators';
 import 'store/services';
-import { IState } from 'types/state.interface';
+import { getAuthors, getCourses, getUser } from 'store/selectors';
 
 function App() {
 	const navigate = useNavigate();
 
-	const user = useSelector((state: IState) => state.user);
-	const authors = useSelector((state: IState) => state.authors);
-	const courses = useSelector((state: IState) => state.courses);
+	const user = useSelector(getUser);
+	const authors = useSelector(getAuthors);
+	const courses = useSelector(getCourses);
 
 	const dispatch = useDispatch();
 

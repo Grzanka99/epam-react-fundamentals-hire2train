@@ -8,11 +8,11 @@ import SearchBar from './components/SearchBar/SearchBar';
 import './Courses.scss';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { IAuthor, ICourse, IState } from 'types/state.interface';
+import { ICourse } from 'types/state.interface';
+import { getCourses } from 'store/selectors';
 
 const Courses = () => {
-	const authors: IAuthor[] = useSelector((state: IState) => state.authors);
-	const courses: ICourse[] = useSelector((state: IState) => state.courses);
+	const courses: ICourse[] = useSelector(getCourses);
 	const [toDisplay, setToDisplay] = useState(courses);
 
 	useEffect(() => {

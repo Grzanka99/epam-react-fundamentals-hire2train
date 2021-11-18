@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 import { ICourse } from './state.interface';
 
 export interface ICourseCardProps extends ICourse {}
@@ -13,6 +13,7 @@ export interface IButtonProps {
 	onClick?: () => void;
 	type?: 'submit' | 'reset' | 'button';
 	pathTo?: string;
+	children?: ReactNode;
 }
 
 export interface IInputProps {
