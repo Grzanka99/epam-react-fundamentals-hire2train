@@ -27,7 +27,7 @@ const Courses = () => {
 			</div>
 			<div>
 				{toDisplay.map((course) => (
-					<CourseCard {...course} />
+					<CourseCard {...course} key={course.id} />
 				))}
 			</div>
 		</section>

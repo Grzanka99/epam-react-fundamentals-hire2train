@@ -26,23 +26,34 @@ function App() {
 	useEffect(() => {
 		let localUser: string | null = localStorage.getItem('user');
 		let localToken: string | null = localStorage.getItem('token');
+		let localEmail: string | null = localStorage.getItem('email');
 
-		if (user.name && !localUser && user.token && !localToken) {
+		if (
+			user.name &&
+			!localUser &&
+			user.token &&
+			!localToken &&
+			user.email &&
+			!localEmail
+		) {
 			localStorage.setItem('user', user.name);
 			localStorage.setItem('token', user.token);
+			localStorage.setItem('email', user.email);
 		}
 
-		if (localUser && localToken) {
+		if (localUser && localToken && localEmail) {
 			dispatch(
 				userLogin({
 					name: localUser,
 					token: localToken,
+					email: localEmail,
 				})
 			);
 		}
 
 		localUser = localStorage.getItem('user');
 		localToken = localStorage.getItem('token');
+		localEmail = localStorage.getItem('email');
 
 		if (!localUser || !localToken) {
 			navigate('/login');

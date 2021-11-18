@@ -22,7 +22,7 @@ const Button = ({
 	);
 
 Button.propTypes = {
-	buttonText: PropTypes.string.isRequired,
+	buttonText: PropTypes.string,
 	onClick: PropTypes.func,
 	type: PropTypes.string,
 	pathTo: PropTypes.string,
