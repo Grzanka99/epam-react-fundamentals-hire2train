@@ -11,6 +11,7 @@ const CourseInfo = ({ courses, authors }) => {
 	const currentCourse = courses.find((course) => course.id === courseId);
 
 	if (!currentCourse) {
+		console.log('im here');
 		// idk why, but this immediately returns to the home page
 		return <div></div>;
 	}

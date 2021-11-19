@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Header from 'components/Header/Header';
 import Courses from 'components/Courses/Courses';
@@ -15,8 +15,6 @@ import 'store/services';
 import { getAuthors, getCourses, getUser } from 'store/selectors';
 
 function App() {
-	const navigate = useNavigate();
-
 	const user = useSelector(getUser);
 	const authors = useSelector(getAuthors);
 	const courses = useSelector(getCourses);
@@ -54,30 +52,34 @@ function App() {
 		localUser = localStorage.getItem('user');
 		localToken = localStorage.getItem('token');
 		localEmail = localStorage.getItem('email');
-
-		if (!localUser || !localToken) {
-			navigate('/login');
-		} else if (!!localUser && !!localToken) {
-			navigate('/courses');
-		}
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user.name, user.token, user.email, dispatch]);
+
+	const isLoggedIn =
+		localStorage.getItem('user') && localStorage.getItem('token');
 
 	return (
 		<>
 			<Header />
 			<main className='main-view'>
 				<Routes>
-					<Route path='/' element={<Navigate to='/courses' />} />
-					<Route path='/courses' element={<Courses />} />
-					<Route path='/courses/add' element={<CreateCourse />} />
-					<Route path='/registration' element={<Registration />} />
-					<Route path='/login' element={<Login />} />
-					<Route
-						path='/courses/:courseId'
-						element={<CourseInfo courses={courses} authors={authors} />}
-					/>
+					{isLoggedIn ? (
+						<>
+							<Route path='/' element={<Navigate to='/courses' />} />
+							<Route path='/courses' element={<Courses />} />
+							<Route path='/courses/add' element={<CreateCourse />} />
+							<Route
+								path='/courses/:courseId'
+								element={<CourseInfo courses={courses} authors={authors} />}
+							/>
+							<Route path='*' element={<Navigate to='/courses' />} />
+						</>
+					) : (
+						<>
+							<Route path='/registration' element={<Registration />} />
+							<Route path='/login' element={<Login />} />
+							<Route path='*' element={<Navigate to='/login' />} />
+						</>
+					)}
 				</Routes>
 			</main>
 		</>
