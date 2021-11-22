@@ -8,13 +8,14 @@ import Input from 'common/Input/Input';
 import pipeDuration from 'helpers/pipeDuration';
 import dateGenerator from 'helpers/dateGenerator';
 
-import { BUTTON, PLACEHOLDER, TITLE } from 'helpers/constants';
+import { translate } from 'helpers/constants';
 
 import './CreateCourse.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { authorsAdd } from 'store/authors/actionCreators';
 import { coursesAdd } from 'store/courses/actionCreators';
 import { IState } from 'types/state.interface';
+import { getLang } from 'store/selectors';
 
 const CreateCourse = () => {
 	const [duration, setDuration] = useState(0);
@@ -27,6 +28,8 @@ const CreateCourse = () => {
 	const [currAuthors, setCurrAuthors] = useState([] as string[]);
 
 	const dispatch = useDispatch();
+
+	const lang = useSelector(getLang);
 
 	// useNavigate replaced useHistory in react-router-dom v6
 	const navigate = useNavigate();
@@ -107,21 +110,27 @@ const CreateCourse = () => {
 					labelText='Title'
 					value={title}
 					onChange={handleChangeTitle}
-					placeholderText={PLACEHOLDER.TITLE}
+					placeholderText={translate(lang).PLACEHOLDER.TITLE}
 				/>
 				<span className='flex center'>
-					<Button buttonText={BUTTON.CANCEL} pathTo='/courses' />
-					<Button buttonText={BUTTON.CREATE_COURSE} type='submit' />
+					<Button
+						buttonText={translate(lang).BUTTON.CANCEL}
+						pathTo='/courses'
+					/>
+					<Button
+						buttonText={translate(lang).BUTTON.CREATE_COURSE}
+						type='submit'
+					/>
 				</span>
 			</div>
 			<label className='create-course__desc'>
-				Description
+				{translate(lang).COMMON.DESCRIPTION}
 				<textarea
 					name='description'
 					id='description-input'
 					cols={30}
 					rows={30}
-					placeholder={PLACEHOLDER.DESCRIPTION}
+					placeholder={translate(lang).PLACEHOLDER.DESCRIPTION}
 					value={description}
 					onChange={handleChangeDescription}
 				/>
@@ -129,32 +138,34 @@ const CreateCourse = () => {
 			<div className='create-course__authors'>
 				<div className='create-course__authors__left'>
 					<div className='create-course__authors__left__new-author'>
-						<h3>{TITLE.ADD_AUTHOR}</h3>
+						<h3>{translate(lang).TITLE.ADD_AUTHOR}</h3>
 						<Input
 							labelText='Author name'
 							value={newAuthorName}
 							onChange={handleAuthorNameChange}
-							placeholderText={PLACEHOLDER.AUTHOR}
+							placeholderText={translate(lang).PLACEHOLDER.AUTHOR}
 						/>
 						<Button
-							buttonText={BUTTON.CREATE_AUTHOR}
+							buttonText={translate(lang).BUTTON.CREATE_AUTHOR}
 							onClick={handleCreateAuthor(newAuthorName)}
 						/>
 					</div>
 					<div className='create-course__authors__left__duration'>
-						<h3>{TITLE.DURATION}</h3>
+						<h3>{translate(lang).TITLE.DURATION}</h3>
 						<Input
 							labelText='Duration'
 							inputType='number'
-							placeholderText={PLACEHOLDER.DURATION}
+							placeholderText={translate(lang).PLACEHOLDER.DURATION}
 							value={duration}
 							onChange={handleChangeDuration}
 						/>
-						<span>Duration: {pipeDuration(duration)}</span>
+						<span>
+							{translate(lang).COMMON.DURATION}: {pipeDuration(duration)}
+						</span>
 					</div>
 				</div>
 				<div className='create-course__authors__right'>
-					<h3>{TITLE.AUTHORS}</h3>
+					<h3>{translate(lang).TITLE.AUTHORS}</h3>
 					<div>
 						{authorList.length &&
 							authorList
@@ -169,7 +180,7 @@ const CreateCourse = () => {
 									</div>
 								))}
 					</div>
-					<h3>{TITLE.COURSE_AUTHORS}</h3>
+					<h3>{translate(lang).TITLE.COURSE_AUTHORS}</h3>
 					<div>
 						{currAuthors.length ? (
 							currAuthors.map((author) => {
@@ -178,14 +189,14 @@ const CreateCourse = () => {
 									<div key={curr?.id} className='single-author'>
 										<span>{curr?.name}</span>
 										<Button
-											buttonText={BUTTON.DELETE_AUTHOR}
+											buttonText={translate(lang).BUTTON.DELETE_AUTHOR}
 											onClick={handleDeleteAuthor(curr?.id || '')}
 										/>
 									</div>
 								);
 							})
 						) : (
-							<span>Authors list is epmpty</span>
+							<span>{translate(lang).COMMON.AUTHORS_LIST_EMPTY}</span>
 						)}
 					</div>
 				</div>

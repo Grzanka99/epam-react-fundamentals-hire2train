@@ -1,11 +1,14 @@
+import axios from 'axios';
+
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useCallback, ChangeEvent } from 'react';
+
 import Input from 'common/Input/Input';
 import Button from 'common/Button/Button';
-import { useState, useCallback, ChangeEvent } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { API } from 'helpers/constants';
+import { API, translate } from 'helpers/constants';
 import { userLogin } from 'store/user/actionCreators';
+import { getLang } from 'store/selectors';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
@@ -13,6 +16,8 @@ const Login = () => {
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+
+	const lang = useSelector(getLang);
 
 	const handleSubmit = useCallback(
 		async (e) => {
@@ -61,18 +66,22 @@ const Login = () => {
 			onSubmit={handleSubmit}
 			className='flex column h100 center'
 		>
-			<h1>Login</h1>
-			<Input labelText='Email' onChange={handleEmailChange} value={email} />
+			<h1>{translate(lang).COMMON.LOGIN}</h1>
 			<Input
-				labelText='Password'
+				labelText={translate(lang).LABEL.EMAIL}
+				onChange={handleEmailChange}
+				value={email}
+			/>
+			<Input
+				labelText={translate(lang).LABEL.PASSWORD}
 				onChange={handlePasswordChange}
 				value={password}
 				inputType='password'
 			/>
-			<Button buttonText='Login' type='submit' />
+			<Button buttonText={translate(lang).BUTTON.LOGIN} type='submit' />
 			<p>
-				If you not have an account you can{' '}
-				<Link to='/registration'>Registration</Link>
+				{translate(lang).COMMON.NO_ACCOUNT}{' '}
+				<Link to='/registration'>{translate(lang).LINK.REGISTRATION}</Link>
 			</p>
 		</form>
 	);

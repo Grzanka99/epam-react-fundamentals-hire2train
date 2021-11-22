@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Button from '../../common/Button/Button';
+import Button from 'common/Button/Button';
 import Logo from './components/Logo/Logo';
 
 import './Header.scss';

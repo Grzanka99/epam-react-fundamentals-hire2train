@@ -7,13 +7,17 @@ import { ICourse } from 'types/state.interface';
 import Button from 'common/Button/Button';
 import Input from 'common/Input/Input';
 
-import { BUTTON, PLACEHOLDER } from 'helpers/constants';
+import { translate } from 'helpers/constants';
 import finder from 'helpers/finder';
 
 import './SearchBar.scss';
+import { useSelector } from 'react-redux';
+import { getLang } from 'store/selectors';
 
 const SearchBar = ({ searchIn, onFind }: ISearchBarProps<ICourse>) => {
 	const [searchPhrase, setSearchPhrase] = useState('');
+
+	const lang = useSelector(getLang);
 
 	const handleOnChange = (e: ChangeEvent) =>
 		setSearchPhrase((e.target as HTMLInputElement).value);
@@ -26,11 +30,14 @@ const SearchBar = ({ searchIn, onFind }: ISearchBarProps<ICourse>) => {
 	return (
 		<div className='search-bar'>
 			<Input
-				placeholderText={PLACEHOLDER.SEARCH}
+				placeholderText={translate(lang).PLACEHOLDER.SEARCH}
 				value={searchPhrase}
 				onChange={handleOnChange}
 			/>
-			<Button buttonText={BUTTON.SEARCH} onClick={handleSearch} />
+			<Button
+				buttonText={translate(lang).PLACEHOLDER.SEARCH}
+				onClick={handleSearch}
+			/>
 		</div>
 	);
 };

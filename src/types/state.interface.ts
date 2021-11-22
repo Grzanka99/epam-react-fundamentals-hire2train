@@ -1,3 +1,4 @@
+import { Lang } from 'helpers/constants';
 import { DefaultRootState } from 'react-redux';
 
 export interface IUser {
@@ -25,5 +26,5 @@ export interface IState extends DefaultRootState {
 	user: IUser;
 	courses: ICourse[];
 	authors: IAuthor[];
-	lang: string;
+	lang: Lang;
 }

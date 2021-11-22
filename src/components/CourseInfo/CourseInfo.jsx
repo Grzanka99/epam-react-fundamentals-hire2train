@@ -25,7 +25,10 @@ const CourseInfo = ({ courses, authors }) => {
 
 	return (
 		<div className='flex column course-info--wrapper'>
-			<Link to='/courses'> {'<'} Back to courses</Link>
+			<Link to='/courses'>
+				{' '}
+				{'<'} {translate(lang).LINK.BACK_TO_COURSES}
+			</Link>
 			<div className='flex column center course-info'>
 				<h1 className='courses-info__title'>{currentCourse.title}</h1>
 				<div className='flex course-info__info-container'>
@@ -34,19 +37,19 @@ const CourseInfo = ({ courses, authors }) => {
 						<table>
 							<tbody>
 								<tr>
-									<td>ID:</td>
+									<td>{translate(lang).COMMON.ID}:</td>
 									<td className='info-id'>{currentCourse.id}</td>
 								</tr>
 								<tr>
-									<td>Duration:</td>
+									<td>{translate(lang).COMMON.DURATION}:</td>
 									<td>{pipeDuration(currentCourse.duration)}</td>
 								</tr>
 								<tr>
-									<td>Created:</td>
+									<td>{translate(lang).COMMON.CREATED}:</td>
 									<td>{currentCourse.creationDate.replace(/\//g, '.')}</td>
 								</tr>
 								<tr className='course-info__authors'>
-									<td>Authors:</td>
+									<td>{translate(lang).COMMON.AUTHORS}:</td>
 									{currentAuthors.map((author) => (
 										<td key={author.id}>{author.name}</td>
 									))}

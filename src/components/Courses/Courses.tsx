@@ -1,5 +1,4 @@
-// it didn't compile without .js extension
-import { BUTTON } from 'helpers/constants';
+import { translate } from 'helpers/constants';
 
 import Button from 'common/Button/Button';
 import CourseCard from './components/CourseCard/CourseCard';
@@ -9,11 +8,12 @@ import './Courses.scss';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ICourse } from 'types/state.interface';
-import { getCourses } from 'store/selectors';
+import { getCourses, getLang } from 'store/selectors';
 
 const Courses = () => {
 	const courses: ICourse[] = useSelector(getCourses);
 	const [toDisplay, setToDisplay] = useState(courses);
+	const lang = useSelector(getLang);
 
 	useEffect(() => {
 		setToDisplay(courses);
@@ -23,7 +23,10 @@ const Courses = () => {
 		<section className='courses'>
 			<div className='courses__heading'>
 				<SearchBar searchIn={courses} onFind={setToDisplay} />
-				<Button buttonText={BUTTON.ADD_NEW} pathTo='/courses/add' />
+				<Button
+					buttonText={translate(lang).BUTTON.ADD_NEW}
+					pathTo='/courses/add'
+				/>
 			</div>
 			<div>
 				{toDisplay.map((course) => (

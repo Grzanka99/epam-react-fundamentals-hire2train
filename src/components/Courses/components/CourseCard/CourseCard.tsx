@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
 import pipeDuration from 'helpers/pipeDuration';
-import { BUTTON } from 'helpers/constants';
+import { translate } from 'helpers/constants';
 import Button from 'common/Button/Button';
 import './CourseCard.scss';
 
@@ -11,7 +11,7 @@ import { ICourseCardProps } from 'types/props.interface';
 import { IAuthor } from 'types/state.interface';
 import TrashIconSVG from 'svg/trash-icon.svg';
 import PencilIconSVG from 'svg/pencil-icon.svg';
-import { getAuthors } from 'store/selectors';
+import { getAuthors, getLang } from 'store/selectors';
 
 const CourseCard = ({
 	title,
@@ -24,6 +24,7 @@ const CourseCard = ({
 	const dispatch = useDispatch();
 
 	const allAuthors = useSelector(getAuthors);
+	const lang = useSelector(getLang);
 
 	const currentAuthors: IAuthor[] = allAuthors.filter((author) =>
 		authors.includes(author.id)
@@ -43,21 +44,24 @@ const CourseCard = ({
 				<table>
 					<tbody>
 						<tr>
-							<td>Authors:</td>
+							<td>{translate(lang).COMMON.AUTHORS}:</td>
 							<td>{currentAuthors.map((el) => `${el.name}, `)}</td>
 						</tr>
 						<tr>
-							<td>Duration:</td>
+							<td>{translate(lang).COMMON.DURATION}:</td>
 							<td>{pipeDuration(duration)}</td>
 						</tr>
 						<tr>
-							<td>Created:</td>
+							<td>{translate(lang).COMMON.CREATED}:</td>
 							<td>{creationDate.replace(/\//g, '.')}</td>
 						</tr>
 					</tbody>
 				</table>
 				<div className='flex center'>
-					<Button buttonText={BUTTON.SHOW_COURSE} pathTo={`/courses/${id}`} />
+					<Button
+						buttonText={translate(lang).BUTTON.SHOW_COURSE}
+						pathTo={`/courses/${id}`}
+					/>
 					<Button onClick={handleDelete}>
 						<TrashIconSVG />
 					</Button>
