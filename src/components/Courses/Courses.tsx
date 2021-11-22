@@ -1,5 +1,5 @@
 // it didn't compile without .js extension
-import { BUTTON } from 'constants.js';
+import { BUTTON } from 'helpers/constants';
 
 import Button from 'common/Button/Button';
 import CourseCard from './components/CourseCard/CourseCard';

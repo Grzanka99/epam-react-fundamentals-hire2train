@@ -7,7 +7,7 @@ import { ICourse } from 'types/state.interface';
 import Button from 'common/Button/Button';
 import Input from 'common/Input/Input';
 
-import { BUTTON, PLACEHOLDER } from 'constants.js';
+import { BUTTON, PLACEHOLDER } from 'helpers/constants';
 import finder from 'helpers/finder';
 
 import './SearchBar.scss';

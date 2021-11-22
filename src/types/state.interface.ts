@@ -25,4 +25,5 @@ export interface IState extends DefaultRootState {
 	user: IUser;
 	courses: ICourse[];
 	authors: IAuthor[];
+	lang: string;
 }

@@ -4,7 +4,7 @@ import { useState, useCallback, ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { API } from 'constants.js';
+import { API } from 'helpers/constants';
 import { userLogin } from 'store/user/actionCreators';
 
 const Login = () => {

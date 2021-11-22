@@ -8,7 +8,7 @@ import Input from 'common/Input/Input';
 import pipeDuration from 'helpers/pipeDuration';
 import dateGenerator from 'helpers/dateGenerator';
 
-import { BUTTON, PLACEHOLDER, TITLE } from 'constants.js';
+import { BUTTON, PLACEHOLDER, TITLE } from 'helpers/constants';
 
 import './CreateCourse.scss';
 import { useDispatch, useSelector } from 'react-redux';

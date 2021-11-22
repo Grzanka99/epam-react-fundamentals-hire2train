@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
 import pipeDuration from 'helpers/pipeDuration';
-import { BUTTON } from 'constants.js';
+import { BUTTON } from 'helpers/constants';
 import Button from 'common/Button/Button';
 import './CourseCard.scss';
 

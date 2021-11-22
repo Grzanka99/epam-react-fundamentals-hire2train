@@ -2,18 +2,21 @@ import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
 
 import pipeDuration from 'helpers/pipeDuration';
+import { translate } from 'helpers/constants';
 
 import './CourseInfo.scss';
+import { useSelector } from 'react-redux';
+import { getLang } from 'store/selectors';
 
 const CourseInfo = ({ courses, authors }) => {
 	const { courseId } = useParams();
 
 	const currentCourse = courses.find((course) => course.id === courseId);
+	const lang = useSelector(getLang);
 
 	if (!currentCourse) {
-		console.log('im here');
 		// idk why, but this immediately returns to the home page
-		return <div></div>;
+		return <h1>{translate(lang).TITLE.COURSE_INFO_FALLBACK}</h1>;
 	}
 
 	const currentAuthors = authors.filter((author) =>

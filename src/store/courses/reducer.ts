@@ -4,7 +4,7 @@ import { CoursesActionTypes } from './actionTypes';
 
 const initialCoursesState: ICourse[] = [];
 
-export default function coursesReducer(
+export function coursesReducer(
 	state = initialCoursesState,
 	action: IAction<CoursesActionTypes, any>
 ): ICourse[] {

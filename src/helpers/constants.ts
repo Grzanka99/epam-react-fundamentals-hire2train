@@ -17,6 +17,7 @@ export const TITLE = {
 	DURATION: 'Duration',
 	AUTHORS: 'Authors',
 	COURSE_AUTHORS: 'Course authors',
+	COURSE_INFO_FALLBACK: 'Course not found',
 };
 
 export const PLACEHOLDER = {
@@ -28,3 +29,23 @@ export const PLACEHOLDER = {
 };
 
 export const API = 'http://localhost:3000';
+
+export const ENGLISH = {
+	BUTTON,
+	TITLE,
+	PLACEHOLDER,
+};
+
+export enum Lang {
+	EN = 'en',
+	PL = 'pl',
+}
+
+export const translate = (lang: Lang): typeof ENGLISH => {
+	switch (lang) {
+		case Lang.EN:
+			return ENGLISH;
+		default:
+			return ENGLISH;
+	}
+};

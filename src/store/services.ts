@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { API } from 'constants.js';
+import { API } from 'helpers/constants';
 import { IAuthor, ICourse } from 'types/state.interface';
 import { authorsAdd } from './authors/actionCreators';
 import { coursesAdd } from './courses/actionCreators';

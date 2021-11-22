@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Header from 'components/Header/Header';
@@ -13,14 +13,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from 'store/user/actionCreators';
 import 'store/services';
 import { getAuthors, getCourses, getIsAuth } from 'store/selectors';
+import { languageSet } from 'store/lang/actionCreators';
 
-function App() {
+const App = () => {
 	const authors = useSelector(getAuthors);
 	const courses = useSelector(getCourses);
 
 	const isAuth = useSelector(getIsAuth);
 
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(languageSet('en'));
+	}, [dispatch]);
 
 	useEffect(() => {
 		const user = localStorage.getItem('user');
@@ -32,12 +37,21 @@ function App() {
 		}
 	}, [dispatch]);
 
+	const check = localStorage.getItem('user') && localStorage.getItem('token');
+	const [isLoggedIn, setIsLoggedIn] = useState(check);
+
+	useEffect(() => {
+		setIsLoggedIn(
+			localStorage.getItem('user') && localStorage.getItem('token')
+		);
+	}, [isAuth]);
+
 	return (
 		<>
 			<Header />
 			<main className='main-view'>
 				<Routes>
-					{isAuth ? (
+					{isLoggedIn ? (
 						<>
 							<Route path='/' element={<Navigate to='/courses' />} />
 							<Route path='/courses' element={<Courses />} />
@@ -59,6 +73,6 @@ function App() {
 			</main>
 		</>
 	);
-}
+};
 
 export default App;

@@ -4,7 +4,7 @@ import { AuthorsActionTypes } from './actionTypes';
 
 const initialAuthorsState: IAuthor[] = [];
 
-export default function authorsReducer(
+export function authorsReducer(
 	state = initialAuthorsState,
 	action: IAction<AuthorsActionTypes, any>
 ) {

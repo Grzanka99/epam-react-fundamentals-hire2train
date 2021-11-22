@@ -9,7 +9,7 @@ const initialUserState: IUser = {
 	token: '',
 };
 
-export default function userReducer(
+export function userReducer(
 	state = initialUserState,
 	action: IAction<UserActionTypes, IUser>
 ): IUser {
