@@ -43,7 +43,7 @@ const SearchBar = ({ searchIn, onFind }: ISearchBarProps<ICourse>) => {
 };
 
 SearchBar.propTypes = {
-	searchIn: PropTypes.arrayOf(PropTypes.object).isRequired,
+	searchIn: PropTypes.array,
 	onFind: PropTypes.func.isRequired,
 };
 

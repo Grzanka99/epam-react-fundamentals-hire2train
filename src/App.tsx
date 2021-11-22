@@ -12,13 +12,10 @@ import CourseInfo from 'components/CourseInfo/CourseInfo';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from 'store/user/actionCreators';
 import 'store/services';
-import { getAuthors, getCourses, getIsAuth } from 'store/selectors';
+import { getIsAuth } from 'store/selectors';
 import { languageSet } from 'store/lang/actionCreators';
 
 const App = () => {
-	const authors = useSelector(getAuthors);
-	const courses = useSelector(getCourses);
-
 	const isAuth = useSelector(getIsAuth);
 
 	const dispatch = useDispatch();
@@ -56,10 +53,7 @@ const App = () => {
 							<Route path='/' element={<Navigate to='/courses' />} />
 							<Route path='/courses' element={<Courses />} />
 							<Route path='/courses/add' element={<CreateCourse />} />
-							<Route
-								path='/courses/:courseId'
-								element={<CourseInfo courses={courses} authors={authors} />}
-							/>
+							<Route path='/courses/:courseId' element={<CourseInfo />} />
 							<Route path='*' element={<Navigate to='/courses' />} />
 						</>
 					) : (
