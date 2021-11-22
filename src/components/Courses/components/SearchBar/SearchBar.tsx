@@ -35,7 +35,7 @@ const SearchBar = ({ searchIn, onFind }: ISearchBarProps<ICourse>) => {
 				onChange={handleOnChange}
 			/>
 			<Button
-				buttonText={translate(lang).PLACEHOLDER.SEARCH}
+				buttonText={translate(lang).BUTTON.SEARCH}
 				onClick={handleSearch}
 			/>
 		</div>
