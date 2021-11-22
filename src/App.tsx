@@ -12,57 +12,32 @@ import CourseInfo from 'components/CourseInfo/CourseInfo';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from 'store/user/actionCreators';
 import 'store/services';
-import { getAuthors, getCourses, getUser } from 'store/selectors';
+import { getAuthors, getCourses, getIsAuth } from 'store/selectors';
 
 function App() {
-	const user = useSelector(getUser);
 	const authors = useSelector(getAuthors);
 	const courses = useSelector(getCourses);
+
+	const isAuth = useSelector(getIsAuth);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		let localUser: string | null = localStorage.getItem('user');
-		let localToken: string | null = localStorage.getItem('token');
-		let localEmail: string | null = localStorage.getItem('email');
+		const user = localStorage.getItem('user');
+		const token = localStorage.getItem('token');
+		const email = localStorage.getItem('email');
 
-		if (
-			user.name &&
-			!localUser &&
-			user.token &&
-			!localToken &&
-			user.email &&
-			!localEmail
-		) {
-			localStorage.setItem('user', user.name);
-			localStorage.setItem('token', user.token);
-			localStorage.setItem('email', user.email);
+		if (user && token && email) {
+			dispatch(userLogin({ name: user, token, email }));
 		}
-
-		if (localUser && localToken && localEmail) {
-			dispatch(
-				userLogin({
-					name: localUser,
-					token: localToken,
-					email: localEmail,
-				})
-			);
-		}
-
-		localUser = localStorage.getItem('user');
-		localToken = localStorage.getItem('token');
-		localEmail = localStorage.getItem('email');
-	}, [user.name, user.token, user.email, dispatch]);
-
-	const isLoggedIn =
-		localStorage.getItem('user') && localStorage.getItem('token');
+	}, [dispatch]);
 
 	return (
 		<>
 			<Header />
 			<main className='main-view'>
 				<Routes>
-					{isLoggedIn ? (
+					{isAuth ? (
 						<>
 							<Route path='/' element={<Navigate to='/courses' />} />
 							<Route path='/courses' element={<Courses />} />

@@ -12,7 +12,6 @@ const Login = () => {
 	const [password, setPassword] = useState('');
 
 	const navigate = useNavigate();
-
 	const dispatch = useDispatch();
 
 	const handleSubmit = useCallback(
@@ -42,10 +41,13 @@ const Login = () => {
 				})
 			);
 
-			navigate('/');
+			localStorage.setItem('token', result.data.result);
+			localStorage.setItem('user', result.data.user.name);
+			localStorage.setItem('email', result.data.user.email);
+
+			navigate('/course');
 		},
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[email, password]
+		[email, password, dispatch, navigate]
 	);
 
 	const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
