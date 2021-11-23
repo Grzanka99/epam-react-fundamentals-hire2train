@@ -1,10 +1,12 @@
-import axios from 'axios';
-import { API } from 'helpers/constants';
 import { Dispatch } from 'redux';
-import { getUserInfo, performLoginRequest } from 'store/services';
 import { IUserLoginData } from 'types/common.interface';
 import { IState, IUser } from 'types/state.interface';
 import { userLogin, userLogout } from './actionCreators';
+import {
+	getUserInfo,
+	performLoginRequest,
+	performLogoutRequest,
+} from './services';
 
 export const thunkUserLogin = ({ email, password }: IUserLoginData) => {
 	return async function (dispatch: Dispatch) {
@@ -27,13 +29,7 @@ export const thunkUserLogin = ({ email, password }: IUserLoginData) => {
 export const thunkUserLogout = () => {
 	return async function (dispatch: Dispatch, getState: () => IState) {
 		const user: IUser = getState().user;
-
-		await axios.delete(`${API}/logout`, {
-			headers: {
-				Authorization: user.token,
-			},
-		});
-
+		await performLogoutRequest(user.token);
 		dispatch(userLogout());
 	};
 };

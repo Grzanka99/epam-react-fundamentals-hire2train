@@ -20,7 +20,7 @@ export interface ICourse {
 }
 
 export interface IAuthor {
-	id: string;
+	id?: string;
 	name: string;
 }
 

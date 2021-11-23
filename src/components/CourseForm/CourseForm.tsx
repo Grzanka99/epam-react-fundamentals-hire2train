@@ -170,13 +170,13 @@ const CreateCourse = () => {
 					<div>
 						{authorList.length &&
 							authorList
-								.filter((a) => !currAuthors.includes(a.id))
+								.filter((a) => !currAuthors.includes(a.id || ''))
 								.map((author) => (
 									<div key={author.id} className='single-author'>
 										<span>{author.name}</span>
 										<Button
 											buttonText='Add author'
-											onClick={handleAddAuthor(author.id)}
+											onClick={handleAddAuthor(author.id || '')}
 										/>
 									</div>
 								))}
