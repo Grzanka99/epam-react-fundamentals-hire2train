@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Header from 'components/Header/Header';
 import Courses from 'components/Courses/Courses';
-import CreateCourse from 'components/CreateCourse/CreateCourse';
+import CourseForm from 'components/CourseForm/CourseForm';
 import Registration from 'components/Registration/Registration';
 import Login from 'components/Login/Login';
 
@@ -52,7 +52,7 @@ const App = () => {
 						<>
 							<Route path='/' element={<Navigate to='/courses' />} />
 							<Route path='/courses' element={<Courses />} />
-							<Route path='/courses/add' element={<CreateCourse />} />
+							<Route path='/courses/add' element={<CourseForm />} />
 							<Route path='/courses/:courseId' element={<CourseInfo />} />
 							<Route path='*' element={<Navigate to='/courses' />} />
 						</>

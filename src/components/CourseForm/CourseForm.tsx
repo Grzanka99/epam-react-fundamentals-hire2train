@@ -5,12 +5,11 @@ import { v4 as uuidv4 } from 'uuid';
 import Button from 'common/Button/Button';
 import Input from 'common/Input/Input';
 
-import pipeDuration from 'helpers/pipeDuration';
 import dateGenerator from 'helpers/dateGenerator';
 
 import { translate } from 'helpers/constants';
 
-import './CreateCourse.scss';
+import './CourseForm.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { authorsAdd } from 'store/authors/actionCreators';
 import { coursesAdd } from 'store/courses/actionCreators';
