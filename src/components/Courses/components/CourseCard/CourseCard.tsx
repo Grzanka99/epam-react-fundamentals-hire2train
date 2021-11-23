@@ -5,14 +5,13 @@ import { translate } from 'helpers/constants';
 import Button from 'common/Button/Button';
 import './CourseCard.scss';
 
-import { coursesRemove } from 'store/courses/actionCreators';
 import { ICourseCardProps } from 'types/props.interface';
 import { IAuthor } from 'types/state.interface';
 import TrashIconSVG from 'svg/trash-icon.svg';
 import PencilIconSVG from 'svg/pencil-icon.svg';
-import { getAuthors, getLang } from 'store/selectors';
+import { getAuthors, getIsAdmin, getLang } from 'store/selectors';
 import { PipeDuration } from 'components/PipeDuration/PipeDuration';
-import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
+import { thunkCourseRemove } from 'store/courses/thunk';
 
 const CourseCard = ({
 	title,
@@ -26,13 +25,14 @@ const CourseCard = ({
 
 	const allAuthors = useSelector(getAuthors);
 	const lang = useSelector(getLang);
+	const isAdmin = useSelector(getIsAdmin);
 
 	const currentAuthors: IAuthor[] = allAuthors.filter((author) =>
-		authors.includes(author.id)
+		authors.includes(author.id || '')
 	);
 
 	const handleDelete = (): void => {
-		dispatch(coursesRemove(id));
+		dispatch(thunkCourseRemove({ id }));
 	};
 
 	return (
@@ -65,7 +65,7 @@ const CourseCard = ({
 						buttonText={translate(lang).BUTTON.SHOW_COURSE}
 						pathTo={`/courses/${id}`}
 					/>
-					<PrivateRoute>
+					{isAdmin && (
 						<>
 							<Button onClick={handleDelete}>
 								<TrashIconSVG />
@@ -74,7 +74,7 @@ const CourseCard = ({
 								<PencilIconSVG />
 							</Button>
 						</>
-					</PrivateRoute>
+					)}
 				</div>
 			</div>
 		</article>

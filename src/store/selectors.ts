@@ -8,3 +8,5 @@ export const getUser = (state: IState): IUser => state.user;
 export const getIsAuth = (state: IState): boolean => Boolean(state.user.isAuth);
 export const getLang = (state: IState): Lang => state.lang;
 export const getRole = (state: IState): Role => state.user.role || Role.None;
+export const getIsAdmin = (state: IState): boolean =>
+	state.user.role?.toLowerCase() === Role.Admin.toLowerCase();

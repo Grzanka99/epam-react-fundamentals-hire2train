@@ -24,7 +24,9 @@ const CourseInfo = () => {
 	const currentAuthors = useMemo(
 		() =>
 			currentCourse &&
-			authors.filter((author) => currentCourse.authors.includes(author.id)),
+			authors.filter((author) =>
+				currentCourse.authors.includes(author.id || '')
+			),
 		[currentCourse, authors]
 	);
 

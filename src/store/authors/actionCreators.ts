@@ -1,7 +1,7 @@
 import { IAuthor } from 'types/state.interface';
 import { AuthorsActionTypes } from './actionTypes';
 
-export function authorsAdd(authors: IAuthor[] | IAuthor) {
+export function authorsAdd(authors: IAuthor) {
 	const payload: IAuthor[] = Array.isArray(authors) ? authors : [authors];
 
 	return {
