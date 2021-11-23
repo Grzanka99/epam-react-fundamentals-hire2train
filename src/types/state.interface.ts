@@ -1,11 +1,13 @@
 import { Lang } from 'helpers/constants';
 import { DefaultRootState } from 'react-redux';
+import { Role } from './common.enum';
 
 export interface IUser {
 	isAuth?: boolean;
 	name: string;
 	email: string;
 	token: string;
+	role?: Role;
 }
 
 export interface ICourse {

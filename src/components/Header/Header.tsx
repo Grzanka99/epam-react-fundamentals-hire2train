@@ -8,8 +8,9 @@ import './Header.scss';
 import { userLogout } from 'store/user/actionCreators';
 
 import { IState, IUser } from 'types/state.interface';
-import { translate } from 'helpers/constants';
+import { API, translate } from 'helpers/constants';
 import { getLang } from 'store/selectors';
+import axios from 'axios';
 
 const Header = () => {
 	const navigate = useNavigate();
@@ -18,8 +19,15 @@ const Header = () => {
 
 	const lang = useSelector(getLang);
 
-	const handleLogout = () => {
+	const handleLogout = async () => {
 		dispatch(userLogout());
+
+		await axios.delete(`${API}/logout`, {
+			headers: {
+				Authorization: user.token,
+			},
+		});
+
 		navigate('/login');
 	};
 

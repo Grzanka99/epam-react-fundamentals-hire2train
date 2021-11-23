@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactNode } from 'react';
+import { ChangeEvent, Component, ReactNode } from 'react';
 import { ICourse } from './state.interface';
 
 export interface ICourseCardProps extends ICourse {}
@@ -29,4 +29,8 @@ export interface IInputProps {
 export interface IPipeDuration {
 	hours: string;
 	minutes: string;
+}
+
+export interface IPrivateRouteProps {
+	component: Component;
 }

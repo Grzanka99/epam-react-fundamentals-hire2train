@@ -1,4 +1,5 @@
 import { IAction } from 'types/action.interface';
+import { Role } from 'types/common.enum';
 import { IUser } from 'types/state.interface';
 import { UserActionTypes } from './actionTypes';
 
@@ -7,6 +8,7 @@ const initialUserState: IUser = {
 	name: '',
 	email: '',
 	token: '',
+	role: Role.None,
 };
 
 export function userReducer(
