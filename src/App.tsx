@@ -14,6 +14,8 @@ import { userLogin } from 'store/user/actionCreators';
 import 'store/services';
 import { getIsAuth } from 'store/selectors';
 import { languageSet } from 'store/lang/actionCreators';
+import { Role } from 'types/common.enum';
+import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
 
 const App = () => {
 	const isAuth = useSelector(getIsAuth);
@@ -28,9 +30,10 @@ const App = () => {
 		const user = localStorage.getItem('user');
 		const token = localStorage.getItem('token');
 		const email = localStorage.getItem('email');
+		const role: Role = (localStorage.getItem('role') as Role) || Role.None;
 
 		if (user && token && email) {
-			dispatch(userLogin({ name: user, token, email }));
+			dispatch(userLogin({ name: user, token, email, role }));
 		}
 	}, [dispatch]);
 
@@ -52,7 +55,14 @@ const App = () => {
 						<>
 							<Route path='/' element={<Navigate to='/courses' />} />
 							<Route path='/courses' element={<Courses />} />
-							<Route path='/courses/add' element={<CourseForm />} />
+							<Route
+								path='/courses/add'
+								element={
+									<PrivateRoute>
+										<CourseForm />
+									</PrivateRoute>
+								}
+							/>
 							<Route path='/courses/:courseId' element={<CourseInfo />} />
 							<Route path='*' element={<Navigate to='/courses' />} />
 						</>

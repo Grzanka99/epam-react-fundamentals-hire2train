@@ -23,6 +23,7 @@ export function userReducer(
 				name: action.payload.name,
 				email: action.payload.email,
 				token: action.payload.token,
+				role: action.payload.role,
 			};
 		case UserActionTypes.USER_LOGOUT: {
 			localStorage.clear();
@@ -32,6 +33,7 @@ export function userReducer(
 				name: '',
 				email: '',
 				token: '',
+				role: Role.None,
 			};
 		}
 		default:

@@ -12,11 +12,21 @@ const Button = ({
 	children,
 }: IButtonProps) =>
 	pathTo ? (
-		<Link to={pathTo} onClick={onClick} className='common-button'>
+		<Link
+			to={pathTo}
+			onClick={onClick}
+			className='common-button'
+			data-children={!!children}
+		>
 			{children ?? buttonText}
 		</Link>
 	) : (
-		<button onClick={onClick} className='common-button' type={type ?? 'button'}>
+		<button
+			onClick={onClick}
+			className='common-button'
+			type={type ?? 'button'}
+			data-children={!!children}
+		>
 			{children ?? buttonText}
 		</button>
 	);

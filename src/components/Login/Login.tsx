@@ -1,14 +1,15 @@
-import axios from 'axios';
-
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useCallback, ChangeEvent } from 'react';
 
 import Input from 'common/Input/Input';
 import Button from 'common/Button/Button';
-import { API, translate } from 'helpers/constants';
+import { translate } from 'helpers/constants';
 import { userLogin } from 'store/user/actionCreators';
 import { getLang } from 'store/selectors';
+import { setLocalStorageOnLogin } from './helpers';
+import { Role } from 'types/common.enum';
+import { getUserInfo, performLoginRequest } from 'store/services';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
@@ -22,33 +23,26 @@ const Login = () => {
 	const handleSubmit = useCallback(
 		async (e) => {
 			e.preventDefault();
-			let result;
 
-			try {
-				result = await axios.post(`${API}/login`, {
-					email,
-					password,
-				});
-			} catch (error: ErrorEvent | any | unknown) {
-				result = error.response;
-				if (error.response.data.successful === false) {
-					alert('Wrong username or password');
-				}
+			const result = await performLoginRequest(email, password);
+			if (!result) return;
+			const userInfo = await getUserInfo(result.data.result);
 
-				return;
-			}
+			setLocalStorageOnLogin({
+				token: result.data.result,
+				name: userInfo.name,
+				role: userInfo.role || Role.None,
+				email: userInfo.email,
+			});
 
 			dispatch(
 				userLogin({
 					token: result.data.result,
-					name: result.data.user.name,
-					email: result.data.user.email,
+					name: userInfo.name,
+					email: userInfo.email,
+					role: userInfo.role,
 				})
 			);
-
-			localStorage.setItem('token', result.data.result);
-			localStorage.setItem('user', result.data.user.name);
-			localStorage.setItem('email', result.data.user.email);
 
 			navigate('/course');
 		},

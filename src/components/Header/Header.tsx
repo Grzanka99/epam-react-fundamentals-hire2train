@@ -34,9 +34,9 @@ const Header = () => {
 	return (
 		<header className='header'>
 			<Logo />
-			{!!user.name && (
+			{(!!user.name || user.name === null) && (
 				<div className='header__right'>
-					<span className='header__right__user'>{user.name}</span>
+					<span className='header__right__user'>{String(user.name)}</span>
 					<Button
 						buttonText={translate(lang).BUTTON.LOGOUT}
 						onClick={handleLogout}

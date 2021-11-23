@@ -12,6 +12,7 @@ import TrashIconSVG from 'svg/trash-icon.svg';
 import PencilIconSVG from 'svg/pencil-icon.svg';
 import { getAuthors, getLang } from 'store/selectors';
 import { PipeDuration } from 'components/PipeDuration/PipeDuration';
+import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
 
 const CourseCard = ({
 	title,
@@ -64,12 +65,16 @@ const CourseCard = ({
 						buttonText={translate(lang).BUTTON.SHOW_COURSE}
 						pathTo={`/courses/${id}`}
 					/>
-					<Button onClick={handleDelete}>
-						<TrashIconSVG />
-					</Button>
-					<Button>
-						<PencilIconSVG />
-					</Button>
+					<PrivateRoute>
+						<>
+							<Button onClick={handleDelete}>
+								<TrashIconSVG />
+							</Button>
+							<Button>
+								<PencilIconSVG />
+							</Button>
+						</>
+					</PrivateRoute>
 				</div>
 			</div>
 		</article>

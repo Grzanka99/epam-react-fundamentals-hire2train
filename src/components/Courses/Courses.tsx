@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ICourse } from 'types/state.interface';
 import { getCourses, getLang } from 'store/selectors';
+import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
 
 const Courses = () => {
 	const courses: ICourse[] = useSelector(getCourses);
@@ -23,10 +24,12 @@ const Courses = () => {
 		<section className='courses'>
 			<div className='courses__heading'>
 				<SearchBar searchIn={courses} onFind={setToDisplay} />
-				<Button
-					buttonText={translate(lang).BUTTON.ADD_NEW}
-					pathTo='/courses/add'
-				/>
+				<PrivateRoute>
+					<Button
+						buttonText={translate(lang).BUTTON.ADD_NEW}
+						pathTo='/courses/add'
+					/>
+				</PrivateRoute>
 			</div>
 			<div>
 				{toDisplay.map((course) => (

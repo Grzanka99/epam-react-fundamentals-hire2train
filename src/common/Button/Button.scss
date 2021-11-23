@@ -24,4 +24,8 @@
 
 	text-decoration: none;
 	color: black;
+
+	&[data-children='true'] {
+		padding: 7px;
+	}
 }

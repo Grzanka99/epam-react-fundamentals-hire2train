@@ -1,6 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
 
-import pipeDuration from 'helpers/pipeDuration';
 import { translate } from 'helpers/constants';
 
 import './CourseInfo.scss';
@@ -66,7 +65,7 @@ const CourseInfo = () => {
 										</tr>
 										<tr className='course-info__authors'>
 											<td>{translate(lang).COMMON.AUTHORS}:</td>
-											{currentAuthors.map((author) => (
+											{currentAuthors?.map((author) => (
 												<td key={author.id}>{author.name}</td>
 											))}
 										</tr>
