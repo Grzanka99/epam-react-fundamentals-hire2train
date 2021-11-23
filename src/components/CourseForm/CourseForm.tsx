@@ -13,8 +13,7 @@ import './CourseForm.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { authorsAdd } from 'store/authors/actionCreators';
 import { coursesAdd } from 'store/courses/actionCreators';
-import { IState } from 'types/state.interface';
-import { getLang } from 'store/selectors';
+import { getAuthors, getLang } from 'store/selectors';
 import { PipeDuration } from 'components/PipeDuration/PipeDuration';
 
 const CreateCourse = () => {
@@ -23,7 +22,7 @@ const CreateCourse = () => {
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
 
-	const authors = useSelector((state: IState) => state.authors);
+	const authors = useSelector(getAuthors);
 	const [authorList, setAuthorsList] = useState(authors);
 	const [currAuthors, setCurrAuthors] = useState([] as string[]);
 

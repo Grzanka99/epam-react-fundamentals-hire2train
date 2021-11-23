@@ -6,14 +6,13 @@ import Logo from './components/Logo/Logo';
 
 import './Header.scss';
 
-import { IState, IUser } from 'types/state.interface';
 import { translate } from 'helpers/constants';
-import { getLang } from 'store/selectors';
+import { getLang, getUser } from 'store/selectors';
 import { thunkUserLogout } from 'store/user/thunk';
 
 const Header = () => {
 	const navigate = useNavigate();
-	const user: IUser = useSelector((state: IState) => state.user);
+	const user = useSelector(getUser);
 	const dispatch = useDispatch();
 
 	const lang = useSelector(getLang);
