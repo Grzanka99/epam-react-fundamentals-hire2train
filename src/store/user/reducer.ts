@@ -1,5 +1,7 @@
+import { setLocalStorageOnLogin } from 'components/Login/helpers';
 import { IAction } from 'types/action.interface';
 import { Role } from 'types/common.enum';
+import { ILocalStorageKeys } from 'types/common.interface';
 import { IUser } from 'types/state.interface';
 import { UserActionTypes } from './actionTypes';
 
@@ -16,15 +18,19 @@ export function userReducer(
 	action: IAction<UserActionTypes, IUser>
 ): IUser {
 	switch (action.type) {
-		case UserActionTypes.USER_LOGIN:
-			return {
+		case UserActionTypes.USER_LOGIN: {
+			const newData = {
 				...state,
-				isAuth: true,
-				name: action.payload.name,
-				email: action.payload.email,
-				token: action.payload.token,
-				role: action.payload.role,
+				...action.payload,
 			};
+
+			setLocalStorageOnLogin(newData as ILocalStorageKeys);
+
+			return {
+				...newData,
+				isAuth: true,
+			};
+		}
 		case UserActionTypes.USER_LOGOUT: {
 			localStorage.clear();
 			return {

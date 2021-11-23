@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
 import { userReducer } from 'store/user/reducer';
 import { authorsReducer } from 'store/authors/reducer';
@@ -12,4 +13,4 @@ const rootReducer = combineReducers({
 	lang: langReducer,
 });
 
-export default createStore(rootReducer);
+export default createStore(rootReducer, applyMiddleware(thunk));

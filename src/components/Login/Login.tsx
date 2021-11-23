@@ -5,11 +5,8 @@ import { useState, useCallback, ChangeEvent } from 'react';
 import Input from 'common/Input/Input';
 import Button from 'common/Button/Button';
 import { translate } from 'helpers/constants';
-import { userLogin } from 'store/user/actionCreators';
 import { getLang } from 'store/selectors';
-import { setLocalStorageOnLogin } from './helpers';
-import { Role } from 'types/common.enum';
-import { getUserInfo, performLoginRequest } from 'store/services';
+import { thunkUserLogin } from 'store/user/thunk';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
@@ -21,29 +18,9 @@ const Login = () => {
 	const lang = useSelector(getLang);
 
 	const handleSubmit = useCallback(
-		async (e) => {
+		(e) => {
 			e.preventDefault();
-
-			const result = await performLoginRequest(email, password);
-			if (!result) return;
-			const userInfo = await getUserInfo(result.data.result);
-
-			setLocalStorageOnLogin({
-				token: result.data.result,
-				name: userInfo.name,
-				role: userInfo.role || Role.None,
-				email: userInfo.email,
-			});
-
-			dispatch(
-				userLogin({
-					token: result.data.result,
-					name: userInfo.name,
-					email: userInfo.email,
-					role: userInfo.role,
-				})
-			);
-
+			dispatch(thunkUserLogin({ email, password }));
 			navigate('/course');
 		},
 		[email, password, dispatch, navigate]

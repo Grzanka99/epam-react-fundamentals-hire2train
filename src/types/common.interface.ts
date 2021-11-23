@@ -6,3 +6,8 @@ export interface ILocalStorageKeys {
 	email: string;
 	role: Role;
 }
+
+export interface IUserLoginData {
+	email: string;
+	password: string;
+}
