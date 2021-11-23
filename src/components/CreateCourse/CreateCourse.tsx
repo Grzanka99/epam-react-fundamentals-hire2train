@@ -16,6 +16,7 @@ import { authorsAdd } from 'store/authors/actionCreators';
 import { coursesAdd } from 'store/courses/actionCreators';
 import { IState } from 'types/state.interface';
 import { getLang } from 'store/selectors';
+import { PipeDuration } from 'components/PipeDuration/PipeDuration';
 
 const CreateCourse = () => {
 	const [duration, setDuration] = useState(0);
@@ -160,7 +161,8 @@ const CreateCourse = () => {
 							onChange={handleChangeDuration}
 						/>
 						<span>
-							{translate(lang).COMMON.DURATION}: {pipeDuration(duration)}
+							{translate(lang).COMMON.DURATION}:{' '}
+							<PipeDuration time={duration} />
 						</span>
 					</div>
 				</div>

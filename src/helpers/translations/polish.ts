@@ -45,6 +45,7 @@ export const POLISH = {
 		PASSWORD: 'Hasło',
 		NO_ACCOUNT: 'Jeżeli nie masz konta to możesz',
 		ACCOUNT_EXISTS: 'Jeśli masz już konto to możesz',
+		HOURS: 'godzin',
 	},
 	LABEL: {
 		EMAIL: 'Email',

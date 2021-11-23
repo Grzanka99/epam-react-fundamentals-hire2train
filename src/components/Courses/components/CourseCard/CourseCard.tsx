@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
-import pipeDuration from 'helpers/pipeDuration';
 import { translate } from 'helpers/constants';
 import Button from 'common/Button/Button';
 import './CourseCard.scss';
@@ -12,6 +11,7 @@ import { IAuthor } from 'types/state.interface';
 import TrashIconSVG from 'svg/trash-icon.svg';
 import PencilIconSVG from 'svg/pencil-icon.svg';
 import { getAuthors, getLang } from 'store/selectors';
+import { PipeDuration } from 'components/PipeDuration/PipeDuration';
 
 const CourseCard = ({
 	title,
@@ -49,7 +49,9 @@ const CourseCard = ({
 						</tr>
 						<tr>
 							<td>{translate(lang).COMMON.DURATION}:</td>
-							<td>{pipeDuration(duration)}</td>
+							<td>
+								<PipeDuration time={duration} />
+							</td>
 						</tr>
 						<tr>
 							<td>{translate(lang).COMMON.CREATED}:</td>

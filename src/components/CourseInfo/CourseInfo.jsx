@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
 
 import pipeDuration from 'helpers/pipeDuration';
@@ -8,6 +7,7 @@ import './CourseInfo.scss';
 import { useSelector } from 'react-redux';
 import { getAuthors, getCourses, getLang } from 'store/selectors';
 import { useMemo } from 'react';
+import { PipeDuration } from 'components/PipeDuration/PipeDuration';
 
 const CourseInfo = () => {
 	const courses = useSelector(getCourses);
@@ -56,7 +56,9 @@ const CourseInfo = () => {
 										</tr>
 										<tr>
 											<td>{translate(lang).COMMON.DURATION}:</td>
-											<td>{pipeDuration(currentCourse.duration)}</td>
+											<td>
+												<PipeDuration time={currentCourse.duration} />
+											</td>
 										</tr>
 										<tr>
 											<td>{translate(lang).COMMON.CREATED}:</td>

@@ -45,6 +45,7 @@ export const ENGLISH = {
 		PASSWORD: 'Password',
 		NO_ACCOUNT: 'If you not have and account you can',
 		ACCOUNT_EXISTS: 'If you already have and account you can',
+		HOURS: 'hours',
 	},
 	LABEL: {
 		EMAIL: 'Email',

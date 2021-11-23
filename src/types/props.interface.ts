@@ -25,3 +25,8 @@ export interface IInputProps {
 	value?: string | number;
 	required?: boolean;
 }
+
+export interface IPipeDuration {
+	hours: string;
+	minutes: string;
+}
