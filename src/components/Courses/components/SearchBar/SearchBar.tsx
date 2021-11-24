@@ -1,20 +1,19 @@
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { ChangeEvent, FC, useState } from 'react';
 
-import { ChangeEvent, useState } from 'react';
+import { translate } from 'helpers/constants';
+import finder from 'helpers/finder';
 import { ISearchBarProps } from 'types/props.interface';
 import { ICourse } from 'types/state.interface';
 
 import Button from 'common/Button/Button';
 import Input from 'common/Input/Input';
 
-import { translate } from 'helpers/constants';
-import finder from 'helpers/finder';
-
-import './SearchBar.scss';
-import { useSelector } from 'react-redux';
 import { getLang } from 'store/selectors';
 
-const SearchBar = ({ searchIn, onFind }: ISearchBarProps<ICourse>) => {
+import './SearchBar.scss';
+
+const SearchBar: FC<ISearchBarProps<ICourse>> = ({ searchIn, onFind }) => {
 	const [searchPhrase, setSearchPhrase] = useState('');
 
 	const lang = useSelector(getLang);
@@ -40,11 +39,6 @@ const SearchBar = ({ searchIn, onFind }: ISearchBarProps<ICourse>) => {
 			/>
 		</div>
 	);
-};
-
-SearchBar.propTypes = {
-	searchIn: PropTypes.array,
-	onFind: PropTypes.func.isRequired,
 };
 
 export default SearchBar;

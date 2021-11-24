@@ -1,14 +1,16 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useCallback, ChangeEvent } from 'react';
+import { useState, useCallback, ChangeEvent, FC } from 'react';
 
 import Input from 'common/Input/Input';
 import Button from 'common/Button/Button';
+
 import { translate } from 'helpers/constants';
+
 import { getLang } from 'store/selectors';
 import { thunkUserLogin } from 'store/user/thunk';
 
-const Login = () => {
+const Login: FC = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 

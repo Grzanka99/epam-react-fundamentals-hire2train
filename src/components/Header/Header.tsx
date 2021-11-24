@@ -1,16 +1,18 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { FC } from 'react';
 
 import Button from 'common/Button/Button';
 import Logo from './components/Logo/Logo';
 
-import './Header.scss';
-
 import { translate } from 'helpers/constants';
+
 import { getLang, getUser } from 'store/selectors';
 import { thunkUserLogout } from 'store/user/thunk';
 
-const Header = () => {
+import './Header.scss';
+
+const Header: FC = () => {
 	const navigate = useNavigate();
 	const user = useSelector(getUser);
 	const dispatch = useDispatch();

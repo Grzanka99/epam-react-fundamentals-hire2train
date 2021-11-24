@@ -1,16 +1,18 @@
-import { translate } from 'helpers/constants';
+import { FC, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import Button from 'common/Button/Button';
 import CourseCard from './components/CourseCard/CourseCard';
 import SearchBar from './components/SearchBar/SearchBar';
 
-import './Courses.scss';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { translate } from 'helpers/constants';
 import { ICourse } from 'types/state.interface';
+
 import { getCourses, getIsAdmin, getLang } from 'store/selectors';
 
-const Courses = () => {
+import './Courses.scss';
+
+const Courses: FC = () => {
 	const courses: ICourse[] = useSelector(getCourses);
 	const [toDisplay, setToDisplay] = useState(courses);
 	const lang = useSelector(getLang);

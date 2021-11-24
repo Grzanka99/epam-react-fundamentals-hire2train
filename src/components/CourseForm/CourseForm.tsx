@@ -1,30 +1,31 @@
 import {
 	ChangeEvent,
+	FC,
 	FormEventHandler,
 	useCallback,
 	useMemo,
 	useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
 import Button from 'common/Button/Button';
 import Input from 'common/Input/Input';
+import { PipeDuration } from 'components/PipeDuration/PipeDuration';
+import TrashIconSVG from 'svg/trash-icon.svg';
 
 import dateGenerator from 'helpers/dateGenerator';
-
 import { translate } from 'helpers/constants';
-
-import './CourseForm.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { coursesAdd } from 'store/courses/actionCreators';
-import { getAuthors, getLang } from 'store/selectors';
-import { PipeDuration } from 'components/PipeDuration/PipeDuration';
-import { thunkAuthorAdd, thunkAuthorRemove } from 'store/authors/thunk';
-import TrashIconSVG from 'svg/trash-icon.svg';
 import { IAuthor } from 'types/state.interface';
 
-const CreateCourse = () => {
+import { coursesAdd } from 'store/courses/actionCreators';
+import { getAuthors, getLang } from 'store/selectors';
+import { thunkAuthorAdd, thunkAuthorRemove } from 'store/authors/thunk';
+
+import './CourseForm.scss';
+
+const CreateCourse: FC = () => {
 	const [duration, setDuration] = useState(0);
 	const [newAuthorName, setNewAuthorName] = useState('');
 	const [title, setTitle] = useState('');

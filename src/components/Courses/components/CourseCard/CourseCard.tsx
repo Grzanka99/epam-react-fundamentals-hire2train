@@ -1,26 +1,28 @@
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { translate } from 'helpers/constants';
 import Button from 'common/Button/Button';
-import './CourseCard.scss';
-
-import { ICourseCardProps } from 'types/props.interface';
-import { IAuthor } from 'types/state.interface';
+import { PipeDuration } from 'components/PipeDuration/PipeDuration';
 import TrashIconSVG from 'svg/trash-icon.svg';
 import PencilIconSVG from 'svg/pencil-icon.svg';
+
+import { translate } from 'helpers/constants';
+import { ICourseCardProps } from 'types/props.interface';
+import { IAuthor } from 'types/state.interface';
+
 import { getAuthors, getIsAdmin, getLang } from 'store/selectors';
-import { PipeDuration } from 'components/PipeDuration/PipeDuration';
 import { thunkCourseRemove } from 'store/courses/thunk';
 
-const CourseCard = ({
+import './CourseCard.scss';
+import { FC } from 'react';
+
+const CourseCard: FC<ICourseCardProps> = ({
 	title,
 	description,
 	duration,
 	creationDate,
 	id,
 	authors,
-}: ICourseCardProps) => {
+}) => {
 	const dispatch = useDispatch();
 
 	const allAuthors = useSelector(getAuthors);
@@ -79,14 +81,6 @@ const CourseCard = ({
 			</div>
 		</article>
 	);
-};
-
-CourseCard.propTypes = {
-	title: PropTypes.string.isRequired,
-	description: PropTypes.string.isRequired,
-	duration: PropTypes.number.isRequired,
-	creationDate: PropTypes.string.isRequired,
-	id: PropTypes.string.isRequired,
 };
 
 export default CourseCard;

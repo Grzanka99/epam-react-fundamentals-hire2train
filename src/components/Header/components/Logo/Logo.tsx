@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import './Logo.scss';
 
-const Logo = () => (
+const Logo: FC = () => (
 	<img
 		src='https://picsum.photos/500/200'
 		alt='some random thing'

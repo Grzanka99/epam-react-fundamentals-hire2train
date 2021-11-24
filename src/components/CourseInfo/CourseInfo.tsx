@@ -1,14 +1,16 @@
 import { Link, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { FC, useMemo } from 'react';
 
 import { translate } from 'helpers/constants';
 
-import './CourseInfo.scss';
-import { useSelector } from 'react-redux';
-import { getAuthors, getCourses, getLang } from 'store/selectors';
-import { useMemo } from 'react';
 import { PipeDuration } from 'components/PipeDuration/PipeDuration';
 
-const CourseInfo = () => {
+import { getAuthors, getCourses, getLang } from 'store/selectors';
+
+import './CourseInfo.scss';
+
+const CourseInfo: FC = () => {
 	const courses = useSelector(getCourses);
 	const authors = useSelector(getAuthors);
 
@@ -29,10 +31,6 @@ const CourseInfo = () => {
 			),
 		[currentCourse, authors]
 	);
-
-	if (!currentCourse) {
-		// idk why, but this immediately returns to the home page
-	}
 
 	return (
 		<div className='flex column course-info--wrapper'>

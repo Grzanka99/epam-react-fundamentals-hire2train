@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
+import { FC } from 'react';
 import { IInputProps } from 'types/props.interface';
 
 import './Input.scss';
 
-const Input = ({
+const Input: FC<IInputProps> = ({
 	labelText,
 	placeholderText,
 	onChange,
@@ -11,7 +11,7 @@ const Input = ({
 	min,
 	value,
 	required,
-}: IInputProps) => (
+}) => (
 	<label className='common-input__label'>
 		<span className='common-input__label--text'>{labelText}</span>
 		<input
@@ -25,15 +25,5 @@ const Input = ({
 		/>
 	</label>
 );
-
-Input.propTypes = {
-	labelText: PropTypes.string,
-	placeholderText: PropTypes.string,
-	onChange: PropTypes.func,
-	inputType: PropTypes.string,
-	min: PropTypes.number,
-	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-	required: PropTypes.bool,
-};
 
 export default Input;

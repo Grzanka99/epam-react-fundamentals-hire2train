@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { FC } from 'react';
 
-import './Button.scss';
 import { IButtonProps } from 'types/props.interface';
 
-const Button = ({
+import './Button.scss';
+
+const Button: FC<IButtonProps> = ({
 	buttonText,
 	onClick,
 	type,
 	pathTo,
 	children,
-}: IButtonProps) =>
+}) =>
 	pathTo ? (
 		<Link
 			to={pathTo}
@@ -30,13 +31,5 @@ const Button = ({
 			{children ?? buttonText}
 		</button>
 	);
-
-Button.propTypes = {
-	buttonText: PropTypes.string,
-	onClick: PropTypes.func,
-	type: PropTypes.string,
-	pathTo: PropTypes.string,
-	children: PropTypes.node,
-};
 
 export default Button;

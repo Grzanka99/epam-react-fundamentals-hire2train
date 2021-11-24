@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,7 +20,7 @@ import {
 
 import './App.scss';
 
-const App = () => {
+const App: FC = () => {
 	const isAuth = useSelector(getIsAuth);
 	const dispatch = useDispatch();
 

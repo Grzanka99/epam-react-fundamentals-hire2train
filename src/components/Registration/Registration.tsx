@@ -1,15 +1,18 @@
-import Button from 'common/Button/Button';
-import Input from 'common/Input/Input';
-import { translate } from 'helpers/constants';
-import { useState, useCallback, ChangeEvent } from 'react';
+import { useState, useCallback, ChangeEvent, FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { userServiceRegister } from 'services/user.service';
+
+import Button from 'common/Button/Button';
+import Input from 'common/Input/Input';
+
+import { translate } from 'helpers/constants';
+
 import { getLang } from 'store/selectors';
+import { userServiceRegister } from 'services/user.service';
 
 import './Registration.scss';
 
-const Registration = () => {
+const Registration: FC = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');

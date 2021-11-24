@@ -1,12 +1,13 @@
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { FC, useEffect, useState } from 'react';
+
 import { translate } from 'helpers/constants';
 import pipeDuration from 'helpers/pipeDuration';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { getLang } from 'store/selectors';
 import { IPipeDuration } from 'types/props.interface';
 
-export const PipeDuration = ({ time }: { time: number }) => {
+import { getLang } from 'store/selectors';
+
+export const PipeDuration: FC<{ time: number }> = ({ time }) => {
 	const [duration, setDuration] = useState({} as IPipeDuration);
 
 	const lang = useSelector(getLang);
@@ -24,8 +25,4 @@ export const PipeDuration = ({ time }: { time: number }) => {
 			&nbsp;{translate(lang).COMMON.HOURS}
 		</span>
 	);
-};
-
-PipeDuration.propTypes = {
-	time: PropTypes.number.isRequired,
 };
