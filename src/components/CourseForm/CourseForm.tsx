@@ -1,4 +1,10 @@
-import { ChangeEvent, FormEventHandler, useCallback, useState } from 'react';
+import {
+	ChangeEvent,
+	FormEventHandler,
+	useCallback,
+	useMemo,
+	useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -14,7 +20,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { coursesAdd } from 'store/courses/actionCreators';
 import { getAuthors, getLang } from 'store/selectors';
 import { PipeDuration } from 'components/PipeDuration/PipeDuration';
-import { thunkAuthorAdd } from 'store/authors/thunk';
+import { thunkAuthorAdd, thunkAuthorRemove } from 'store/authors/thunk';
+import TrashIconSVG from 'svg/trash-icon.svg';
+import { IAuthor } from 'types/state.interface';
 
 const CreateCourse = () => {
 	const [duration, setDuration] = useState(0);
@@ -23,7 +31,6 @@ const CreateCourse = () => {
 	const [description, setDescription] = useState('');
 
 	const authors = useSelector(getAuthors);
-	const [authorList, setAuthorsList] = useState(authors);
 	const [currAuthors, setCurrAuthors] = useState([] as string[]);
 
 	const dispatch = useDispatch();
@@ -45,12 +52,19 @@ const CreateCourse = () => {
 				id: newID,
 			};
 
-			setAuthorsList([...authorList, newAuthor]);
 			setNewAuthorName('');
 
 			dispatch(thunkAuthorAdd(newAuthor));
 		},
-		[authorList, dispatch]
+		[dispatch]
+	);
+
+	const handleRemoveAuthor = useCallback(
+		(id: string) => () => {
+			if (!id.length) return;
+			dispatch(thunkAuthorRemove(id));
+		},
+		[dispatch]
 	);
 
 	const validateData = () => {
@@ -83,6 +97,10 @@ const CreateCourse = () => {
 			navigate('/', { replace: true });
 		} else return;
 	};
+
+	const getFilteredAuthors: IAuthor[] = useMemo(() => {
+		return authors.filter((a) => !currAuthors.includes(a.id || '')) || [];
+	}, [authors, currAuthors]);
 
 	const handleAuthorNameChange = (e: ChangeEvent<HTMLInputElement>) =>
 		setNewAuthorName(e.target.value);
@@ -167,24 +185,31 @@ const CreateCourse = () => {
 				<div className='create-course__authors__right'>
 					<h3>{translate(lang).TITLE.AUTHORS}</h3>
 					<div>
-						{authorList.length &&
-							authorList
-								.filter((a) => !currAuthors.includes(a.id || ''))
-								.map((author) => (
-									<div key={author.id} className='single-author'>
-										<span>{author.name}</span>
+						{!!getFilteredAuthors.length ? (
+							getFilteredAuthors.map((author: IAuthor) => (
+								<div key={author.id || Math.random()} className='single-author'>
+									<span>{author.name}</span>
+									<div className='flex'>
+										<Button onClick={handleRemoveAuthor(author.id || '')}>
+											<TrashIconSVG />
+										</Button>
+
 										<Button
 											buttonText='Add author'
 											onClick={handleAddAuthor(author.id || '')}
 										/>
-									</div>
-								))}
+									</div>{' '}
+								</div>
+							))
+						) : (
+							<span>{translate(lang).COMMON.AUTHORS_LIST_EMPTY}</span>
+						)}
 					</div>
 					<h3>{translate(lang).TITLE.COURSE_AUTHORS}</h3>
 					<div>
 						{currAuthors.length ? (
 							currAuthors.map((author) => {
-								const curr = authorList.find((el) => el.id === author);
+								const curr = authors.find((el) => el.id === author);
 								return (
 									<div key={curr?.id} className='single-author'>
 										<span>{curr?.name}</span>

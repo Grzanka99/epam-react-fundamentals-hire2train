@@ -5,7 +5,7 @@
   "jsxSingleQuote": true,
   "singleQuote": true,
   "useTabs": true,
-  "endOfLine": "auto",
+  "endOfLine": "lf",
   "max-len": ["error", { "code": 80 }],
   "tabWidth": 2
 }
