@@ -14,6 +14,8 @@ export function authorsReducer(
 		}
 		case AuthorsActionTypes.AUTHORS_REMOVE:
 			return state.filter((author) => author.id !== action.payload.id);
+		case AuthorsActionTypes.AUTHORS_CLEAN:
+			return [];
 		default:
 			return state;
 	}

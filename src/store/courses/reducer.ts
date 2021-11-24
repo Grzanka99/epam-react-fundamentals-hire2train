@@ -20,6 +20,8 @@ export function coursesReducer(
 				}
 				return course;
 			});
+		case CoursesActionTypes.COURSES_CLEAN:
+			return [];
 		default:
 			return state;
 	}

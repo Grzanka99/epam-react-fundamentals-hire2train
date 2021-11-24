@@ -4,6 +4,8 @@ import {
 	userServiceLogout,
 	userSeviceLogin,
 } from 'services/user.service';
+import { authorsClean } from 'store/authors/actionCreators';
+import { coursesClean } from 'store/courses/actionCreators';
 import { IUserLoginData } from 'types/common.interface';
 import { userLogin, userLogout } from './actionCreators';
 
@@ -27,7 +29,11 @@ export const thunkUserLogin = ({ email, password }: IUserLoginData) => {
 
 export const thunkUserLogout = () => {
 	return async function (dispatch: Dispatch) {
+		dispatch(authorsClean());
+		dispatch(coursesClean());
+
 		await userServiceLogout();
+
 		dispatch(userLogout());
 	};
 };

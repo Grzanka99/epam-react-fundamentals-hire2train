@@ -30,3 +30,10 @@ export function coursesUpdate(
 		payload: { ...course },
 	};
 }
+
+export function coursesClean(): IAction<CoursesActionTypes, null> {
+	return {
+		type: CoursesActionTypes.COURSES_CLEAN,
+		payload: null,
+	};
+}
