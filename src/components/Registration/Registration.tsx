@@ -1,10 +1,10 @@
-import axios from 'axios';
 import Button from 'common/Button/Button';
 import Input from 'common/Input/Input';
-import { API, translate } from 'helpers/constants';
+import { translate } from 'helpers/constants';
 import { useState, useCallback, ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { userServiceRegister } from 'services/user.service';
 import { getLang } from 'store/selectors';
 
 import './Registration.scss';
@@ -21,28 +21,21 @@ const Registration = () => {
 	const handleSubmit = useCallback(
 		async (e) => {
 			e.preventDefault();
-			let result;
+			const res = await userServiceRegister({
+				name,
+				email,
+				password,
+			});
 
-			try {
-				result = await axios.post(`${API}/register`, {
-					name,
-					email,
-					password,
-				});
-			} catch (error: ErrorEvent | any | unknown) {
-				if (error) {
-					result = error.response;
-					console.log(result.data);
-					alert('Wrong data or email is already taken');
-				}
+			if (!res) {
+				alert('Wrong data or email is already taken');
 				return;
 			}
 
 			alert('User created succesful');
 			navigate('/login');
 		},
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[name, email, password]
+		[name, email, password, navigate]
 	);
 
 	const handleNameChange = (e: ChangeEvent<HTMLInputElement>) =>

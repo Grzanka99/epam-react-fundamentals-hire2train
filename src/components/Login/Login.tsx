@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useCallback, ChangeEvent } from 'react';
 
@@ -12,7 +12,6 @@ const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const lang = useSelector(getLang);
@@ -21,9 +20,8 @@ const Login = () => {
 		(e) => {
 			e.preventDefault();
 			dispatch(thunkUserLogin({ email, password }));
-			navigate('/course');
 		},
-		[email, password, dispatch, navigate]
+		[email, password, dispatch]
 	);
 
 	const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>

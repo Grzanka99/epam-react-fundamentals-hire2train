@@ -33,14 +33,7 @@ export function userReducer(
 		}
 		case UserActionTypes.USER_LOGOUT: {
 			localStorage.clear();
-			return {
-				...state,
-				isAuth: false,
-				name: '',
-				email: '',
-				token: '',
-				role: Role.None,
-			};
+			return { ...initialUserState };
 		}
 		default:
 			return state;

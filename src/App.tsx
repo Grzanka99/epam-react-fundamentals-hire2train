@@ -16,6 +16,7 @@ import { getIsAuth } from 'store/selectors';
 import { languageSet } from 'store/lang/actionCreators';
 import { Role } from 'types/common.enum';
 import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
+import { setAuthToken } from 'services/axios-instance';
 
 const App = () => {
 	const isAuth = useSelector(getIsAuth);
@@ -33,6 +34,7 @@ const App = () => {
 		const role: Role = (localStorage.getItem('role') as Role) || Role.None;
 
 		if (user && token && email) {
+			setAuthToken(token);
 			dispatch(userLogin({ name: user, token, email, role }));
 		}
 	}, [dispatch]);

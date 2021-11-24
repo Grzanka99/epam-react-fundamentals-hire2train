@@ -11,10 +11,10 @@ import { translate } from 'helpers/constants';
 
 import './CourseForm.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { authorsAdd } from 'store/authors/actionCreators';
 import { coursesAdd } from 'store/courses/actionCreators';
 import { getAuthors, getLang } from 'store/selectors';
 import { PipeDuration } from 'components/PipeDuration/PipeDuration';
+import { thunkAuthorAdd } from 'store/authors/thunk';
 
 const CreateCourse = () => {
 	const [duration, setDuration] = useState(0);
@@ -48,7 +48,7 @@ const CreateCourse = () => {
 			setAuthorsList([...authorList, newAuthor]);
 			setNewAuthorName('');
 
-			dispatch(authorsAdd(newAuthor));
+			dispatch(thunkAuthorAdd(newAuthor));
 		},
 		[authorList, dispatch]
 	);
