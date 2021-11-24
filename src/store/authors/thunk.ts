@@ -18,6 +18,6 @@ export const thunkAuthorAdd =
 	async (dispatch: Dispatch) => {
 		const result = await authorsServiceAddAuthor({ name });
 		if (result) {
-			dispatch(authorsAdd({ name }));
+			dispatch(authorsAdd({ id: result, name }));
 		}
 	};

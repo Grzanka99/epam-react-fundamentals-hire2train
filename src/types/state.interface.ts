@@ -11,7 +11,7 @@ export interface IUser {
 }
 
 export interface ICourse {
-	id: string;
+	id?: string;
 	title: string;
 	description: string;
 	creationDate: string;

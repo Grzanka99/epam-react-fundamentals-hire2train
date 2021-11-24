@@ -8,7 +8,6 @@ import {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
 
 import Button from 'common/Button/Button';
 import Input from 'common/Input/Input';
@@ -19,11 +18,11 @@ import dateGenerator from 'helpers/dateGenerator';
 import { translate } from 'helpers/constants';
 import { IAuthor } from 'types/state.interface';
 
-import { coursesAdd } from 'store/courses/actionCreators';
 import { getAuthors, getLang } from 'store/selectors';
 import { thunkAuthorAdd, thunkAuthorRemove } from 'store/authors/thunk';
 
 import './CourseForm.scss';
+import { thunkCourseCreate } from 'store/courses/thunk';
 
 const CreateCourse: FC = () => {
 	const [duration, setDuration] = useState(0);
@@ -47,11 +46,7 @@ const CreateCourse: FC = () => {
 				alert('Author name cannot be empty');
 				return;
 			}
-			const newID = uuidv4();
-			const newAuthor = {
-				name: newName,
-				id: newID,
-			};
+			const newAuthor = { name: newName };
 
 			setNewAuthorName('');
 
@@ -85,7 +80,6 @@ const CreateCourse: FC = () => {
 
 		if (validateData()) {
 			const newCourse = {
-				id: uuidv4(),
 				title,
 				description,
 				creationDate: dateGenerator(),
@@ -93,7 +87,7 @@ const CreateCourse: FC = () => {
 				authors: currAuthors,
 			};
 
-			dispatch(coursesAdd([newCourse]));
+			dispatch(thunkCourseCreate(newCourse));
 
 			navigate('/', { replace: true });
 		} else return;
@@ -194,7 +188,6 @@ const CreateCourse: FC = () => {
 										<Button onClick={handleRemoveAuthor(author.id || '')}>
 											<TrashIconSVG />
 										</Button>
-
 										<Button
 											buttonText='Add author'
 											onClick={handleAddAuthor(author.id || '')}

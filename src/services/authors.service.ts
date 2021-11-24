@@ -1,12 +1,14 @@
 import { IAuthor } from 'types/state.interface';
 import { axiosInstance } from './axios-instance';
 
-export async function authorsServiceAddAuthor(data: IAuthor): Promise<boolean> {
-	let res: boolean = false;
+export async function authorsServiceAddAuthor(
+	data: IAuthor
+): Promise<false | string> {
+	let res: false | string = false;
 
 	try {
 		const response = await axiosInstance.post('/authors/add', { ...data });
-		if (response.data.successful) res = true;
+		if (response.data.successful) res = response.data.result.id;
 	} catch (error) {
 		console.log(error);
 	}

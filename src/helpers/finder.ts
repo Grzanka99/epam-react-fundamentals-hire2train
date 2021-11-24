@@ -23,6 +23,7 @@ const finder = (current: ICourse, searchPhrase: string) =>
 	!searchPhrase
 		? true
 		: fuzzySearch(searchPhrase.toLowerCase(), current.title.toLowerCase()) ||
-		  fuzzySearch(searchPhrase.toLowerCase(), current.id.toLowerCase());
+		  (current.id &&
+				fuzzySearch(searchPhrase.toLowerCase(), current.id.toLowerCase()));
 
 export default finder;

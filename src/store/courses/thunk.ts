@@ -1,6 +1,10 @@
 import { Dispatch } from 'redux';
-import { coursesServiceRemoveCourse } from 'services/courses.service';
-import { coursesRemove } from './actionCreators';
+import {
+	coursesServiceCreateCourse,
+	coursesServiceRemoveCourse,
+} from 'services/courses.service';
+import { ICourse } from 'types/state.interface';
+import { coursesAdd, coursesRemove } from './actionCreators';
 
 export const thunkCourseRemove = ({ id }: { id: string }) => {
 	return async (dispatch: Dispatch) => {
@@ -10,3 +14,12 @@ export const thunkCourseRemove = ({ id }: { id: string }) => {
 		}
 	};
 };
+
+export const thunkCourseCreate =
+	({ id, ...newCourse }: ICourse) =>
+	async (dispatch: Dispatch) => {
+		const result = await coursesServiceCreateCourse(newCourse);
+		if (result) {
+			dispatch(coursesAdd({ id: result, ...newCourse }));
+		}
+	};

@@ -34,6 +34,7 @@ const CourseCard: FC<ICourseCardProps> = ({
 	);
 
 	const handleDelete = (): void => {
+		if (!id) return;
 		dispatch(thunkCourseRemove({ id }));
 	};
 
