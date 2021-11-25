@@ -33,8 +33,10 @@ const App: FC = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		dispatch(thunkLoadAuthors());
-		dispatch(thunkLoadCourses());
+		if (isAuth) {
+			dispatch(thunkLoadAuthors());
+			dispatch(thunkLoadCourses());
+		}
 	}, [dispatch, isAuth]);
 
 	const check = localStorage.getItem('user') && localStorage.getItem('token');
