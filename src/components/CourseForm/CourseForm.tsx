@@ -21,9 +21,9 @@ import { IAuthor, ICourse } from 'types/state.interface';
 
 import { getAuthors, getCourses, getLang } from 'store/selectors';
 import { thunkAuthorAdd, thunkAuthorRemove } from 'store/authors/thunk';
+import { thunkCourseCreate, thunkCourseUpdate } from 'store/courses/thunk';
 
 import './CourseForm.scss';
-import { thunkCourseCreate, thunkCourseUpdate } from 'store/courses/thunk';
 
 const CreateCourse: FC = () => {
 	const [duration, setDuration] = useState(0);
