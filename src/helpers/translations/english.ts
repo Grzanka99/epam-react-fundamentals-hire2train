@@ -8,6 +8,7 @@ export const ENGLISH = {
 		LOGOUT: 'Logout',
 		LOGIN: 'Login',
 		CREATE_COURSE: 'Create course',
+		UPDATE_COURSE: 'Update course',
 		CREATE_AUTHOR: 'Create author',
 		DELETE_AUTHOR: 'Delete author',
 		ADD_AUTHOR: 'Add author',

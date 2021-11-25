@@ -3,10 +3,11 @@ import {
 	FC,
 	FormEventHandler,
 	useCallback,
+	useEffect,
 	useMemo,
 	useState,
 } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Button from 'common/Button/Button';
@@ -16,21 +17,23 @@ import TrashIconSVG from 'svg/trash-icon.svg';
 
 import dateGenerator from 'helpers/dateGenerator';
 import { translate } from 'helpers/constants';
-import { IAuthor } from 'types/state.interface';
+import { IAuthor, ICourse } from 'types/state.interface';
 
-import { getAuthors, getLang } from 'store/selectors';
+import { getAuthors, getCourses, getLang } from 'store/selectors';
 import { thunkAuthorAdd, thunkAuthorRemove } from 'store/authors/thunk';
 
 import './CourseForm.scss';
-import { thunkCourseCreate } from 'store/courses/thunk';
+import { thunkCourseCreate, thunkCourseUpdate } from 'store/courses/thunk';
 
 const CreateCourse: FC = () => {
 	const [duration, setDuration] = useState(0);
 	const [newAuthorName, setNewAuthorName] = useState('');
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
+	const [isUpdate, setIsUpdate] = useState(false);
 
 	const authors = useSelector(getAuthors);
+	const courses = useSelector(getCourses);
 	const [currAuthors, setCurrAuthors] = useState([] as string[]);
 
 	const dispatch = useDispatch();
@@ -39,6 +42,8 @@ const CreateCourse: FC = () => {
 
 	// useNavigate replaced useHistory in react-router-dom v6
 	const navigate = useNavigate();
+	const location = useLocation();
+	const courseId = useParams().id || '';
 
 	const handleCreateAuthor = useCallback(
 		(newName) => () => {
@@ -75,11 +80,28 @@ const CreateCourse: FC = () => {
 		return !errors.length;
 	};
 
+	useEffect(() => {
+		const localIsUpdate = location.pathname.includes('update');
+		setIsUpdate(localIsUpdate);
+	}, [location]);
+
+	useEffect(() => {
+		if (isUpdate) {
+			const localCourse = courses.find((course) => course.id === courseId);
+			if (!localCourse) return;
+
+			setTitle(localCourse.title);
+			setDescription(localCourse.description);
+			setDuration(localCourse.duration);
+			setCurrAuthors(localCourse.authors);
+		}
+	}, [isUpdate, courseId, courses]);
+
 	const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
 		e.preventDefault();
 
 		if (validateData()) {
-			const newCourse = {
+			const newCourse: ICourse = {
 				title,
 				description,
 				creationDate: dateGenerator(),
@@ -87,7 +109,11 @@ const CreateCourse: FC = () => {
 				authors: currAuthors,
 			};
 
-			dispatch(thunkCourseCreate(newCourse));
+			if (isUpdate) {
+				dispatch(thunkCourseUpdate({ id: courseId, ...newCourse } as ICourse));
+			} else {
+				dispatch(thunkCourseCreate(newCourse));
+			}
 
 			navigate('/', { replace: true });
 		} else return;
@@ -130,7 +156,11 @@ const CreateCourse: FC = () => {
 						pathTo='/courses'
 					/>
 					<Button
-						buttonText={translate(lang).BUTTON.CREATE_COURSE}
+						buttonText={
+							isUpdate
+								? translate(lang).BUTTON.UPDATE_COURSE
+								: translate(lang).BUTTON.CREATE_COURSE
+						}
 						type='submit'
 					/>
 				</span>

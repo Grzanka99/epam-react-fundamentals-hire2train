@@ -73,7 +73,7 @@ const CourseCard: FC<ICourseCardProps> = ({
 							<Button onClick={handleDelete}>
 								<TrashIconSVG />
 							</Button>
-							<Button>
+							<Button pathTo={`/courses/update/${id}`}>
 								<PencilIconSVG />
 							</Button>
 						</>

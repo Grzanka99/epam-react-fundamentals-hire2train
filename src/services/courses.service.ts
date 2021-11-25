@@ -29,3 +29,20 @@ export async function coursesServiceCreateCourse(
 
 	return res;
 }
+
+export async function coursesServiceUpdateCourse({
+	id,
+	...data
+}: ICourse): Promise<string | false> {
+	let res: string | false = false;
+	if (!id) return res;
+
+	try {
+		const response = await axiosInstance.put(`/courses/${id}`, data);
+		if (response.data.successful) res = response.data.result.id;
+	} catch (error) {
+		console.log(error);
+	}
+
+	return res;
+}

@@ -65,6 +65,14 @@ const App: FC = () => {
 									</PrivateRoute>
 								}
 							/>
+							<Route
+								path='/courses/update/:id'
+								element={
+									<PrivateRoute>
+										<CourseForm />
+									</PrivateRoute>
+								}
+							/>
 							<Route path='/courses/:courseId' element={<CourseInfo />} />
 							<Route path='*' element={<Navigate to='/courses' />} />
 						</>

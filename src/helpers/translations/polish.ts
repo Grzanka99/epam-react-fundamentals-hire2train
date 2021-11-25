@@ -8,6 +8,7 @@ export const POLISH = {
 		LOGOUT: 'Wyloguj',
 		LOGIN: 'Zaloguj',
 		CREATE_COURSE: 'Utwórz kurs',
+		UPDATE_COURSE: 'Zaktualizuj kurs',
 		CREATE_AUTHOR: 'Utwórz autora',
 		DELETE_AUTHOR: 'Usuń autora',
 		ADD_AUTHOR: 'Dodaj autora',
