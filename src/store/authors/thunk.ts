@@ -8,17 +8,23 @@ import { IAuthor } from 'types/state.interface';
 import { authorsAdd, authorsRemove } from './actionCreators';
 
 export const thunkAuthorRemove = (id: string) => async (dispatch: Dispatch) => {
-	const result = await authorsServiceDeleteAuthor(id);
-	if (result) {
+	try {
+		await authorsServiceDeleteAuthor(id);
 		dispatch(authorsRemove(id));
+	} catch (error) {
+		console.log(error);
+		alert('Something went wrong while deleting author!');
 	}
 };
 
 export const thunkAuthorAdd =
 	({ name }: IAuthor) =>
 	async (dispatch: Dispatch) => {
-		const result = await authorsServiceAddAuthor({ name });
-		if (result) {
-			dispatch(authorsAdd({ id: result, name }));
+		try {
+			const result = await authorsServiceAddAuthor({ name });
+			dispatch(authorsAdd({ id: result.id, name: result.name }));
+		} catch (error) {
+			console.log(error);
+			alert('Something went wrong while creating author!');
 		}
 	};

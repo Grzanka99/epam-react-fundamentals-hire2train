@@ -22,19 +22,15 @@ const Registration: FC = () => {
 	const handleSubmit = useCallback(
 		async (e) => {
 			e.preventDefault();
-			const res = await userServiceRegister({
-				name,
-				email,
-				password,
-			});
+			try {
+				await userServiceRegister({ name, email, password });
 
-			if (!res) {
+				alert('User created succesful');
+				navigate('/login');
+			} catch (error) {
+				console.log(error);
 				alert('Wrong data or email is already taken');
-				return;
 			}
-
-			alert('User created succesful');
-			navigate('/login');
 		},
 		[name, email, password, navigate]
 	);

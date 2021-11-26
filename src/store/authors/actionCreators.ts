@@ -3,7 +3,7 @@ import { IAuthor } from 'types/state.interface';
 
 import { AuthorsActionTypes } from './actionTypes';
 
-export function authorsAdd(authors: IAuthor) {
+export function authorsAdd(authors: IAuthor[] | IAuthor) {
 	const payload: IAuthor[] = Array.isArray(authors) ? authors : [authors];
 
 	return {
@@ -12,16 +12,17 @@ export function authorsAdd(authors: IAuthor) {
 	};
 }
 
-export function authorsRemove(id: string) {
-	return {
-		type: AuthorsActionTypes.AUTHORS_REMOVE,
-		payload: { id },
-	};
-}
+export const authorsRemove = (
+	id: string
+): IAction<AuthorsActionTypes.AUTHORS_REMOVE, string> => ({
+	type: AuthorsActionTypes.AUTHORS_REMOVE,
+	payload: id,
+});
 
-export function authorsClean(): IAction<AuthorsActionTypes, null> {
-	return {
-		type: AuthorsActionTypes.AUTHORS_CLEAN,
-		payload: null,
-	};
-}
+export const authorsClean = (): IAction<
+	AuthorsActionTypes.AUTHORS_CLEAN,
+	null
+> => ({
+	type: AuthorsActionTypes.AUTHORS_CLEAN,
+	payload: null,
+});

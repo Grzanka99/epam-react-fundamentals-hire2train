@@ -5,7 +5,7 @@ import { CoursesActionTypes } from './actionTypes';
 
 export function coursesAdd(
 	courses: ICourse[] | ICourse
-): IAction<CoursesActionTypes, ICourse[]> {
+): IAction<CoursesActionTypes.COURSES_ADD, ICourse[]> {
 	const payload = Array.isArray(courses) ? courses : [courses];
 
 	return {
@@ -16,7 +16,7 @@ export function coursesAdd(
 
 export function coursesRemove(
 	id: string
-): IAction<CoursesActionTypes, { id: string }> {
+): IAction<CoursesActionTypes.COURSES_REMOVE, { id: string }> {
 	return {
 		type: CoursesActionTypes.COURSES_REMOVE,
 		payload: { id },
@@ -25,14 +25,17 @@ export function coursesRemove(
 
 export function coursesUpdate(
 	course: ICourse
-): IAction<CoursesActionTypes, ICourse> {
+): IAction<CoursesActionTypes.COURSES_UPDATE, ICourse> {
 	return {
 		type: CoursesActionTypes.COURSES_UPDATE,
 		payload: { ...course },
 	};
 }
 
-export function coursesClean(): IAction<CoursesActionTypes, null> {
+export function coursesClean(): IAction<
+	CoursesActionTypes.COURSES_CLEAN,
+	null
+> {
 	return {
 		type: CoursesActionTypes.COURSES_CLEAN,
 		payload: null,

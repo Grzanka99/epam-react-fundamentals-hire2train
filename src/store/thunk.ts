@@ -12,9 +12,7 @@ export const thunkLoadAuthors = () => async (dispatch: Dispatch) => {
 		const res = await appServiceGetAuthors();
 		dispatch(authorsClean());
 
-		res.forEach((author) => {
-			dispatch(authorsAdd(author));
-		});
+		dispatch(authorsAdd(res));
 	} catch (error) {
 		console.log(error);
 		alert('Something went wrong while loading authors!');
@@ -24,11 +22,9 @@ export const thunkLoadAuthors = () => async (dispatch: Dispatch) => {
 export const thunkLoadCourses = () => async (dispatch: Dispatch) => {
 	try {
 		const res = await appServiceGetCourses();
-
 		dispatch(coursesClean());
-		res.forEach((course) => {
-			dispatch(coursesAdd(course));
-		});
+
+		dispatch(coursesAdd(res));
 	} catch (error) {
 		console.log(error);
 		alert('Something went wrong while loading courses!');
