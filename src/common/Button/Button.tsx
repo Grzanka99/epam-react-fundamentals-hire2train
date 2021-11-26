@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
 import { FC } from 'react';
 
+import { Link } from 'react-router-dom';
 import { IButtonProps } from 'types/props.interface';
 
 import './Button.scss';

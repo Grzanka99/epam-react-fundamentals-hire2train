@@ -1,4 +1,5 @@
 import { IAuthor, ICourse } from 'types/state.interface';
+
 import { axiosInstance } from './axios-instance';
 
 export const appServiceGetAuthors = (): Promise<IAuthor[]> =>

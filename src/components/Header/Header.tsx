@@ -1,13 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { FC } from 'react';
 
 import Button from 'common/Button/Button';
-import Logo from './components/Logo/Logo';
-
 import { translate } from 'helpers/constants';
-
+import { useDispatch, useSelector } from 'react-redux';
 import { getLang, getUser } from 'store/selectors';
 import { thunkUserLogout } from 'store/user/thunk';
+
+import Logo from './components/Logo/Logo';
 
 import './Header.scss';
 

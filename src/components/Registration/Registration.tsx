@@ -1,14 +1,12 @@
-import { useState, useCallback, ChangeEvent, FC } from 'react';
-import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { ChangeEvent, FC, useCallback, useState } from 'react';
 
 import Button from 'common/Button/Button';
 import Input from 'common/Input/Input';
-
 import { translate } from 'helpers/constants';
-
-import { getLang } from 'store/selectors';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { userServiceRegister } from 'services/user.service';
+import { getLang } from 'store/selectors';
 
 import './Registration.scss';
 

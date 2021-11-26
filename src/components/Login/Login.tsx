@@ -1,12 +1,10 @@
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useState, useCallback, ChangeEvent, FC } from 'react';
+import { ChangeEvent, FC, useCallback, useState } from 'react';
 
-import Input from 'common/Input/Input';
 import Button from 'common/Button/Button';
-
+import Input from 'common/Input/Input';
 import { translate } from 'helpers/constants';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getLang } from 'store/selectors';
 import { thunkUserLogin } from 'store/user/thunk';
 

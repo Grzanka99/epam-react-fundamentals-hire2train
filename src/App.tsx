@@ -1,17 +1,16 @@
 import { FC, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 
-import Header from 'components/Header/Header';
-import Courses from 'components/Courses/Courses';
 import CourseForm from 'components/CourseForm/CourseForm';
-import Registration from 'components/Registration/Registration';
-import Login from 'components/Login/Login';
 import CourseInfo from 'components/CourseInfo/CourseInfo';
+import Courses from 'components/Courses/Courses';
+import Header from 'components/Header/Header';
+import Login from 'components/Login/Login';
 import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
-
-import { getIsAuth } from 'store/selectors';
+import Registration from 'components/Registration/Registration';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { languageSet } from 'store/lang/actionCreators';
+import { getIsAuth } from 'store/selectors';
 import { thunkLoadAuthors, thunkLoadCourses } from 'store/thunk';
 import { thunkGetCurrentUser } from 'store/user/thunk';
 

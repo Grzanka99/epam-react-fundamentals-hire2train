@@ -1,19 +1,18 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { FC } from 'react';
 
 import Button from 'common/Button/Button';
 import { PipeDuration } from 'components/PipeDuration/PipeDuration';
-import TrashIconSVG from 'svg/trash-icon.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { thunkCourseRemove } from 'store/courses/thunk';
+import { getAuthors, getIsAdmin, getLang } from 'store/selectors';
 import PencilIconSVG from 'svg/pencil-icon.svg';
-
-import { translate } from 'helpers/constants';
+import TrashIconSVG from 'svg/trash-icon.svg';
 import { ICourseCardProps } from 'types/props.interface';
 import { IAuthor } from 'types/state.interface';
 
-import { getAuthors, getIsAdmin, getLang } from 'store/selectors';
-import { thunkCourseRemove } from 'store/courses/thunk';
+import { translate } from 'helpers/constants';
 
 import './CourseCard.scss';
-import { FC } from 'react';
 
 const CourseCard: FC<ICourseCardProps> = ({
 	title,

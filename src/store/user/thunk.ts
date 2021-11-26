@@ -1,13 +1,16 @@
 import { Dispatch } from 'redux';
+import { authorsClean } from 'store/authors/actionCreators';
+import { coursesClean } from 'store/courses/actionCreators';
+
 import {
 	userServiceGetUserInfo,
 	userServiceLogout,
 	userSeviceLogin,
 } from 'services/user.service';
-import { authorsClean } from 'store/authors/actionCreators';
-import { coursesClean } from 'store/courses/actionCreators';
-import { IUserLoginData } from 'types/common.interface';
+
 import { IUser } from 'types/state.interface';
+import { IUserLoginData } from 'types/common.interface';
+
 import { userLogin, userLogout, userSetInfo } from './actionCreators';
 
 export const thunkUserLogin =

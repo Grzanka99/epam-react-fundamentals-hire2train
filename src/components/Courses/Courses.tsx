@@ -1,14 +1,13 @@
 import { FC, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 
 import Button from 'common/Button/Button';
-import CourseCard from './components/CourseCard/CourseCard';
-import SearchBar from './components/SearchBar/SearchBar';
-
 import { translate } from 'helpers/constants';
+import { useSelector } from 'react-redux';
+import { getCourses, getIsAdmin, getLang } from 'store/selectors';
 import { ICourse } from 'types/state.interface';
 
-import { getCourses, getIsAdmin, getLang } from 'store/selectors';
+import CourseCard from './components/CourseCard/CourseCard';
+import SearchBar from './components/SearchBar/SearchBar';
 
 import './Courses.scss';
 

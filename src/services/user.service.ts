@@ -1,5 +1,6 @@
 import { IUserRegisterData } from 'types/common.interface';
 import { IUser } from 'types/state.interface';
+
 import { axiosInstance } from './axios-instance';
 
 export const userSeviceLogin = (

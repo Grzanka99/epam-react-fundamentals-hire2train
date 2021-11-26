@@ -1,5 +1,6 @@
 import { IAction } from 'types/action.interface';
 import { ICourse } from 'types/state.interface';
+
 import { CoursesActionTypes } from './actionTypes';
 
 const initialCoursesState: ICourse[] = [];

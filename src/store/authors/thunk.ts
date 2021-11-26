@@ -4,6 +4,7 @@ import {
 	authorsServiceDeleteAuthor,
 } from 'services/authors.service';
 import { IAuthor } from 'types/state.interface';
+
 import { authorsAdd, authorsRemove } from './actionCreators';
 
 export const thunkAuthorRemove = (id: string) => async (dispatch: Dispatch) => {

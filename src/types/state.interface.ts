@@ -1,5 +1,7 @@
-import { Lang } from 'helpers/constants';
 import { DefaultRootState } from 'react-redux';
+
+import { Lang } from 'helpers/constants';
+
 import { Role } from './common.enum';
 
 export interface IUser {

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import { IInputProps } from 'types/props.interface';
 
 import './Input.scss';

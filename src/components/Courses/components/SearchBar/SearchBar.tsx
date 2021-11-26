@@ -1,15 +1,13 @@
-import { useSelector } from 'react-redux';
 import { ChangeEvent, FC, useState } from 'react';
-
-import { translate } from 'helpers/constants';
-import finder from 'helpers/finder';
-import { ISearchBarProps } from 'types/props.interface';
-import { ICourse } from 'types/state.interface';
 
 import Button from 'common/Button/Button';
 import Input from 'common/Input/Input';
-
+import { translate } from 'helpers/constants';
+import finder from 'helpers/finder';
+import { useSelector } from 'react-redux';
 import { getLang } from 'store/selectors';
+import { ISearchBarProps } from 'types/props.interface';
+import { ICourse } from 'types/state.interface';
 
 import './SearchBar.scss';
 

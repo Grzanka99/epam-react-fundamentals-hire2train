@@ -1,11 +1,9 @@
-import { Link, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { FC, useMemo } from 'react';
 
-import { translate } from 'helpers/constants';
-
 import { PipeDuration } from 'components/PipeDuration/PipeDuration';
-
+import { translate } from 'helpers/constants';
+import { useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
 import { getAuthors, getCourses, getLang } from 'store/selectors';
 
 import './CourseInfo.scss';

@@ -5,10 +5,12 @@ import {
 	coursesServiceUpdateCourse,
 } from 'services/courses.service';
 import { ICourse } from 'types/state.interface';
+
 import { coursesAdd, coursesRemove, coursesUpdate } from './actionCreators';
 
-export const thunkCourseRemove = ({ id }: { id: string }) => {
-	return async (dispatch: Dispatch) => {
+export const thunkCourseRemove =
+	({ id }: { id: string }) =>
+	async (dispatch: Dispatch) => {
 		try {
 			const result = await coursesServiceRemoveCourse(id);
 			console.log(result);
@@ -17,7 +19,6 @@ export const thunkCourseRemove = ({ id }: { id: string }) => {
 			console.error(error);
 		}
 	};
-};
 
 export const thunkCourseCreate =
 	({ id, ...newCourse }: ICourse) =>

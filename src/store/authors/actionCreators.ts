@@ -1,5 +1,6 @@
 import { IAction } from 'types/action.interface';
 import { IAuthor } from 'types/state.interface';
+
 import { AuthorsActionTypes } from './actionTypes';
 
 export function authorsAdd(authors: IAuthor) {

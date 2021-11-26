@@ -1,4 +1,5 @@
 import { IUser } from 'types/state.interface';
+
 import { UserActionTypes } from './actionTypes';
 
 export const userLogin = (token: string) => ({

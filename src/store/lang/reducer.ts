@@ -1,4 +1,5 @@
 import { IAction } from 'types/action.interface';
+
 import { LangActionTypes } from './actionTypes';
 
 export function langReducer(

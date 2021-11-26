@@ -1,11 +1,10 @@
-import { useSelector } from 'react-redux';
 import { FC, useEffect, useState } from 'react';
 
 import { translate } from 'helpers/constants';
 import pipeDuration from 'helpers/pipeDuration';
-import { IPipeDuration } from 'types/props.interface';
-
+import { useSelector } from 'react-redux';
 import { getLang } from 'store/selectors';
+import { IPipeDuration } from 'types/props.interface';
 
 export const PipeDuration: FC<{ time: number }> = ({ time }) => {
 	const [duration, setDuration] = useState({} as IPipeDuration);

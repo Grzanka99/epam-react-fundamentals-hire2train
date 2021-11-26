@@ -1,4 +1,5 @@
 import { ICourse } from 'types/state.interface';
+
 import { axiosInstance } from './axios-instance';
 
 export const coursesServiceRemoveCourse = (id: string): Promise<any> =>

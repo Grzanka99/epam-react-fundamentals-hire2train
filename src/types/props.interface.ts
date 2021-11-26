@@ -1,4 +1,5 @@
 import { ChangeEvent, Component, ReactElement, ReactNode } from 'react';
+
 import { ICourse } from './state.interface';
 
 export interface ICourseCardProps extends ICourse {}

@@ -7,21 +7,19 @@ import {
 	useMemo,
 	useState,
 } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 
 import Button from 'common/Button/Button';
 import Input from 'common/Input/Input';
 import { PipeDuration } from 'components/PipeDuration/PipeDuration';
-import TrashIconSVG from 'svg/trash-icon.svg';
-
-import dateGenerator from 'helpers/dateGenerator';
 import { translate } from 'helpers/constants';
-import { IAuthor, ICourse } from 'types/state.interface';
-
-import { getAuthors, getCourses, getLang } from 'store/selectors';
+import dateGenerator from 'helpers/dateGenerator';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { thunkAuthorAdd, thunkAuthorRemove } from 'store/authors/thunk';
 import { thunkCourseCreate, thunkCourseUpdate } from 'store/courses/thunk';
+import { getAuthors, getCourses, getLang } from 'store/selectors';
+import TrashIconSVG from 'svg/trash-icon.svg';
+import { IAuthor, ICourse } from 'types/state.interface';
 
 import './CourseForm.scss';
 
@@ -119,9 +117,10 @@ const CreateCourse: FC = () => {
 		} else return;
 	};
 
-	const getFilteredAuthors: IAuthor[] = useMemo(() => {
-		return authors.filter((a) => !currAuthors.includes(a.id || '')) || [];
-	}, [authors, currAuthors]);
+	const getFilteredAuthors: IAuthor[] = useMemo(
+		() => authors.filter((a) => !currAuthors.includes(a.id || '')) || [],
+		[authors, currAuthors]
+	);
 
 	const handleAuthorNameChange = (e: ChangeEvent<HTMLInputElement>) =>
 		setNewAuthorName(e.target.value);
