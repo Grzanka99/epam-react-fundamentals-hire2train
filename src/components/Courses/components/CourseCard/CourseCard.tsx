@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Button from 'common/Button/Button';
@@ -13,7 +14,6 @@ import { getAuthors, getIsAdmin, getLang } from 'store/selectors';
 import { thunkCourseRemove } from 'store/courses/thunk';
 
 import './CourseCard.scss';
-import { FC } from 'react';
 
 const CourseCard: FC<ICourseCardProps> = ({
 	title,

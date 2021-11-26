@@ -12,11 +12,8 @@ import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
 
 import { getIsAuth } from 'store/selectors';
 import { languageSet } from 'store/lang/actionCreators';
-import {
-	thunkLoadAuthors,
-	thunkLoadCourses,
-	thunkRestoreUserSession,
-} from 'store/thunk';
+import { thunkLoadAuthors, thunkLoadCourses } from 'store/thunk';
+import { getCurrentUser } from 'store/user/thunk';
 
 import './App.scss';
 
@@ -29,31 +26,19 @@ const App: FC = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		dispatch(thunkRestoreUserSession());
-	}, [dispatch]);
-
-	useEffect(() => {
 		if (isAuth) {
+			dispatch(getCurrentUser());
 			dispatch(thunkLoadAuthors());
 			dispatch(thunkLoadCourses());
 		}
 	}, [dispatch, isAuth]);
-
-	const check = localStorage.getItem('user') && localStorage.getItem('token');
-	const [isLoggedIn, setIsLoggedIn] = useState(check);
-
-	useEffect(() => {
-		setIsLoggedIn(
-			localStorage.getItem('user') && localStorage.getItem('token')
-		);
-	}, [isAuth]);
 
 	return (
 		<>
 			<Header />
 			<main className='main-view'>
 				<Routes>
-					{isLoggedIn ? (
+					{isAuth ? (
 						<>
 							<Route path='/' element={<Navigate to='/courses' />} />
 							<Route path='/courses' element={<Courses />} />

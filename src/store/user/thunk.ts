@@ -7,33 +7,40 @@ import {
 import { authorsClean } from 'store/authors/actionCreators';
 import { coursesClean } from 'store/courses/actionCreators';
 import { IUserLoginData } from 'types/common.interface';
-import { userLogin, userLogout } from './actionCreators';
+import { userLogin, userLogout, setUserInfo } from './actionCreators';
 
-export const thunkUserLogin = ({ email, password }: IUserLoginData) => {
-	return async function (dispatch: Dispatch) {
-		const result = await userSeviceLogin(email, password);
-		const userInfo = await userServiceGetUserInfo();
+export const thunkUserLogin = ({ email, password }: IUserLoginData) =>
+	async function (dispatch: Dispatch) {
+		try {
+			const token: any = await userSeviceLogin(email, password);
 
-		if (result && userInfo) {
-			dispatch(
-				userLogin({
-					token: result.result,
-					name: userInfo.name,
-					email: userInfo.email,
-					role: userInfo.role,
-				})
-			);
-		}
+			localStorage.setItem('token', token.result);
+			dispatch(userLogin(token.result));
+		} catch (err) {}
 	};
+
+export const getCurrentUser = (): any => async (dispatch: Dispatch) => {
+	try {
+		const userInfo: any = await userServiceGetUserInfo();
+
+		dispatch(
+			setUserInfo({
+				...userInfo,
+			})
+		);
+	} catch (err) {
+		console.log(err);
+	}
 };
 
-export const thunkUserLogout = () => {
-	return async function (dispatch: Dispatch) {
-		dispatch(authorsClean());
-		dispatch(coursesClean());
+export const thunkUserLogout = () =>
+	async function (dispatch: Dispatch) {
+		try {
+			await userServiceLogout();
+			localStorage.clear();
 
-		await userServiceLogout();
-
-		dispatch(userLogout());
+			dispatch(userLogout());
+			dispatch(authorsClean());
+			dispatch(coursesClean());
+		} catch (err) {}
 	};
-};

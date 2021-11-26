@@ -15,20 +15,10 @@ export async function coursesServiceRemoveCourse(id: string): Promise<boolean> {
 	return res;
 }
 
-export async function coursesServiceCreateCourse(
-	data: ICourse
-): Promise<string | false> {
-	let res: string | false = false;
-
-	try {
-		const response = await axiosInstance.post('/courses/add', data);
-		if (response.data.successful) res = response.data.result.id;
-	} catch (error) {
-		console.log(error);
-	}
-
-	return res;
-}
+export const coursesServiceCreateCourse = (data: ICourse): Promise<ICourse> =>
+	axiosInstance
+		.post('/courses/add', data)
+		.then((response) => response.data.result);
 
 export async function coursesServiceUpdateCourse({
 	id,

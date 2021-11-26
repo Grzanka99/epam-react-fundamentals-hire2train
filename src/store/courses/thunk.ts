@@ -19,9 +19,11 @@ export const thunkCourseRemove = ({ id }: { id: string }) => {
 export const thunkCourseCreate =
 	({ id, ...newCourse }: ICourse) =>
 	async (dispatch: Dispatch) => {
-		const result = await coursesServiceCreateCourse(newCourse);
-		if (result) {
-			dispatch(coursesAdd({ id: result, ...newCourse }));
+		try {
+			const result = await coursesServiceCreateCourse(newCourse);
+			dispatch(coursesAdd({ ...result }));
+		} catch (err) {
+			console.log(err);
 		}
 	};
 
