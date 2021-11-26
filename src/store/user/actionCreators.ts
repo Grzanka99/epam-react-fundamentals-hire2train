@@ -1,15 +1,22 @@
 import { IUser } from 'types/state.interface';
 import { UserActionTypes } from './actionTypes';
 
-export function userLogin(user: IUser) {
+export function userLogin(token: string) {
 	return {
 		type: UserActionTypes.USER_LOGIN,
-		payload: user,
+		payload: token,
 	};
 }
 
 export function userLogout() {
 	return {
 		type: UserActionTypes.USER_LOGOUT,
+	};
+}
+
+export function setUserInfo(user: IUser) {
+	return {
+		type: UserActionTypes.SET_USER,
+		payload: user,
 	};
 }

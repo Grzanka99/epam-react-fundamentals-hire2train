@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import { API } from 'helpers/constants';
 
-export const axiosInstance: AxiosInstance = axios.create({
+const axiosInstance: AxiosInstance = axios.create({
 	baseURL: API,
 	timeout: 1000,
 	headers: {
@@ -9,13 +9,11 @@ export const axiosInstance: AxiosInstance = axios.create({
 	},
 });
 
-export function setAuthToken(token: string): boolean {
-	try {
-		axiosInstance.defaults.headers.common['Authorization'] = token;
-		return true;
-	} catch (error) {
-		console.log(error);
-	} finally {
-		return false;
-	}
-}
+axiosInstance.interceptors.request.use(function (config: any) {
+	const token = localStorage.getItem('token');
+
+	config.headers.Authorization = token;
+	return config;
+});
+
+export { axiosInstance };

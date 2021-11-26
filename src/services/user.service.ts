@@ -1,7 +1,7 @@
 import { IUserRegisterData } from 'types/common.interface';
 import { IUserLoginResponse } from 'types/response.interface';
 import { IUser } from 'types/state.interface';
-import { axiosInstance, setAuthToken } from './axios-instance';
+import { axiosInstance } from './axios-instance';
 
 export async function userSeviceLogin(
 	email: string,
@@ -16,8 +16,6 @@ export async function userSeviceLogin(
 		});
 
 		const data: IUserLoginResponse = response.data;
-
-		setAuthToken(data.result);
 
 		if (data.successful) res = data;
 	} catch (error: ErrorEvent | any | unknown) {
