@@ -1,48 +1,18 @@
 import { ICourse } from 'types/state.interface';
 import { axiosInstance } from './axios-instance';
 
-export async function coursesServiceRemoveCourse(id: string): Promise<boolean> {
-	let res: boolean = false;
+export const coursesServiceRemoveCourse = (id: string): Promise<any> =>
+	axiosInstance.delete(`/courses/${id}`).then((response) => response.data);
 
-	try {
-		const response = await axiosInstance.delete(`/courses/${id}`);
+export const coursesServiceCreateCourse = (data: ICourse): Promise<ICourse> =>
+	axiosInstance
+		.post('/courses/add', data)
+		.then((responde) => responde.data.result);
 
-		if (response.data.successful) res = true;
-	} catch (error) {
-		console.log(error);
-	}
-
-	return res;
-}
-
-export async function coursesServiceCreateCourse(
-	data: ICourse
-): Promise<string | false> {
-	let res: string | false = false;
-
-	try {
-		const response = await axiosInstance.post('/courses/add', data);
-		if (response.data.successful) res = response.data.result.id;
-	} catch (error) {
-		console.log(error);
-	}
-
-	return res;
-}
-
-export async function coursesServiceUpdateCourse({
+export const coursesServiceUpdateCourse = ({
 	id,
 	...data
-}: ICourse): Promise<string | false> {
-	let res: string | false = false;
-	if (!id) return res;
-
-	try {
-		const response = await axiosInstance.put(`/courses/${id}`, data);
-		if (response.data.successful) res = response.data.result.id;
-	} catch (error) {
-		console.log(error);
-	}
-
-	return res;
-}
+}: ICourse): Promise<ICourse> =>
+	axiosInstance
+		.put(`/courses/${id}`, data)
+		.then((response) => response.data.result);

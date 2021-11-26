@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FC } from 'react';
 
@@ -13,7 +12,6 @@ import { thunkUserLogout } from 'store/user/thunk';
 import './Header.scss';
 
 const Header: FC = () => {
-	const navigate = useNavigate();
 	const user = useSelector(getUser);
 	const dispatch = useDispatch();
 
@@ -21,7 +19,6 @@ const Header: FC = () => {
 
 	const handleLogout = () => {
 		dispatch(thunkUserLogout());
-		navigate('/login');
 	};
 
 	return (

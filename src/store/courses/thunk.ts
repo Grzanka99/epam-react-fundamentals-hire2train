@@ -9,9 +9,12 @@ import { coursesAdd, coursesRemove, coursesUpdate } from './actionCreators';
 
 export const thunkCourseRemove = ({ id }: { id: string }) => {
 	return async (dispatch: Dispatch) => {
-		const result = await coursesServiceRemoveCourse(id);
-		if (result) {
+		try {
+			const result = await coursesServiceRemoveCourse(id);
+			console.log(result);
 			dispatch(coursesRemove(id));
+		} catch (error) {
+			console.error(error);
 		}
 	};
 };
@@ -19,17 +22,20 @@ export const thunkCourseRemove = ({ id }: { id: string }) => {
 export const thunkCourseCreate =
 	({ id, ...newCourse }: ICourse) =>
 	async (dispatch: Dispatch) => {
-		const result = await coursesServiceCreateCourse(newCourse);
-		if (result) {
-			dispatch(coursesAdd({ id: result, ...newCourse }));
+		try {
+			const result = await coursesServiceCreateCourse(newCourse);
+			dispatch(coursesAdd({ ...result }));
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
 export const thunkCourseUpdate =
 	(updatedCourse: ICourse) => async (dispatch: Dispatch) => {
-		const result = await coursesServiceUpdateCourse(updatedCourse);
-
-		if (result) {
-			dispatch(coursesUpdate({ id: result, ...updatedCourse }));
+		try {
+			const result = await coursesServiceUpdateCourse(updatedCourse);
+			dispatch(coursesUpdate({ ...result }));
+		} catch (error) {
+			console.log(error);
 		}
 	};
