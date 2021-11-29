@@ -11,6 +11,7 @@ const Button: FC<IButtonProps> = ({
 	type,
 	pathTo,
 	children,
+	dataTestId,
 }) =>
 	pathTo ? (
 		<Link
@@ -18,6 +19,7 @@ const Button: FC<IButtonProps> = ({
 			onClick={onClick}
 			className='common-button'
 			data-children={!!children}
+			data-testid={dataTestId}
 		>
 			{children ?? buttonText}
 		</Link>
@@ -27,6 +29,7 @@ const Button: FC<IButtonProps> = ({
 			className='common-button'
 			type={type ?? 'button'}
 			data-children={!!children}
+			data-testid={dataTestId}
 		>
 			{children ?? buttonText}
 		</button>

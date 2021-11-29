@@ -141,7 +141,11 @@ const CreateCourse: FC = () => {
 		setDescription(e.target.value);
 
 	return (
-		<form className='create-course' onSubmit={handleSubmit}>
+		<form
+			className='create-course'
+			onSubmit={handleSubmit}
+			data-testid='course-form'
+		>
 			<div className='create-course__title'>
 				<Input
 					labelText='Title'

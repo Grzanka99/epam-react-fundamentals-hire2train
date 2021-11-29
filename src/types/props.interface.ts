@@ -15,6 +15,7 @@ export interface IButtonProps {
 	type?: 'submit' | 'reset' | 'button';
 	pathTo?: string;
 	children?: ReactNode;
+	dataTestId?: string;
 }
 
 export interface IInputProps {

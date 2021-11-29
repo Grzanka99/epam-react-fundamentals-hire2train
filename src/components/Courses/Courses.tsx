@@ -22,17 +22,18 @@ const Courses: FC = () => {
 	}, [courses]);
 
 	return (
-		<section className='courses'>
+		<section className='courses' data-testid='courses'>
 			<div className='courses__heading'>
 				<SearchBar searchIn={courses} onFind={setToDisplay} />
 				{isAdmin && (
 					<Button
+						dataTestId='add-course-button'
 						buttonText={translate(lang).BUTTON.ADD_NEW}
 						pathTo='/courses/add'
 					/>
 				)}
 			</div>
-			<div>
+			<div data-testid='courses-list'>
 				{toDisplay.map((course) => (
 					<CourseCard {...course} key={course.id} />
 				))}
