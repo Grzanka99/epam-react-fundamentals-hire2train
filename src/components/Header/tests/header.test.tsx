@@ -21,7 +21,7 @@ test('Header', () => {
 	};
 
 	render(
-		<Provider store={mockedStore}>
+		<Provider store={mockedStore as any}>
 			<Header />
 		</Provider>
 	);

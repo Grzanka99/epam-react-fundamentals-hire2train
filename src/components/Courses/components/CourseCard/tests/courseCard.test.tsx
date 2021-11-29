@@ -36,7 +36,7 @@ const mockedProps: ICourseCardProps = {
 
 beforeEach(() => {
 	render(
-		<Provider store={mockedStore}>
+		<Provider store={mockedStore as any}>
 			<CourseCard {...mockedProps} />
 		</Provider>,
 		{ wrapper: MemoryRouter }
