@@ -48,7 +48,9 @@ const CourseCard: FC<ICourseCardProps> = ({
 					<tbody>
 						<tr>
 							<td>{translate(lang).COMMON.AUTHORS}:</td>
-							<td>{currentAuthors.map((el) => `${el.name}, `)}</td>
+							<td data-testid='authors-list'>
+								{currentAuthors.map((el) => `${el.name}, `)}
+							</td>
 						</tr>
 						<tr>
 							<td>{translate(lang).COMMON.DURATION}:</td>

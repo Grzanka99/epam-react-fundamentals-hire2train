@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import Header from '../Header';
 import { Provider } from 'react-redux';
 
-describe('Header', () => {
+test('Header', () => {
 	const mockedState = {
 		user: {
 			isAuth: true,
@@ -20,14 +20,12 @@ describe('Header', () => {
 		dispatch: jest.fn(),
 	};
 
-	it('Should have logo and username', () => {
-		render(
-			<Provider store={mockedStore}>
-				<Header />
-			</Provider>
-		);
+	render(
+		<Provider store={mockedStore}>
+			<Header />
+		</Provider>
+	);
 
-		expect(screen.queryByText(mockedState.user.name)).toBeInTheDocument();
-		expect(screen.getByTestId('logo')).toBeInTheDocument();
-	});
+	expect(screen.queryByText(mockedState.user.name)).toBeInTheDocument();
+	expect(screen.getByTestId('logo')).toBeInTheDocument();
 });
