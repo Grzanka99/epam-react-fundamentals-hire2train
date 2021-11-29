@@ -191,6 +191,7 @@ const CreateCourse: FC = () => {
 							placeholderText={translate(lang).PLACEHOLDER.AUTHOR}
 						/>
 						<Button
+							dataTestId='create-author-button'
 							buttonText={translate(lang).BUTTON.CREATE_AUTHOR}
 							onClick={handleCreateAuthor(newAuthorName)}
 						/>
@@ -210,9 +211,12 @@ const CreateCourse: FC = () => {
 						</span>
 					</div>
 				</div>
-				<div className='create-course__authors__right'>
+				<div
+					className='create-course__authors__right'
+					data-testid='authors-lists'
+				>
 					<h3>{translate(lang).TITLE.AUTHORS}</h3>
-					<div>
+					<div data-testid='authors-all'>
 						{!!getFilteredAuthors.length ? (
 							getFilteredAuthors.map((author: IAuthor) => (
 								<div key={author.id || Math.random()} className='single-author'>
@@ -222,6 +226,7 @@ const CreateCourse: FC = () => {
 											<TrashIconSVG />
 										</Button>
 										<Button
+											dataTestId='add-author-button'
 											buttonText='Add author'
 											onClick={handleAddAuthor(author.id || '')}
 										/>
@@ -233,7 +238,7 @@ const CreateCourse: FC = () => {
 						)}
 					</div>
 					<h3>{translate(lang).TITLE.COURSE_AUTHORS}</h3>
-					<div>
+					<div data-testid='authors-course'>
 						{currAuthors.length ? (
 							currAuthors.map((author) => {
 								const curr = authors.find((el) => el.id === author);
@@ -241,6 +246,7 @@ const CreateCourse: FC = () => {
 									<div key={curr?.id} className='single-author'>
 										<span>{curr?.name}</span>
 										<Button
+											dataTestId='delete-author-button'
 											buttonText={translate(lang).BUTTON.DELETE_AUTHOR}
 											onClick={handleDeleteAuthor(curr?.id || '')}
 										/>

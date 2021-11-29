@@ -46,7 +46,7 @@ const mockedStore = {
 
 test('should display amount of CourseCard equal length of courses array', () => {
 	render(
-		<Provider store={mockedStore}>
+		<Provider store={mockedStore as any}>
 			<Courses />
 		</Provider>,
 		{ wrapper: MemoryRouter }
@@ -66,7 +66,7 @@ test('should display empty container if courses array length is 0', () => {
 		dispatch: jest.fn(),
 	};
 	render(
-		<Provider store={emptyStore}>
+		<Provider store={emptyStore as any}>
 			<Courses />
 		</Provider>,
 		{ wrapper: MemoryRouter }
