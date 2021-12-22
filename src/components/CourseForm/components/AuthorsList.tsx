@@ -1,5 +1,8 @@
 import Button from 'common/Button/Button';
+import { translate } from 'helpers/constants';
 import { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { getLang } from 'store/selectors';
 import TrashIconSVG from 'svg/trash-icon.svg';
 import { IAuthorsListProps } from 'types/props.interface';
 import { IAuthor } from 'types/state.interface';
@@ -12,6 +15,8 @@ const AuthorsList: FC<IAuthorsListProps> = ({
 	testId,
 }) => {
 	const isOnRemove = (): boolean => Boolean(onRemove);
+
+	const lang = useSelector(getLang);
 
 	return (
 		<div className='authors-list'>
@@ -27,7 +32,11 @@ const AuthorsList: FC<IAuthorsListProps> = ({
 						)}
 						<Button
 							dataTestId={testId}
-							buttonText={isOnRemove() ? 'Add author' : 'Delete author'}
+							buttonText={
+								translate(lang).BUTTON[
+									isOnRemove() ? 'ADD_AUTHOR' : 'DELETE_AUTHOR'
+								]
+							}
 							onClick={
 								isOnRemove()
 									? // @ts-ignore-next-line
