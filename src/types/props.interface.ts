@@ -1,6 +1,6 @@
 import { ChangeEvent, Component, ReactElement, ReactNode } from 'react';
 
-import { ICourse } from './state.interface';
+import { IAuthor, ICourse } from './state.interface';
 
 export interface ICourseCardProps extends ICourse {}
 
@@ -11,7 +11,7 @@ export interface ISearchBarProps<T> {
 
 export interface IButtonProps {
 	buttonText?: string;
-	onClick?: () => void;
+	onClick?: any;
 	type?: 'submit' | 'reset' | 'button';
 	pathTo?: string;
 	children?: ReactNode;
@@ -35,4 +35,12 @@ export interface IPipeDuration {
 
 export interface IPrivateRouteProps {
 	children: Component | ReactElement;
+}
+
+export interface IAuthorsListProps {
+	authors: IAuthor[];
+	onRemove?: (author: string) => void;
+	onAdd?: (author: string) => void;
+	onDelete?: (author: string) => void;
+	testId?: string;
 }

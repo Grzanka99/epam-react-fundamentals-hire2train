@@ -22,7 +22,11 @@ export interface ICourse {
 }
 
 export interface IAuthor {
-	id?: string;
+	id: string;
+	name: string;
+}
+
+export interface ICreateAuthor {
 	name: string;
 }
 

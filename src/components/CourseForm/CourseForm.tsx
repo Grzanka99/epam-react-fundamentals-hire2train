@@ -18,10 +18,10 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { thunkAuthorAdd, thunkAuthorRemove } from 'store/authors/thunk';
 import { thunkCourseCreate, thunkCourseUpdate } from 'store/courses/thunk';
 import { getAuthors, getCourses, getLang } from 'store/selectors';
-import TrashIconSVG from 'svg/trash-icon.svg';
 import { IAuthor, ICourse } from 'types/state.interface';
 
 import './CourseForm.scss';
+import AuthorsList from './components/AuthorsList';
 
 const CreateCourse: FC = () => {
 	const [duration, setDuration] = useState(0);
@@ -122,6 +122,11 @@ const CreateCourse: FC = () => {
 		[authors, currAuthors]
 	);
 
+	const currAuthorsDisplay: IAuthor[] = useMemo(
+		() => authors.filter((a) => currAuthors.includes(a.id)) || [],
+		[authors, currAuthors]
+	);
+
 	const handleAuthorNameChange = (e: ChangeEvent<HTMLInputElement>) =>
 		setNewAuthorName(e.target.value);
 
@@ -218,41 +223,24 @@ const CreateCourse: FC = () => {
 					<h3>{translate(lang).TITLE.AUTHORS}</h3>
 					<div data-testid='authors-all'>
 						{!!getFilteredAuthors.length ? (
-							getFilteredAuthors.map((author: IAuthor) => (
-								<div key={author.id || Math.random()} className='single-author'>
-									<span>{author.name}</span>
-									<div className='flex'>
-										<Button onClick={handleRemoveAuthor(author.id || '')}>
-											<TrashIconSVG />
-										</Button>
-										<Button
-											dataTestId='add-author-button'
-											buttonText='Add author'
-											onClick={handleAddAuthor(author.id || '')}
-										/>
-									</div>{' '}
-								</div>
-							))
+							<AuthorsList
+								authors={getFilteredAuthors}
+								onRemove={handleRemoveAuthor}
+								onAdd={handleAddAuthor}
+								testId='add-author-button'
+							/>
 						) : (
 							<span>{translate(lang).COMMON.AUTHORS_LIST_EMPTY}</span>
 						)}
 					</div>
 					<h3>{translate(lang).TITLE.COURSE_AUTHORS}</h3>
 					<div data-testid='authors-course'>
-						{currAuthors.length ? (
-							currAuthors.map((author) => {
-								const curr = authors.find((el) => el.id === author);
-								return (
-									<div key={curr?.id} className='single-author'>
-										<span>{curr?.name}</span>
-										<Button
-											dataTestId='delete-author-button'
-											buttonText={translate(lang).BUTTON.DELETE_AUTHOR}
-											onClick={handleDeleteAuthor(curr?.id || '')}
-										/>
-									</div>
-								);
-							})
+						{currAuthorsDisplay.length ? (
+							<AuthorsList
+								authors={currAuthorsDisplay}
+								onDelete={handleDeleteAuthor}
+								testId='delete-author-button'
+							/>
 						) : (
 							<span>{translate(lang).COMMON.AUTHORS_LIST_EMPTY}</span>
 						)}

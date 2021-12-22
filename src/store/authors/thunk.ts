@@ -3,7 +3,7 @@ import {
 	authorsServiceAddAuthor,
 	authorsServiceDeleteAuthor,
 } from 'services/authors.service';
-import { IAuthor } from 'types/state.interface';
+import { ICreateAuthor } from 'types/state.interface';
 
 import { authorsAdd, authorsRemove } from './actionCreators';
 
@@ -18,7 +18,7 @@ export const thunkAuthorRemove = (id: string) => async (dispatch: Dispatch) => {
 };
 
 export const thunkAuthorAdd =
-	({ name }: IAuthor) =>
+	({ name }: ICreateAuthor) =>
 	async (dispatch: Dispatch) => {
 		try {
 			const result = await authorsServiceAddAuthor({ name });

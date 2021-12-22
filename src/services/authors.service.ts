@@ -1,8 +1,10 @@
-import { IAuthor } from 'types/state.interface';
+import { IAuthor, ICreateAuthor } from 'types/state.interface';
 
 import { axiosInstance } from './axios-instance';
 
-export const authorsServiceAddAuthor = (data: IAuthor): Promise<IAuthor> =>
+export const authorsServiceAddAuthor = (
+	data: ICreateAuthor
+): Promise<IAuthor> =>
 	axiosInstance
 		.post('/authors/add', { ...data })
 		.then((res) => res.data.result);
