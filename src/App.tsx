@@ -15,6 +15,8 @@ import { thunkLoadAuthors, thunkLoadCourses } from 'store/thunk';
 import { thunkGetCurrentUser } from 'store/user/thunk';
 
 import './App.scss';
+import { thunkAuthorAdd } from 'store/thunks/authors.thunk';
+import { thunkAuthorRemove } from 'store/authors/thunk';
 
 const App: FC = () => {
 	const isAuth = useSelector(getIsAuth);
@@ -25,6 +27,9 @@ const App: FC = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
+		dispatch(thunkAuthorAdd());
+		dispatch(thunkAuthorRemove('tonienumber'));
+
 		if (isAuth) {
 			dispatch(thunkGetCurrentUser());
 			dispatch(thunkLoadAuthors());

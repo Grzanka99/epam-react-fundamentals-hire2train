@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { thunkAuthorRemove, thunkAuthorAdd } from 'store/thunks/authors.thunk';
 import { IAuthor } from 'types/state.interface';
 
 const initialState: IAuthor[] = [];
@@ -18,6 +19,18 @@ const authorsReducer = createSlice({
 		removeAuthor: (state, action: PayloadAction<string>) =>
 			state.filter((author) => author.id !== action.payload),
 		cleanAuthors: () => [],
+	},
+	extraReducers: (builder) => {
+		builder.addCase(thunkAuthorRemove.fulfilled, (state, action) => {
+			console.log(action);
+			// @ts-ignore
+			state.filter((author) => author.id !== action.payload);
+		});
+		builder.addCase(thunkAuthorAdd.fulfilled, (state, action) => {
+			console.log(action);
+			// @ts-ignore
+			state.concat(action.payload);
+		});
 	},
 });
 
