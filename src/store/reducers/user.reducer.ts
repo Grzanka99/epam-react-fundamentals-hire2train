@@ -1,4 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+	thunkGetCurrentUser,
+	thunkUserLogin,
+	thunkUserLogout,
+} from 'store/thunks/user.thunk';
 import { Role } from 'types/common.enum';
 import { IUser } from 'types/state.interface';
 
@@ -10,24 +15,31 @@ const initialUserState: IUser = {
 	role: Role.None,
 };
 
+const userLogin = (state: IUser, action: PayloadAction<string | any>) => ({
+	...state,
+	isAuth: true,
+	token: action.payload,
+});
+
+const userSetInfo = (state: IUser, action: PayloadAction<IUser | any>) => ({
+	...state,
+	...action.payload,
+});
+
+const userLogout = (state: IUser) => ({
+	...state,
+	isAuth: false,
+	token: '',
+});
+
 const userReducer = createSlice({
 	name: 'userStore',
 	initialState: initialUserState,
-	reducers: {
-		userLogin: (state: IUser, action: PayloadAction<string>) => ({
-			...state,
-			isAuth: true,
-			token: action.payload,
-		}),
-		userSetInfo: (state: IUser, action: PayloadAction<IUser>) => ({
-			...state,
-			...action.payload,
-		}),
-		userLogout: (state: IUser) => ({
-			...state,
-			isAuth: false,
-			token: '',
-		}),
+	reducers: { userLogin, userLogout, userSetInfo },
+	extraReducers: (builder) => {
+		builder.addCase(thunkUserLogin.fulfilled, userLogin);
+		builder.addCase(thunkUserLogout.fulfilled, userLogout);
+		builder.addCase(thunkGetCurrentUser.fulfilled, userSetInfo);
 	},
 });
 

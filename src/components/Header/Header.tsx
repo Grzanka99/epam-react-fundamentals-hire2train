@@ -4,7 +4,7 @@ import Button from 'common/Button/Button';
 import { translate } from 'helpers/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { getLang, getUser } from 'store/selectors';
-import { thunkUserLogout } from 'store/user/thunk';
+import { thunkUserLogout } from 'store/thunks/user.thunk';
 
 import Logo from './components/Logo/Logo';
 

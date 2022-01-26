@@ -3,7 +3,7 @@ import { IUser } from 'types/state.interface';
 
 import { axiosInstance } from './axios-instance';
 
-export const userSeviceLogin = (
+export const userServiceLogin = (
 	email: string,
 	password: string
 ): Promise<string> =>
