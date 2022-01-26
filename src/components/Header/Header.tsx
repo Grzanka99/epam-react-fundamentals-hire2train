@@ -3,8 +3,9 @@ import { FC } from 'react';
 import Button from 'common/Button/Button';
 import { translate } from 'helpers/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLang, getUser } from 'store/selectors';
 import { thunkUserLogout } from 'store/thunks/user.thunk';
+import { getUser } from 'store/selectors/user.selectors';
+import { getLang } from 'store/selectors/lang.selectors';
 
 import Logo from './components/Logo/Logo';
 

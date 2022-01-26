@@ -6,7 +6,7 @@ import { translate } from 'helpers/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getLang } from 'store/selectors';
-import { thunkUserLogin } from 'store/user/thunk';
+import { thunkUserLogin } from 'store/thunks/user.thunk';
 
 const Login: FC = () => {
 	const [email, setEmail] = useState('');

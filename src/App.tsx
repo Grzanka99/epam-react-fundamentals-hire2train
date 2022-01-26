@@ -12,11 +12,9 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { languageSet } from 'store/lang/actionCreators';
 import { getIsAuth } from 'store/selectors';
 import { thunkLoadAuthors, thunkLoadCourses } from 'store/thunk';
-import { thunkGetCurrentUser } from 'store/user/thunk';
 
 import './App.scss';
-import { thunkAuthorAdd } from 'store/thunks/authors.thunk';
-import { thunkAuthorRemove } from 'store/authors/thunk';
+import { thunkGetCurrentUser } from 'store/thunks/user.thunk';
 
 const App: FC = () => {
 	const isAuth = useSelector(getIsAuth);
@@ -27,9 +25,6 @@ const App: FC = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		dispatch(thunkAuthorAdd());
-		dispatch(thunkAuthorRemove('tonienumber'));
-
 		if (isAuth) {
 			dispatch(thunkGetCurrentUser());
 			dispatch(thunkLoadAuthors());

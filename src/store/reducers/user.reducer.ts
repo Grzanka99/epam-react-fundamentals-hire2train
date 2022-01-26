@@ -26,8 +26,8 @@ const userSetInfo = (state: IUser, action: PayloadAction<IUser | any>) => ({
 	...action.payload,
 });
 
-const userLogout = (state: IUser) => ({
-	...state,
+const userLogout = () => ({
+	...initialUserState,
 	isAuth: false,
 	token: '',
 });
