@@ -1,24 +1,3 @@
-// import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-// import thunk from 'redux-thunk';
-// import { authorsReducer } from 'store/authors/reducer';
-// import { coursesReducer } from 'store/courses/reducer';
-// import { langReducer } from 'store/lang/reducer';
-// import { userReducer } from 'store/user/reducer';
-//
-//
-//
-// const rootReducer = combineReducers({
-// 	user: userReducer,
-// 	authors: authorsReducer,
-// 	courses: coursesReducer,
-// 	lang: langReducer,
-// });
-//
-// export default createStore(
-// 	rootReducer,
-// 	composeEnhancer(applyMiddleware(thunk))
-// );
-
 import { configureStore } from '@reduxjs/toolkit';
 
 import authorsReducer from 'store/reducers/authors.reducer';

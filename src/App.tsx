@@ -10,11 +10,11 @@ import Registration from 'components/Registration/Registration';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { languageSet } from 'store/lang/actionCreators';
-import { getIsAuth } from 'store/selectors';
 import { thunkLoadAuthors, thunkLoadCourses } from 'store/thunk';
 
 import './App.scss';
 import { thunkGetCurrentUser } from 'store/thunks/user.thunk';
+import { getIsAuth } from 'store/selectors/user.selectors';
 
 const App: FC = () => {
 	const isAuth = useSelector(getIsAuth);
