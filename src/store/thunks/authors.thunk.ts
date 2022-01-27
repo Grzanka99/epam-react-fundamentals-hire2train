@@ -39,13 +39,11 @@ export const thunkAuthorAdd = createAsyncThunk<IAuthor | false, ICreateAuthor>(
 	}
 );
 
-export const thunkLoadAuthors = createAsyncThunk<IAuthor[] | false, void>(
+export const thunkAuthorsLoad = createAsyncThunk<IAuthor[] | false, void>(
 	AuthorsAsync.LOAD,
 	async () => {
 		try {
 			const result = await appServiceGetAuthors();
-			authorsActions.cleanAuthors();
-
 			return result.map((single) => ({ ...single }));
 		} catch (error) {
 			console.log(error);

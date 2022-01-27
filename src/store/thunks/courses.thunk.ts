@@ -54,13 +54,11 @@ export const thunkCourseUpdate = createAsyncThunk<ICourse | false, ICourse>(
 	}
 );
 
-export const thunkLoadCourses = createAsyncThunk<ICourse[] | false, void>(
+export const thunkCoursesLoad = createAsyncThunk<ICourse[] | false, void>(
 	CoursesAsync.LOAD,
 	async () => {
 		try {
 			const result = await appServiceGetCourses();
-			coursesActions.cleanCourses();
-
 			return result.map((single) => ({ ...single }));
 		} catch (error) {
 			alert('Something went wrong while loading courses');
