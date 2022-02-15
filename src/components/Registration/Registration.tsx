@@ -5,10 +5,10 @@ import Input from 'common/Input/Input';
 import { translate } from 'helpers/constants';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { userServiceRegister } from 'services/user.service';
 import { getLang } from 'store/selectors';
 
 import './Registration.scss';
+import { useRegisterMutation } from 'services/user-api.service';
 
 const Registration: FC = () => {
 	const [name, setName] = useState('');
@@ -16,15 +16,15 @@ const Registration: FC = () => {
 	const [password, setPassword] = useState('');
 
 	const navigate = useNavigate();
-
+	const [performRegistration] = useRegisterMutation();
 	const lang = useSelector(getLang);
 
 	const handleSubmit = useCallback(
 		async (e) => {
 			e.preventDefault();
-			try {
-				await userServiceRegister({ name, email, password });
 
+			try {
+				await performRegistration({ name, email, password });
 				alert('User created succesful');
 				navigate('/login');
 			} catch (error) {
@@ -32,7 +32,7 @@ const Registration: FC = () => {
 				alert('Wrong data or email is already taken');
 			}
 		},
-		[name, email, password, navigate]
+		[name, email, password, navigate, performRegistration]
 	);
 
 	const handleNameChange = (e: ChangeEvent<HTMLInputElement>) =>

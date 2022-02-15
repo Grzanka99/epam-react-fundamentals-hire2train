@@ -4,6 +4,7 @@ import authorsReducer from 'store/reducers/authors.reducer';
 import coursesReducer from 'store/reducers/courses.reducer';
 import userReducer from 'store/reducers/user.reducer';
 import langReducer from 'store/reducers/lang.reducer';
+import { userApi } from 'services/user-api.service';
 
 // declare const window: {
 // 	__REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
@@ -13,6 +14,7 @@ import langReducer from 'store/reducers/lang.reducer';
 
 const store = configureStore({
 	reducer: {
+		[userApi.reducerPath]: userApi.reducer,
 		user: userReducer.reducer,
 		authors: authorsReducer.reducer,
 		courses: coursesReducer.reducer,

@@ -12,15 +12,20 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { languageSet } from 'store/lang/actionCreators';
 
 import './App.scss';
-import { thunkGetCurrentUser } from 'store/thunks/user.thunk';
-import { getIsAuth } from 'store/selectors/user.selectors';
+import { getIsAuth, getToken } from 'store/selectors/user.selectors';
 import { thunkAuthorsLoad } from 'store/thunks/authors.thunk';
 import { thunkCoursesLoad } from 'store/thunks/courses.thunk';
 import { authorsActions, coursesActions } from 'store';
+import { useUserInfoQuery } from 'services/user-api.service';
 
 const App: FC = () => {
 	const isAuth = useSelector(getIsAuth);
+	const token = useSelector(getToken);
 	const dispatch = useDispatch();
+
+	useUserInfoQuery(token, {
+		skip: !isAuth,
+	});
 
 	useEffect(() => {
 		dispatch(languageSet('en'));
@@ -28,15 +33,14 @@ const App: FC = () => {
 
 	useEffect(() => {
 		if (isAuth) {
-			dispatch(thunkGetCurrentUser());
-
 			authorsActions.cleanAuthors();
 			dispatch(thunkAuthorsLoad());
 
 			coursesActions.cleanCourses();
 			dispatch(thunkCoursesLoad());
 		}
-	}, [dispatch, isAuth]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isAuth]);
 
 	return (
 		<>

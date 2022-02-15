@@ -9,3 +9,5 @@ export const getRole = (state: IState): Role => state.user.role || Role.None;
 
 export const getIsAdmin = (state: IState): boolean =>
 	state.user.role?.toLowerCase() === Role.Admin.toLowerCase();
+
+export const getToken = (state: IState): string => state.user.token;

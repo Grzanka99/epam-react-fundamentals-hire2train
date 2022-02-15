@@ -2,23 +2,25 @@ import { FC } from 'react';
 
 import Button from 'common/Button/Button';
 import { translate } from 'helpers/constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { thunkUserLogout } from 'store/thunks/user.thunk';
-import { getUser } from 'store/selectors/user.selectors';
+import { useSelector } from 'react-redux';
+import { getToken, getUser } from 'store/selectors/user.selectors';
 import { getLang } from 'store/selectors/lang.selectors';
 
 import Logo from './components/Logo/Logo';
 
 import './Header.scss';
+import { useLogoutMutation } from 'services/user-api.service';
 
 const Header: FC = () => {
 	const user = useSelector(getUser);
-	const dispatch = useDispatch();
 
 	const lang = useSelector(getLang);
 
+	const [logout] = useLogoutMutation();
+	const token = useSelector(getToken);
+
 	const handleLogout = () => {
-		dispatch(thunkUserLogout());
+		logout(token);
 	};
 
 	return (

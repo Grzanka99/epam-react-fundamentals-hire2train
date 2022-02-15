@@ -3,25 +3,25 @@ import { ChangeEvent, FC, useCallback, useState } from 'react';
 import Button from 'common/Button/Button';
 import Input from 'common/Input/Input';
 import { translate } from 'helpers/constants';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getLang } from 'store/selectors';
-import { thunkUserLogin } from 'store/thunks/user.thunk';
+import { useLoginMutation } from 'services/user-api.service';
 
 const Login: FC = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const dispatch = useDispatch();
+	const [login] = useLoginMutation();
 
 	const lang = useSelector(getLang);
 
 	const handleSubmit = useCallback(
 		(e) => {
 			e.preventDefault();
-			dispatch(thunkUserLogin({ email, password }));
+			login({ email, password });
 		},
-		[email, password, dispatch]
+		[email, password, login]
 	);
 
 	const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
