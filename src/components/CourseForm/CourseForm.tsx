@@ -22,6 +22,10 @@ import { IAuthor, ICourse } from 'types/state.interface';
 
 import './CourseForm.scss';
 import AuthorsList from './components/AuthorsList';
+import {
+	useAddAuthorMutation,
+	useRemoveAuthorMutation,
+} from 'services/api.service';
 
 const CreateCourse: FC = () => {
 	const [duration, setDuration] = useState(0);
@@ -43,6 +47,9 @@ const CreateCourse: FC = () => {
 	const location = useLocation();
 	const courseId = useParams().id || '';
 
+	const [addAuthor] = useAddAuthorMutation();
+	const [removeAuthor] = useRemoveAuthorMutation();
+
 	const handleCreateAuthor = useCallback(
 		(newName) => () => {
 			if (!newName) {
@@ -53,17 +60,17 @@ const CreateCourse: FC = () => {
 
 			setNewAuthorName('');
 
-			dispatch(thunkAuthorAdd(newAuthor));
+			addAuthor(newAuthor);
 		},
-		[dispatch]
+		[addAuthor]
 	);
 
 	const handleRemoveAuthor = useCallback(
 		(id: string) => () => {
 			if (!id.length) return;
-			dispatch(thunkAuthorRemove(id));
+			removeAuthor(id);
 		},
-		[dispatch]
+		[removeAuthor]
 	);
 
 	const validateData = () => {

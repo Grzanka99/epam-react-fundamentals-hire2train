@@ -5,7 +5,6 @@ import {
 	coursesServiceRemoveCourse,
 	coursesServiceUpdateCourse,
 } from 'services/courses.service';
-import { coursesActions } from 'store';
 import { ICourse } from 'types/state.interface';
 
 export enum CoursesAsync {

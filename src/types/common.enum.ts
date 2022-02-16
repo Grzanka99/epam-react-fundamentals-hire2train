@@ -3,3 +3,10 @@ export enum Role {
 	User = 'USER',
 	None = '',
 }
+
+export enum HttpMethods {
+	GET = 'GET',
+	POST = 'POST',
+	PUT = 'PUT',
+	DELETE = 'DELETE',
+}

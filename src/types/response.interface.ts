@@ -1,15 +1,19 @@
 import { IUser } from './state.interface';
 
-export interface IUserLoginResponse {
+export interface IResponse<T> {
 	successful: boolean;
-	result: string;
+	result: T;
+}
+
+export interface IUserLoginResponse extends IResponse<string> {
 	user: {
 		email: string;
 		name: string | null;
 	};
 }
 
-export interface IUserGetInfo {
-	successful: boolean;
+export interface IUserGetInfo extends IResponse<void> {
 	user: IUser;
 }
+
+export interface ICreateUserResponse extends IResponse<string> {}

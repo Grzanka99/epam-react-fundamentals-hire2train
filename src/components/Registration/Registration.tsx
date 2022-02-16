@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getLang } from 'store/selectors';
 
 import './Registration.scss';
-import { useRegisterMutation } from 'services/user-api.service';
+import { useRegisterMutation } from 'services/api.service';
 
 const Registration: FC = () => {
 	const [name, setName] = useState('');

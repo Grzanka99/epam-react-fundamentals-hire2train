@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { api } from 'services/api.service';
 import {
 	thunkCourseCreate,
 	thunkCourseRemove,
 	thunkCourseUpdate,
-	thunkCoursesLoad,
 } from 'store/thunks/courses.thunk';
+import { IResponse } from 'types/response.interface';
 import { ICourse } from 'types/state.interface';
 
 const initialState: ICourse[] = [];
@@ -19,6 +20,11 @@ const addCourse = (
 	const newCourses = Array.isArray(payload) ? payload : [payload];
 	return [...state, ...newCourses];
 };
+
+const loadCourses = (
+	_state: ICourse[],
+	action: PayloadAction<IResponse<ICourse[]>>
+) => [...action.payload.result];
 
 const removeCourse = (
 	state: ICourse[],
@@ -56,7 +62,7 @@ const coursesReducer = createSlice({
 		builder.addCase(thunkCourseCreate.fulfilled, addCourse);
 		builder.addCase(thunkCourseRemove.fulfilled, removeCourse);
 		builder.addCase(thunkCourseUpdate.fulfilled, updateCourse);
-		builder.addCase(thunkCoursesLoad.fulfilled, addCourse);
+		builder.addMatcher(api.endpoints.loadCourses.matchFulfilled, loadCourses);
 	},
 });
 

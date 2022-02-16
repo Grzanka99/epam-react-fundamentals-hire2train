@@ -6,7 +6,7 @@ import { translate } from 'helpers/constants';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getLang } from 'store/selectors';
-import { useLoginMutation } from 'services/user-api.service';
+import { useLoginMutation } from 'services/api.service';
 
 const Login: FC = () => {
 	const [email, setEmail] = useState('');

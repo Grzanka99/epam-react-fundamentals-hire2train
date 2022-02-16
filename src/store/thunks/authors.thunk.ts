@@ -4,7 +4,6 @@ import {
 	authorsServiceAddAuthor,
 	authorsServiceDeleteAuthor,
 } from 'services/authors.service';
-import { authorsActions } from 'store';
 import { IAuthor, ICreateAuthor } from 'types/state.interface';
 
 export enum AuthorsAsync {

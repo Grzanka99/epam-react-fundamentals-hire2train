@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { userApi } from 'services/user-api.service';
+import { api } from 'services/api.service';
 import { Role } from 'types/common.enum';
 import { IUserGetInfo, IUserLoginResponse } from 'types/response.interface';
 import { IUser } from 'types/state.interface';
@@ -30,6 +30,12 @@ const userSetInfo = (
 	...action.payload.result,
 });
 
+const userSetInfoFailed = (state: IUser) => ({
+	...state,
+	isAuth: false,
+	token: '',
+});
+
 const userLogout = () => {
 	localStorage.clear();
 	return {
@@ -44,9 +50,10 @@ const userReducer = createSlice({
 	initialState: initialUserState,
 	reducers: {},
 	extraReducers: (builder) => {
-		builder.addMatcher(userApi.endpoints.logout.matchFulfilled, userLogout);
-		builder.addMatcher(userApi.endpoints.login.matchFulfilled, userLogin);
-		builder.addMatcher(userApi.endpoints.userInfo.matchFulfilled, userSetInfo);
+		builder.addMatcher(api.endpoints.logout.matchFulfilled, userLogout);
+		builder.addMatcher(api.endpoints.login.matchFulfilled, userLogin);
+		builder.addMatcher(api.endpoints.userInfo.matchFulfilled, userSetInfo);
+		builder.addMatcher(api.endpoints.userInfo.matchRejected, userSetInfoFailed);
 	},
 });
 
