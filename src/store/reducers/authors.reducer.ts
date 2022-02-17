@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { api } from 'services/api.service';
+import { authorsEndpoints } from 'services/endpoints/authors.builder';
 import { IResponse } from 'types/response.interface';
 import { IAuthor } from 'types/state.interface';
 
@@ -34,9 +34,18 @@ const authorsReducer = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
-		builder.addMatcher(api.endpoints.removeAuthor.matchFulfilled, removeAuthor);
-		builder.addMatcher(api.endpoints.addAuthor.matchFulfilled, addAuthor);
-		builder.addMatcher(api.endpoints.loadAuthors.matchFulfilled, loadAuthors);
+		builder.addMatcher(
+			authorsEndpoints.endpoints.removeAuthor.matchFulfilled,
+			removeAuthor
+		);
+		builder.addMatcher(
+			authorsEndpoints.endpoints.addAuthor.matchFulfilled,
+			addAuthor
+		);
+		builder.addMatcher(
+			authorsEndpoints.endpoints.loadAuthors.matchFulfilled,
+			loadAuthors
+		);
 	},
 });
 

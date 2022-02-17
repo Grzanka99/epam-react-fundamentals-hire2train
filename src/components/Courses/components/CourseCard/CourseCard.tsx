@@ -12,7 +12,7 @@ import { IAuthor } from 'types/state.interface';
 import { translate } from 'helpers/constants';
 
 import './CourseCard.scss';
-import { useRemoveCourseMutation } from 'services/api.service';
+import { useRemoveCourseMutation } from 'services/endpoints/courses.builder';
 
 const CourseCard: FC<ICourseCardProps> = ({
 	title,

@@ -22,10 +22,12 @@ import './CourseForm.scss';
 import AuthorsList from './components/AuthorsList';
 import {
 	useAddAuthorMutation,
-	useCreateCourseMutation,
 	useRemoveAuthorMutation,
+} from 'services/endpoints/authors.builder';
+import {
+	useCreateCourseMutation,
 	useUpdateCourseMutation,
-} from 'services/api.service';
+} from 'services/endpoints/courses.builder';
 
 const CreateCourse: FC = () => {
 	const [duration, setDuration] = useState(0);

@@ -13,11 +13,9 @@ import { langActions } from 'store';
 
 import './App.scss';
 import { getIsAuth } from 'store/selectors/user.selectors';
-import {
-	useLazyLoadAuthorsQuery,
-	useLazyLoadCoursesQuery,
-	useLazyUserInfoQuery,
-} from 'services/api.service';
+import { useLazyUserInfoQuery } from 'services/endpoints/user.builder';
+import { useLazyLoadAuthorsQuery } from 'services/endpoints/authors.builder';
+import { useLazyLoadCoursesQuery } from 'services/endpoints/courses.builder';
 
 const App: FC = () => {
 	const isAuth = useSelector(getIsAuth);

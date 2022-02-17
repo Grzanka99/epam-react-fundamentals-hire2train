@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { api } from 'services/api.service';
+import { coursesEndpoints } from 'services/endpoints/courses.builder';
 import { IResponse } from 'types/response.interface';
 import { ICourse } from 'types/state.interface';
 
@@ -45,10 +45,22 @@ const coursesReducer = createSlice({
 		cleanCourses: () => [],
 	},
 	extraReducers: (builder) => {
-		builder.addMatcher(api.endpoints.removeCourse.matchFulfilled, removeCourse);
-		builder.addMatcher(api.endpoints.updateCourse.matchFulfilled, updateCourse);
-		builder.addMatcher(api.endpoints.createCourse.matchFulfilled, addCourse);
-		builder.addMatcher(api.endpoints.loadCourses.matchFulfilled, loadCourses);
+		builder.addMatcher(
+			coursesEndpoints.endpoints.removeCourse.matchFulfilled,
+			removeCourse
+		);
+		builder.addMatcher(
+			coursesEndpoints.endpoints.updateCourse.matchFulfilled,
+			updateCourse
+		);
+		builder.addMatcher(
+			coursesEndpoints.endpoints.createCourse.matchFulfilled,
+			addCourse
+		);
+		builder.addMatcher(
+			coursesEndpoints.endpoints.loadCourses.matchFulfilled,
+			loadCourses
+		);
 	},
 });
 

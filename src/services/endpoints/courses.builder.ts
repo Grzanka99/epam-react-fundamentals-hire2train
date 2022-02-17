@@ -1,34 +1,43 @@
-import { Builder } from 'services/api.service';
+import { api } from 'services/api.service';
 import { HttpMethods } from 'types/common.enum';
 import { IResponse } from 'types/response.interface';
 import { ICourse } from 'types/state.interface';
 
-export const buildCoursesEndpoints = (builder: Builder) => ({
-	loadCourses: builder.query<IResponse<ICourse[]>, void>({
-		query: () => ({ url: 'courses/all' }),
-	}),
-	updateCourse: builder.mutation<IResponse<ICourse>, ICourse>({
-		query: ({ id, ...body }) => ({
-			url: `courses/${id}`,
-			method: HttpMethods.PUT,
-			body,
+export const coursesEndpoints = api.injectEndpoints({
+	endpoints: (builder) => ({
+		loadCourses: builder.query<IResponse<ICourse[]>, void>({
+			query: () => ({ url: 'courses/all' }),
 		}),
-	}),
-	createCourse: builder.mutation<IResponse<ICourse>, ICourse>({
-		query: (body) => ({
-			url: 'courses/add',
-			method: HttpMethods.POST,
-			body,
+		updateCourse: builder.mutation<IResponse<ICourse>, ICourse>({
+			query: ({ id, ...body }) => ({
+				url: `courses/${id}`,
+				method: HttpMethods.PUT,
+				body,
+			}),
 		}),
-	}),
-	removeCourse: builder.mutation<IResponse<string>, string>({
-		query: (id) => ({
-			url: `courses/${id}`,
-			method: HttpMethods.DELETE,
+		createCourse: builder.mutation<IResponse<ICourse>, ICourse>({
+			query: (body) => ({
+				url: 'courses/add',
+				method: HttpMethods.POST,
+				body,
+			}),
 		}),
-		transformResponse: (response: IResponse<string>, _meta, arg) => ({
-			...response,
-			result: arg,
+		removeCourse: builder.mutation<IResponse<string>, string>({
+			query: (id) => ({
+				url: `courses/${id}`,
+				method: HttpMethods.DELETE,
+			}),
+			transformResponse: (response: IResponse<string>, _meta, arg) => ({
+				...response,
+				result: arg,
+			}),
 		}),
 	}),
 });
+
+export const {
+	useLazyLoadCoursesQuery,
+	useRemoveCourseMutation,
+	useCreateCourseMutation,
+	useUpdateCourseMutation,
+} = coursesEndpoints;

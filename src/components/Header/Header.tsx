@@ -9,7 +9,7 @@ import { getLang } from 'store/selectors/lang.selectors';
 import Logo from './components/Logo/Logo';
 
 import './Header.scss';
-import { useLogoutMutation } from 'services/api.service';
+import { useLogoutMutation } from 'services/endpoints/user.builder';
 
 const Header: FC = () => {
 	const user = useSelector(getUser);

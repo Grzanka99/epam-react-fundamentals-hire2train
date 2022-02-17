@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { api } from 'services/api.service';
+import { userEndpoints } from 'services/endpoints/user.builder';
 import { Role } from 'types/common.enum';
 import { IUserGetInfo, IUserLoginResponse } from 'types/response.interface';
 import { IUser } from 'types/state.interface';
@@ -50,10 +50,19 @@ const userReducer = createSlice({
 	initialState: initialUserState,
 	reducers: {},
 	extraReducers: (builder) => {
-		builder.addMatcher(api.endpoints.logout.matchFulfilled, userLogout);
-		builder.addMatcher(api.endpoints.login.matchFulfilled, userLogin);
-		builder.addMatcher(api.endpoints.userInfo.matchFulfilled, userSetInfo);
-		builder.addMatcher(api.endpoints.userInfo.matchRejected, userSetInfoFailed);
+		builder.addMatcher(
+			userEndpoints.endpoints.logout.matchFulfilled,
+			userLogout
+		);
+		builder.addMatcher(userEndpoints.endpoints.login.matchFulfilled, userLogin);
+		builder.addMatcher(
+			userEndpoints.endpoints.userInfo.matchFulfilled,
+			userSetInfo
+		);
+		builder.addMatcher(
+			userEndpoints.endpoints.userInfo.matchRejected,
+			userSetInfoFailed
+		);
 	},
 });
 
