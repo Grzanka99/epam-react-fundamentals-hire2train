@@ -9,7 +9,7 @@ import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
 import Registration from 'components/Registration/Registration';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { languageSet } from 'store/lang/actionCreators';
+import { langActions } from 'store';
 
 import './App.scss';
 import { getIsAuth } from 'store/selectors/user.selectors';
@@ -28,7 +28,7 @@ const App: FC = () => {
 	const [triggerCoursesLoad] = useLazyLoadCoursesQuery();
 
 	useEffect(() => {
-		dispatch(languageSet('en'));
+		dispatch(langActions.setLang('en'));
 	}, [dispatch]);
 
 	useEffect(() => {
