@@ -15,7 +15,7 @@ export const buildAuthorsEndpoints = (builder: Builder) => ({
 			body,
 		}),
 	}),
-	removeAuthor: builder.mutation<IResponse<any>, string>({
+	removeAuthor: builder.mutation<IResponse<string>, string>({
 		query: (id) => ({
 			url: `authors/${id}`,
 			method: 'DELETE',

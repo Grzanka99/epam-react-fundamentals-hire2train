@@ -2,8 +2,7 @@ import { FC } from 'react';
 
 import Button from 'common/Button/Button';
 import { PipeDuration } from 'components/PipeDuration/PipeDuration';
-import { useDispatch, useSelector } from 'react-redux';
-import { thunkCourseRemove } from 'store/courses/thunk';
+import { useSelector } from 'react-redux';
 import { getAuthors, getIsAdmin, getLang } from 'store/selectors';
 import PencilIconSVG from 'svg/pencil-icon.svg';
 import TrashIconSVG from 'svg/trash-icon.svg';
@@ -13,6 +12,7 @@ import { IAuthor } from 'types/state.interface';
 import { translate } from 'helpers/constants';
 
 import './CourseCard.scss';
+import { useRemoveCourseMutation } from 'services/api.service';
 
 const CourseCard: FC<ICourseCardProps> = ({
 	title,
@@ -22,11 +22,11 @@ const CourseCard: FC<ICourseCardProps> = ({
 	id,
 	authors,
 }) => {
-	const dispatch = useDispatch();
-
 	const allAuthors = useSelector(getAuthors);
 	const lang = useSelector(getLang);
 	const isAdmin = useSelector(getIsAdmin);
+
+	const [removeCourse] = useRemoveCourseMutation();
 
 	const currentAuthors: IAuthor[] = allAuthors.filter((author) =>
 		authors.includes(author.id || '')
@@ -34,7 +34,7 @@ const CourseCard: FC<ICourseCardProps> = ({
 
 	const handleDelete = (): void => {
 		if (!id) return;
-		dispatch(thunkCourseRemove({ id }));
+		removeCourse(id);
 	};
 
 	return (

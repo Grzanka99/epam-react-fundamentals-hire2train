@@ -47,7 +47,10 @@ export const {
 	useRegisterMutation,
 	useLazyUserInfoQuery,
 	useLazyLoadAuthorsQuery,
-	useLazyLoadCoursesQuery,
 	useRemoveAuthorMutation,
 	useAddAuthorMutation,
+	useLazyLoadCoursesQuery,
+	useRemoveCourseMutation,
+	useCreateCourseMutation,
+	useUpdateCourseMutation,
 } = api;

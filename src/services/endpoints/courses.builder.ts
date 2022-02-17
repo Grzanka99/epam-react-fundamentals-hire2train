@@ -21,7 +21,7 @@ export const buildCoursesEndpoints = (builder: Builder) => ({
 			body,
 		}),
 	}),
-	removeCourse: builder.mutation<IResponse<any>, string>({
+	removeCourse: builder.mutation<IResponse<string>, string>({
 		query: (id) => ({
 			url: `courses/${id}`,
 			method: HttpMethods.DELETE,

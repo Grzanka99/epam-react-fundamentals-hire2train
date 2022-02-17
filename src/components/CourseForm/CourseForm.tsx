@@ -13,10 +13,8 @@ import Input from 'common/Input/Input';
 import { PipeDuration } from 'components/PipeDuration/PipeDuration';
 import { translate } from 'helpers/constants';
 import dateGenerator from 'helpers/dateGenerator';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { thunkAuthorAdd, thunkAuthorRemove } from 'store/authors/thunk';
-import { thunkCourseCreate, thunkCourseUpdate } from 'store/courses/thunk';
 import { getAuthors, getCourses, getLang } from 'store/selectors';
 import { IAuthor, ICourse } from 'types/state.interface';
 
@@ -24,7 +22,9 @@ import './CourseForm.scss';
 import AuthorsList from './components/AuthorsList';
 import {
 	useAddAuthorMutation,
+	useCreateCourseMutation,
 	useRemoveAuthorMutation,
+	useUpdateCourseMutation,
 } from 'services/api.service';
 
 const CreateCourse: FC = () => {
@@ -38,8 +38,6 @@ const CreateCourse: FC = () => {
 	const courses = useSelector(getCourses);
 	const [currAuthors, setCurrAuthors] = useState([] as string[]);
 
-	const dispatch = useDispatch();
-
 	const lang = useSelector(getLang);
 
 	// useNavigate replaced useHistory in react-router-dom v6
@@ -49,6 +47,8 @@ const CreateCourse: FC = () => {
 
 	const [addAuthor] = useAddAuthorMutation();
 	const [removeAuthor] = useRemoveAuthorMutation();
+	const [addCourse] = useCreateCourseMutation();
+	const [updateCourse] = useUpdateCourseMutation();
 
 	const handleCreateAuthor = useCallback(
 		(newName) => () => {
@@ -115,9 +115,9 @@ const CreateCourse: FC = () => {
 			};
 
 			if (isUpdate) {
-				dispatch(thunkCourseUpdate({ id: courseId, ...newCourse } as ICourse));
+				updateCourse({ id: courseId, ...newCourse } as ICourse);
 			} else {
-				dispatch(thunkCourseCreate(newCourse));
+				addCourse(newCourse);
 			}
 
 			navigate('/', { replace: true });
