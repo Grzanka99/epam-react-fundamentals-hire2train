@@ -31,6 +31,7 @@ export const authorsEndpoints = api.injectEndpoints({
 });
 
 export const {
+	useLoadAuthorsQuery,
 	useLazyLoadAuthorsQuery,
 	useRemoveAuthorMutation,
 	useAddAuthorMutation,
